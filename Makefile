@@ -14,8 +14,8 @@ SHELL := bash
 .PHONY: clean clobber
 
 VAR := ./var
+TMP := $(VAR)/tmp
 DIST := $(VAR)/dist
-PKGS :=
 
 clean:
 	shopt -u failglob
@@ -28,7 +28,7 @@ clobber: clean
 $(VAR):
 	mkdir -v -p -- '$@'
 
-$(DIST): | $(VAR)
+$(TMP) $(DIST): | $(VAR)
 	mkdir -v -p -- '$@'
 
 include makelib/*.mk
