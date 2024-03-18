@@ -34,8 +34,18 @@ for LINE in "${LINES[@]}"; do
   for HT in "${!HOSTTYPES[@]}"; do
     GOARCH="${HOSTTYPES["$HT"]}"
     HOSTTYPE="${REMAPS["$HT"]:-"$HT"}"
+
+    case "$GOARCH" in
+    arm64)
+      ARCH=aarch64
+      ;;
+    *)
+      ARCH="$GOARCH"
+      ;;
+    esac
+
     if [[ "$HOSTTYPE" != '!' ]]; then
-      printf -- '%s ' "$HT" "$VERSION"
+      printf -- '%s ' "$ARCH" "$VERSION"
       envsubst <<<"$NAME!$URI"
     fi
   done

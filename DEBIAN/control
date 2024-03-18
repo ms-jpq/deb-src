@@ -1,0 +1,5 @@
+Package: ${NAME}
+Version: ${VERSION}
+Architecture: ${ARCH}
+Maintainer: ${NAME}
+Description: ${ARCH}-${VERSION}-${NAME}

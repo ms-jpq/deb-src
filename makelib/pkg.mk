@@ -1,9 +1,5 @@
 .PHONY: pkg
 
-/usr/bin/dpkg-sig /usr/bin/apt-ftparchive /usr/bin/dpkg-scanpackages:
-	sudo -- apt-get update
-	sudo -- env -- DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends --yes -- apt-utils dpkg-sig
-
 $(DIST)/Packages: $(PKGS) | /usr/bin/dpkg-scanpackages $(DIST)
 	env --chdir '$(@D)' -- dpkg-scanpackages --multiversion -- . >'$@'
 
