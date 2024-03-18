@@ -8,6 +8,9 @@ $(DIST)/Packages: $(PKGS) | /usr/bin/dpkg-scanpackages $(DIST)
 	env --chdir '$(@D)' -- dpkg-scanpackages --multiversion -- . >'$@'
 
 pkg: $(DIST)/Packages.gz
-$(DIST)/Packages.gz: $(VAR)/dist/Packages
-	gzip --keep --no-name --force --best -- '$<'
+$(DIST)/Packages.gz: $(DIST)/Packages
+	gzip --keep --no-name --force -- '$<'
 
+pkg: $(DIST)/InRelease
+$(DIST)/InRelease: $(DIST)/Packages
+	gpg --clearsign --output '$@' -- '$<'
