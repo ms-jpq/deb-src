@@ -12,7 +12,7 @@ $(DEB)/Release: $(DEB)/Packages | /usr/bin/apt-ftparchive $(DEB)
 
 pkg: $(DEB)/Release.gpg
 $(DEB)/Release.gpg: $(DEB)/Release
-	gpg --batch --encrypt --yes --output '$@' -- '$<'
+	gpg --batch --sign --yes --output '$@' -- '$<'
 
 pkg: $(DEB)/InRelease
 $(DEB)/InRelease: $(DEB)/Release
