@@ -7,7 +7,7 @@ readarray -t -- LINES <<<"$LS"
 
 declare -A -- HOSTTYPES REMAPS
 HOSTTYPES=(
-  [amd64]=amd64
+  [x86_64]=amd64
   [aarch64]=arm64
 )
 export -- VERSION HOSTTYPE GOARCH
@@ -16,7 +16,7 @@ for LINE in "${LINES[@]}"; do
   if [[ -z "$LINE" ]]; then
     continue
   fi
-  read -r -- VERSION TEMPLATE REMAP <<<"$LINE"
+  read -r -- VERSION NAME URI REMAP <<<"$LINE"
 
   REMAPS=()
   REMAP="$(tr -- ',' '\n' <<<"${REMAP#'%'}")"
@@ -36,7 +36,7 @@ for LINE in "${LINES[@]}"; do
     HOSTTYPE="${REMAPS["$HT"]:-"$HT"}"
     if [[ "$HOSTTYPE" != '!' ]]; then
       printf -- '%s ' "$HT" "$VERSION"
-      envsubst <<<"$TEMPLATE"
+      envsubst <<<"$NAME!$URI"
     fi
   done
-done | uniq | tr ' ' '!'
+done | uniq | tr -- ' ' '!'

@@ -9,7 +9,7 @@ SHELL := bash
 .ONESHELL:
 .SHELLFLAGS := --norc --noprofile -Eeuo pipefail -O dotglob -O nullglob -O extglob -O failglob -O globstar -c
 
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := pkg
 
 .PHONY: clean clobber
 
@@ -19,11 +19,11 @@ DIST := $(VAR)/dist
 
 clean:
 	shopt -u failglob
-	rm -v -rf --
+	rm -v -rf -- $(DIST) $(TMP)
 
 clobber: clean
 	shopt -u failglob
-	rm -v -rf -- '$(VAR)'
+	rm -v -rf -- $(VAR)
 
 $(VAR):
 	mkdir -v -p -- '$@'
