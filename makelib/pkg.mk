@@ -21,3 +21,7 @@ $(DEB)/README.md: ./README.md | $(DEB)
 pkg: $(DEB)/.gitattributes
 $(DEB)/.gitattributes: ./.gitattributes | $(DEB)
 	cp -v -f -- '$<' '$@'
+
+pkg: $(DEB)/key.asc
+$(DEB)/key.asc: | $(DEB)
+	$(CURL) --output '$@' -- 'https://github.com/ms-jpq.gpg'
