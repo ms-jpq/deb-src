@@ -21,9 +21,6 @@ jobs:
           printenv -- PGP_SIGNING_KEY | gpg --batch --import --yes
 
       - run: |-
-          make init
-
-      - run: |-
           make lint
 
       - run: |-
