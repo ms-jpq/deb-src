@@ -6,11 +6,11 @@ $(foreach line,$($1),$(eval $(call $2,$(firstword $(subst !, ,$(line))),$(word 2
 endef
 
 define ARCHIVE_TEMPLATE
-$(TMP)/$1_$2/$3: | $(TMP)
+$(TMP)/$1_$2/$3: | $(VAR)/sh $(TMP)
 	mkdir -v -p -- '$(TMP)/$1_$2'
-	./libexec/curl-unpack.sh '$4' '$(TMP)/$1_$2'
+	'$(VAR)/sh/layers/posix/home/.local/opt/initd/libexec/curl-unpack.sh' '$4' '$(TMP)/$1_$2'
 
-$(TMP)/$1_$2_$3/DEBIAN/control: ./DEBIAN/control
+$(TMP)/$1_$2_$3/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
 	mkdir -v -p -- '$$(@D)'
 	ARCH='$1' VERSION='$2' NAME='$(notdir $3)' envsubst <'$$<' >'$$@'
 
