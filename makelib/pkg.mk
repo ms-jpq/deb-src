@@ -1,13 +1,13 @@
 .PHONY: pkg pubkey
 
-$(DEB)/Packages: $(PKGS) | /usr/bin/dpkg-scanpackages $(DEB)
-	env --chdir '$(@D)' -- dpkg-scanpackages --multiversion -- . >'$@'
+$(DEB)/Packages: $(PKGS) | /usr/bin/apt-ftparchive $(DEB)
+	env --chdir '$(@D)' -- apt-ftparchive packages -- . >'$@'
 
 pkg: $(DEB)/Packages.gz
 $(DEB)/Packages.gz: $(DEB)/Packages
 	gzip --keep --no-name --force -- '$<'
 
-$(DEB)/Release: | /usr/bin/apt-ftparchive $(DEB)
+$(DEB)/Release: $(DEB)/Packages | /usr/bin/apt-ftparchive $(DEB)
 	env --chdir '$(@D)' -- apt-ftparchive release . >'$@'
 
 pkg: $(DEB)/InRelease
