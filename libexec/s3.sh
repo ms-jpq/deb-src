@@ -8,8 +8,8 @@ DEB="${0%/*}/../var/deb"
 case "$ACTION" in
 pull)
   NPROCS="$(nproc)"
-  if [[ -v GITHUB_TOKEN ]]; then
-    URI="https://ms-jpq:$GITHUB_TOKEN@github.com/ms-jpq/deb"
+  if [[ -v CI_TOKEN ]]; then
+    URI="https://ms-jpq:$CI_TOKEN@github.com/ms-jpq/deb"
   else
     URI='git@github.com:ms-jpq/deb.git'
   fi
