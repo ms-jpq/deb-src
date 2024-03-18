@@ -11,7 +11,7 @@ pull)
   if ! [[ -d "$DEB" ]]; then
     git clone --depth=1 --jobs="$NPROCS" -- 'https://github.com/ms-jpq/shell_rc' '$@'
   fi
-  env --chdir "$DEB" -- find . -not -path './.git*' -delete
+  env --chdir "$DEB" -- find . -not -path './.*' -delete
   ;;
 push)
   if [[ -v CI ]]; then
