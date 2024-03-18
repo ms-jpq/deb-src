@@ -18,10 +18,13 @@ $(TMP)/$1_$2_$3/usr/local/bin/$(notdir $3): $(TMP)/$1_$2/$3
 	mkdir -v -p -- '$$(@D)'
 	install -v -- '$$<' '$$@'
 
-PKGS += $(DEB)/$1_$2_$(notdir $3).deb
-$(DEB)/$1_$2_$(notdir $3).deb: $(TMP)/$1_$2_$3/DEBIAN/control $(TMP)/$1_$2_$3/usr/local/bin/$(notdir $3) | $(DEB) /usr/bin/debsigs
+$(TMP)/$1_$2_$(notdir $3).deb: $(TMP)/$1_$2_$3/DEBIAN/control $(TMP)/$1_$2_$3/usr/local/bin/$(notdir $3) | $(DEB) /usr/bin/debsigs
 	dpkg-deb --root-owner-group --build -- '$(TMP)/$1_$2_$3' '$$@'
 	debsigs --sign=archive -- '$$@'
+
+PKGS += $(DEB)/$1_$2_$(notdir $3).deb
+$(DEB)/$1_$2_$(notdir $3).deb: $(TMP)/$1_$2_$(notdir $3).deb
+	cp -v -f -- '$$<' '$$@'
 endef
 
 define DEB_TEMPLATE
