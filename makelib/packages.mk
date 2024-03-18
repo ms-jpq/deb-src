@@ -25,10 +25,13 @@ $(DEB)/$1_$2_$(notdir $3).deb: $(TMP)/$1_$2_$3/DEBIAN/control $(TMP)/$1_$2_$3/us
 endef
 
 define DEB_TEMPLATE
-PKGS += $(DEB)/$1_$2_$3.deb
-$(DEB)/$1_$2_$3.deb: | $(DEB)
+$(TMP)/$1_$2_$3.deb:
 	$(CURL) --output '$$@' -- '$4'
 	debsigs --sign=archive -- '$$@'
+
+PKGS += $(DEB)/$1_$2_$3.deb
+$(DEB)/$1_$2_$3.deb: $(TMP)/$1_$2_$3.deb | $(DEB)
+	cp -v -f -- '$$<' '$$@'
 endef
 
 

@@ -17,3 +17,7 @@ $(DEB)/InRelease: $(DEB)/Release
 pkg: $(DEB)/README.md
 $(DEB)/README.md: ./README.md | $(DEB)
 	cp -v -f -- '$<' '$@'
+
+pkg: $(DEB)/.gitattributes
+$(DEB)/.gitattributes: ./.gitattributes | $(DEB)
+	cp -v -f -- '$<' '$@'
