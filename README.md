@@ -1,7 +1,7 @@
 # APT
 
 ```bash
-curl --disable --fail --location --no-progress-meter -- 'https://ms-jpq.github.io/deb/key.asc' | command -- sudo -- gpg --batch --dearmor --yes --output /etc/apt/trusted.gpg.d/ms-jpq.gpg
+curl --disable --fail --location --no-progress-meter -- 'https://ms-jpq.github.io/deb/pubkey.asc' | command -- sudo -- gpg --batch --dearmor --yes --output /etc/apt/trusted.gpg.d/ms-jpq.gpg
 ```
 
 ```bash
