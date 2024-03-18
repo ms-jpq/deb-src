@@ -10,6 +10,10 @@ $(DEB)/Packages.gz: $(DEB)/Packages
 $(DEB)/Release: $(DEB)/Packages | /usr/bin/apt-ftparchive $(DEB)
 	env --chdir '$(@D)' -- apt-ftparchive release . >'$@'
 
+pkg: $(DEB)/Release.gpg
+$(DEB)/Release.gpg: $(DEB)/Release
+	gpg --batch --encrypt --yes --output '$@' -- '$<'
+
 pkg: $(DEB)/InRelease
 $(DEB)/InRelease: $(DEB)/Release
 	gpg --batch --clearsign --yes --output '$@' -- '$<'
