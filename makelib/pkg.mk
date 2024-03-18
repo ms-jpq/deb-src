@@ -1,4 +1,4 @@
-.PHONY: pkg
+.PHONY: pkg pubkey
 
 $(DEB)/Packages: $(PKGS) | /usr/bin/dpkg-scanpackages $(DEB)
 	env --chdir '$(@D)' -- dpkg-scanpackages --multiversion -- . >'$@'
@@ -22,6 +22,6 @@ pkg: $(DEB)/.gitattributes
 $(DEB)/.gitattributes: ./.gitattributes | $(DEB)
 	cp -v -f -- '$<' '$@'
 
-pkg: $(DEB)/key.asc
-$(DEB)/key.asc: | $(DEB)
+pubkey pkg: $(DEB)/pubkey.asc
+$(DEB)/pubkey.asc: | $(DEB)
 	$(CURL) --output '$@' -- 'https://github.com/ms-jpq.gpg'
