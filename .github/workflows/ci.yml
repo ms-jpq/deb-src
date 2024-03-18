@@ -6,13 +6,17 @@ on:
     - cron: "0 0 * * *" # daily
 
 jobs:
-  mypy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Lint
-        run: |-
+      - run: |-
           make lint
+
+      - run: |-
+          make pkg
+
+      - run: |-
+          make push

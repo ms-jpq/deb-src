@@ -15,7 +15,7 @@ pull)
   ;;
 push)
   if [[ -v CI ]]; then
-    git -C "$DEB" config --local -- user.email 'github-actions[bot]@users.noreply.github.com'
+    git -C "$DEB" config --local -- user.email ''
     git -C "$DEB" config --local -- user.name "$USER"
   fi
   ;;

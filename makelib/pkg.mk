@@ -13,3 +13,7 @@ $(DEB)/Release: $(DEB)/Packages.gz | /usr/bin/apt-ftparchive $(DEB)
 pkg: $(DEB)/InRelease
 $(DEB)/InRelease: $(DEB)/Release
 	gpg --batch --clearsign --yes --output '$@' -- '$<'
+
+pkg: $(DEB)/README.md
+$(DEB)/README.md: ./README.md | $(DEB)
+	cp -v -f -- '$<' '$@'
