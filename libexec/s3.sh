@@ -3,10 +3,22 @@
 set -o pipefail
 
 ACTION="$1"
+DEB="${0%/*}/../var/deb"
 
 case "$ACTION" in
-push) ;;
-pull) ;;
+pull)
+  NPROCS="$(nproc)"
+  if ! [[ -d "$DEB" ]]; then
+    git clone --depth=1 --jobs="$NPROCS" -- 'https://github.com/ms-jpq/shell_rc' '$@'
+  fi
+  env --chdir "$DEB" -- find . -not -path './.git*' -delete
+  ;;
+push)
+  if [[ -v CI ]]; then
+    git -C "$DEB" config --local -- user.email 'github-actions[bot]@users.noreply.github.com'
+    git -C "$DEB" config --local -- user.name "$USER"
+  fi
+  ;;
 *)
   set -x
   exit 1

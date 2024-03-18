@@ -15,11 +15,11 @@ SHELL := bash
 
 VAR := ./var
 TMP := $(VAR)/tmp
-DIST := $(VAR)/dist
+DEB := $(VAR)/deb
 
 clean:
 	shopt -u failglob
-	rm -v -rf -- $(DIST) $(TMP)
+	rm -v -rf -- $(DEB) $(TMP)
 
 clobber: clean
 	shopt -u failglob
@@ -28,7 +28,7 @@ clobber: clean
 $(VAR):
 	mkdir -v -p -- '$@'
 
-$(TMP) $(DIST): | $(VAR)
+$(TMP): | $(VAR)
 	mkdir -v -p -- '$@'
 
 include makelib/*.mk

@@ -1,15 +1,15 @@
 .PHONY: pkg
 
-$(DIST)/Packages: $(PKGS) | /usr/bin/dpkg-scanpackages $(DIST)
+$(DEB)/Packages: $(PKGS) | /usr/bin/dpkg-scanpackages $(DEB)
 	env --chdir '$(@D)' -- dpkg-scanpackages --multiversion -- . >'$@'
 
-pkg: $(DIST)/Packages.gz
-$(DIST)/Packages.gz: $(DIST)/Packages
+pkg: $(DEB)/Packages.gz
+$(DEB)/Packages.gz: $(DEB)/Packages
 	gzip --keep --no-name --force -- '$<'
 
-$(DIST)/Release: $(DIST)/Packages.gz | /usr/bin/apt-ftparchive $(DIST)
+$(DEB)/Release: $(DEB)/Packages.gz | /usr/bin/apt-ftparchive $(DEB)
 	env --chdir '$(@D)' -- apt-ftparchive release . >'$@'
 
-pkg: $(DIST)/InRelease
-$(DIST)/InRelease: $(DIST)/Release
+pkg: $(DEB)/InRelease
+$(DEB)/InRelease: $(DEB)/Release
 	gpg --batch --clearsign --yes --output '$@' -- '$<'

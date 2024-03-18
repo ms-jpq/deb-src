@@ -11,7 +11,11 @@ init: /usr/bin/envsubst
 init: $(VAR)/sh
 $(VAR)/sh: | $(VAR)
 	if [[ -d '$@' ]]; then
-		git -C '$@' pull --recurse-submodules --no-tags '--jobs=$(NPROC)'
+		git -C '$@' pull --recurse-submodules --no-tags
 	else
 		git clone --recurse-submodules --shallow-submodules --depth=1 -- 'https://github.com/ms-jpq/shell_rc' '$@'
 	fi
+
+init: $(DEB)
+$(DEB): | $(VAR)
+	./libexec/s3.sh pull

@@ -18,15 +18,15 @@ $(TMP)/$1_$2_$3/usr/local/bin/$(notdir $3): $(TMP)/$1_$2/$3
 	mkdir -v -p -- '$$(@D)'
 	install -v -- '$$<' '$$@'
 
-PKGS += $(DIST)/$1_$2_$(notdir $3).deb
-$(DIST)/$1_$2_$(notdir $3).deb: $(TMP)/$1_$2_$3/DEBIAN/control $(TMP)/$1_$2_$3/usr/local/bin/$(notdir $3)
+PKGS += $(DEB)/$1_$2_$(notdir $3).deb
+$(DEB)/$1_$2_$(notdir $3).deb: $(TMP)/$1_$2_$3/DEBIAN/control $(TMP)/$1_$2_$3/usr/local/bin/$(notdir $3) | $(DEB)
 	dpkg-deb --root-owner-group --build -- '$(TMP)/$1_$2_$3' '$$@'
 	debsigs --sign=archive -- '$$@'
 endef
 
 define DEB_TEMPLATE
-PKGS += $(DIST)/$1_$2_$3.deb
-$(DIST)/$1_$2_$3.deb: | $(DIST)
+PKGS += $(DEB)/$1_$2_$3.deb
+$(DEB)/$1_$2_$3.deb: | $(DEB)
 	$(CURL) --output '$$@' -- '$4'
 	debsigs --sign=archive -- '$$@'
 endef
