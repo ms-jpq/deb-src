@@ -2,28 +2,28 @@ PKGS :=
 CA := ,
 
 define META_2D
-$(foreach line,$($1),$(eval $(call $2,$(firstword $(subst !, ,$(line))),$(word 2,$(subst !, ,$(line))),$(word 3,$(subst !, ,$(line))),$(word 4,$(subst !, ,$(line))))))
+$(foreach line,$($1),$(eval $(call $2,$(firstword $(subst !, ,$(line))),$(word 2,$(subst !, ,$(line))),$(firstword $(subst :, ,$(word 3,$(subst !, ,$(line))))),$(word 4,$(subst !, ,$(line))),$(notdir $(lastword $(subst :, ,$(word 3,$(subst !, ,$(line)))))))))
 endef
 
 define ARCHIVE_TEMPLATE
+$(TMP)/$1_$2_$5/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
+	mkdir -v -p -- '$$(@D)'
+	ARCH='$1' VERSION='$2' NAME='$5' envsubst <'$$<' >'$$@'
+
 $(TMP)/$1_$2/$3: | $(VAR)/sh $(TMP)
 	mkdir -v -p -- '$(TMP)/$1_$2'
 	'$(VAR)/sh/layers/posix/home/.local/opt/initd/libexec/curl-unpack.sh' '$4' '$(TMP)/$1_$2'
 
-$(TMP)/$1_$2_$3/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
-	mkdir -v -p -- '$$(@D)'
-	ARCH='$1' VERSION='$2' NAME='$(notdir $3)' envsubst <'$$<' >'$$@'
-
-$(TMP)/$1_$2_$3/usr/local/bin/$(notdir $3): $(TMP)/$1_$2/$3
+$(TMP)/$1_$2_$5/usr/local/bin/$5: $(TMP)/$1_$2/$3
 	mkdir -v -p -- '$$(@D)'
 	install -v -- '$$<' '$$@'
 
-$(TMP)/$1_$2_$(notdir $3).deb: $(TMP)/$1_$2_$3/DEBIAN/control $(TMP)/$1_$2_$3/usr/local/bin/$(notdir $3) | $(DEB) /usr/bin/debsigs
-	dpkg-deb --root-owner-group --build -- '$(TMP)/$1_$2_$3' '$$@'
+$(TMP)/$1_$2_$5.deb: $(TMP)/$1_$2_$5/DEBIAN/control $(TMP)/$1_$2_$5/usr/local/bin/$5 | $(DEB) /usr/bin/debsigs
+	dpkg-deb --root-owner-group --build -- '$(TMP)/$1_$2_$5' '$$@'
 	debsigs --sign=archive -- '$$@'
 
-PKGS += $(DEB)/$1_$2_$(notdir $3).deb
-$(DEB)/$1_$2_$(notdir $3).deb: $(TMP)/$1_$2_$(notdir $3).deb
+PKGS += $(DEB)/$1_$2_$5.deb
+$(DEB)/$1_$2_$5.deb: $(TMP)/$1_$2_$5.deb
 	cp -v -f -- '$$<' '$$@'
 endef
 
@@ -68,7 +68,7 @@ $(V_GITUI)   gitui                                               https://github.
 $(V_HTMLQ)   htmlq                                               https://github.com/mgdm/htmlq/releases/latest/download/htmlq-#{HOSTTYPE}-linux.tar.gz                               %aarch64=!
 $(V_JLESS)   jless                                               https://github.com/PaulJuliusMartinez/jless/releases/latest/download/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip %aarch64=!
 $(V_LAZYGIT) lazygit                                             https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz       %aarch64=arm64
-$(V_POSH)    posh-linux-#{GOARCH}                                https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
+$(V_POSH)    posh-linux-#{GOARCH}:oh-my-posh                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
 $(V_XSV)     xsv                                                 https://github.com/BurntSushi/xsv/releases/latest/download/xsv-#{VERSION}-x86_64-unknown-linux-musl.tar.gz          %aarch64=!
 
 endef
