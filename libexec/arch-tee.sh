@@ -44,9 +44,17 @@ for LINE in "${LINES[@]}"; do
       ;;
     esac
 
-    if [[ "$HOSTTYPE" != '!' ]]; then
-      printf -- '%s ' "$ARCH" "$VERSION"
-      envsubst <<<"$NAME!$URI"
-    fi
+    case "$HOSTTYPE" in
+    !)
+      continue
+      ;;
+    ~)
+      HOSTTYPE=''
+      ;;
+    *) ;;
+    esac
+
+    printf -- '%s ' "$ARCH" "$VERSION"
+    envsubst <<<"$NAME!$URI"
   done
 done | uniq | tr -- ' ' '!'
