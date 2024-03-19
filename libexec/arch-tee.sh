@@ -51,6 +51,9 @@ for LINE in "${LINES[@]}"; do
     ~)
       HOSTTYPE=''
       ;;
+    all)
+      ARCH='all'
+      ;;
     *) ;;
     esac
 
