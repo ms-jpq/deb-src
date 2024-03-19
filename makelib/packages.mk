@@ -13,11 +13,11 @@ $(TMP)/$1_$2/$3: | $(VAR)/sh $(TMP)
 	mkdir -v -p -- '$(TMP)/$1_$2'
 	'$(UNPACK)' '$4' '$(TMP)/$1_$2'
 
-$(TMP)/$1_$2_$5/usr/local/bin/$5: $(TMP)/$1_$2/$3
+$(TMP)/$1_$2_$5/usr/bin/$5: $(TMP)/$1_$2/$3
 	mkdir -v -p -- '$$(@D)'
 	install -v -- '$$<' '$$@'
 
-$(TMP)/$1_$2_$5.deb: $(TMP)/$1_$2_$5/DEBIAN/control $(TMP)/$1_$2_$5/usr/local/bin/$5 | $(DEB) /usr/bin/debsigs
+$(TMP)/$1_$2_$5.deb: $(TMP)/$1_$2_$5/DEBIAN/control $(TMP)/$1_$2_$5/usr/bin/$5 | $(DEB) /usr/bin/debsigs
 	dpkg-deb --root-owner-group --build -- '$(TMP)/$1_$2_$5' '$$@'
 	debsigs --sign=archive -- '$$@'
 
