@@ -40,46 +40,49 @@ $(DEB)/$1_$2_$3.deb: $(TMP)/$1_$2_$3.deb | $(DEB)
 endef
 
 
-V_BTM     := $(shell $(GH_LATEST) ClementTsang/bottom)
-V_DELTA   := $(shell $(GH_LATEST) dandavison/delta)
-V_DIFFT   := $(shell $(GH_LATEST) Wilfred/difftastic)
-V_DUST    := $(patsubst v%,%,$(shell $(GH_LATEST) bootandy/dust))
-V_EZA     := $(patsubst v%,%,$(shell $(GH_LATEST) eza-community/eza))
-V_FZF     := $(shell $(GH_LATEST) junegunn/fzf)
-V_GITUI   := $(patsubst v%,%,$(shell $(GH_LATEST) extrawurst/gitui))
-V_GOJQ    := $(shell $(GH_LATEST) itchyny/gojq)
-V_HTMLQ   := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
-V_JLESS   := $(patsubst v%,%,$(shell $(GH_LATEST) PaulJuliusMartinez/jless))
-V_LAZYGIT := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
-V_PASTEL  := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
-V_POSH    := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
-V_RCLONE  := $(patsubst v%,%,$(shell $(GH_LATEST) rclone/rclone))
-V_S3PROXY := $(patsubst s3proxy-%,%,$(shell $(GH_LATEST) gaul/s3proxy))
-V_S5CMD   := $(patsubst v%,%,$(shell $(GH_LATEST) peak/s5cmd))
-V_SAD     := $(patsubst v%,%,$(shell $(GH_LATEST) ms-jpq/sad))
-V_TOKEI   := $(shell $(GH_LATEST) XAMPPRocky/tokei)
-V_TV      := $(shell $(GH_LATEST) alexhallam/tv)
-V_V2RAY   := $(patsubst v%,%,$(shell $(GH_LATEST) v2fly/v2ray-core))
-V_WATCHEX := $(patsubst v%,%,$(shell $(GH_LATEST) watchexec/watchexec))
-V_XSV     := $(shell $(GH_LATEST) BurntSushi/xsv)
-V_YT_DLP  := $(shell $(GH_LATEST) yt-dlp/yt-dlp)
+V_BTM      := $(shell $(GH_LATEST) ClementTsang/bottom)
+V_DELTA    := $(shell $(GH_LATEST) dandavison/delta)
+V_DIFFT    := $(shell $(GH_LATEST) Wilfred/difftastic)
+V_DUST     := $(patsubst v%,%,$(shell $(GH_LATEST) bootandy/dust))
+V_EZA      := $(patsubst v%,%,$(shell $(GH_LATEST) eza-community/eza))
+V_FZF      := $(shell $(GH_LATEST) junegunn/fzf)
+V_GITUI    := $(patsubst v%,%,$(shell $(GH_LATEST) extrawurst/gitui))
+V_GOJQ     := $(shell $(GH_LATEST) itchyny/gojq)
+V_HTMLQ    := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
+V_JLESS    := $(patsubst v%,%,$(shell $(GH_LATEST) PaulJuliusMartinez/jless))
+V_LAZYGIT  := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
+V_PASTEL   := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
+V_POSH     := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
+V_RCLONE   := $(patsubst v%,%,$(shell $(GH_LATEST) rclone/rclone))
+V_S3PROXY  := $(patsubst s3proxy-%,%,$(shell $(GH_LATEST) gaul/s3proxy))
+V_S5CMD    := $(patsubst v%,%,$(shell $(GH_LATEST) peak/s5cmd))
+V_SAD      := $(patsubst v%,%,$(shell $(GH_LATEST) ms-jpq/sad))
+V_SPOTIFYD := $(patsubst v%,%,$(shell $(GH_LATEST) Spotifyd/spotifyd))
+V_TOKEI    := $(shell $(GH_LATEST) XAMPPRocky/tokei)
+V_TV       := $(shell $(GH_LATEST) alexhallam/tv)
+V_V2RAY    := $(patsubst v%,%,$(shell $(GH_LATEST) v2fly/v2ray-core))
+V_WATCHEX  := $(patsubst v%,%,$(shell $(GH_LATEST) watchexec/watchexec))
+V_XSV      := $(shell $(GH_LATEST) BurntSushi/xsv)
+V_YT_DLP   := $(shell $(GH_LATEST) yt-dlp/yt-dlp)
+
 
 define CURL_ARCHIVES
 
-$(V_DIFFT)   difft                                               https://github.com/Wilfred/difftastic/releases/latest/download/difft-#{HOSTTYPE}-unknown-linux-gnu.tar.gz           %
-$(V_DUST)    dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust https://github.com/bootandy/dust/releases/latest/download/dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz     %
-$(V_EZA)     eza                                                 https://github.com/eza-community/eza/releases/latest/download/eza_#{HOSTTYPE}-unknown-linux-gnu.tar.gz              %
-$(V_FZF)     fzf                                                 https://github.com/junegunn/fzf/releases/latest/download/fzf-#{VERSION}-linux_#{GOARCH}.tar.gz                      %
-$(V_GITUI)   gitui                                               https://github.com/extrawurst/gitui/releases/latest/download/gitui-linux-#{HOSTTYPE}.tar.gz                         %x86_64=musl
-$(V_HTMLQ)   htmlq                                               https://github.com/mgdm/htmlq/releases/latest/download/htmlq-#{HOSTTYPE}-linux.tar.gz                               %aarch64=!
-$(V_JLESS)   jless                                               https://github.com/PaulJuliusMartinez/jless/releases/latest/download/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip %aarch64=!
-$(V_LAZYGIT) lazygit                                             https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz       %aarch64=arm64
-$(V_POSH)    posh-linux-#{GOARCH}:oh-my-posh                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
-$(V_S3PROXY) s3proxy                                             https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                    %aarch64=all,x86_64=all
-$(V_SAD)     sad                                                 https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.zip                            %
-$(V_V2RAY)   v2ray                                               https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-#{HOSTTYPE}.zip                            %aarch64=arm64-v8a,x86_64=64
-$(V_XSV)     xsv                                                 https://github.com/BurntSushi/xsv/releases/latest/download/xsv-#{VERSION}-x86_64-unknown-linux-musl.tar.gz          %aarch64=!
-$(V_YT_DLP)  yt-dlp_linux${HOSTTYPE}:yt-dlp                      https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux${HOSTTYPE}                                   %aarch64=_aarch64,x86_64=
+$(V_DIFFT)    difft                                               https://github.com/Wilfred/difftastic/releases/latest/download/difft-#{HOSTTYPE}-unknown-linux-gnu.tar.gz           %
+$(V_DUST)     dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust https://github.com/bootandy/dust/releases/latest/download/dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz     %
+$(V_EZA)      eza                                                 https://github.com/eza-community/eza/releases/latest/download/eza_#{HOSTTYPE}-unknown-linux-gnu.tar.gz              %
+$(V_FZF)      fzf                                                 https://github.com/junegunn/fzf/releases/latest/download/fzf-#{VERSION}-linux_#{GOARCH}.tar.gz                      %
+$(V_GITUI)    gitui                                               https://github.com/extrawurst/gitui/releases/latest/download/gitui-linux-#{HOSTTYPE}.tar.gz                         %x86_64=musl
+$(V_HTMLQ)    htmlq                                               https://github.com/mgdm/htmlq/releases/latest/download/htmlq-#{HOSTTYPE}-linux.tar.gz                               %aarch64=!
+$(V_JLESS)    jless                                               https://github.com/PaulJuliusMartinez/jless/releases/latest/download/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip %aarch64=!
+$(V_LAZYGIT)  lazygit                                             https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz       %aarch64=arm64
+$(V_POSH)     posh-linux-#{GOARCH}:oh-my-posh                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
+$(V_S3PROXY)  s3proxy                                             https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                    %aarch64=all,x86_64=all
+$(V_SAD)      sad                                                 https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.zip                            %
+$(V_SPOTIFYD) spotifyd                                            https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-linux-full.tar.gz                            %aarch64=!
+$(V_V2RAY)    v2ray                                               https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-#{HOSTTYPE}.zip                            %aarch64=arm64-v8a,x86_64=64
+$(V_XSV)      xsv                                                 https://github.com/BurntSushi/xsv/releases/latest/download/xsv-#{VERSION}-x86_64-unknown-linux-musl.tar.gz          %aarch64=!
+$(V_YT_DLP)   yt-dlp_linux${HOSTTYPE}:yt-dlp                      https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux${HOSTTYPE}                                   %aarch64=_aarch64,x86_64=
 
 endef
 
