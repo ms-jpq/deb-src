@@ -1,6 +1,7 @@
 CA := ,
+.PHONY: curl
 
-define META_2D
+define META_5D
 $(foreach line,$($1),$(eval $(call $2,$(firstword $(subst !, ,$(line))),$(word 2,$(subst !, ,$(line))),$(firstword $(subst :, ,$(word 3,$(subst !, ,$(line))))),$(word 4,$(subst !, ,$(line))),$(notdir $(lastword $(subst :, ,$(word 3,$(subst !, ,$(line)))))))))
 endef
 
@@ -21,6 +22,7 @@ $(TMP)/$1_$2_$5.deb: $(TMP)/$1_$2_$5/DEBIAN/control $(TMP)/$1_$2_$5/usr/bin/$5 |
 	dpkg-deb --root-owner-group --build -- '$(TMP)/$1_$2_$5' '$$@'
 	debsigs --sign=archive -- '$$@'
 
+curl: $(DEB)/$1_$2_$5.deb
 PKGS += $(DEB)/$1_$2_$5.deb
 $(DEB)/$1_$2_$5.deb: $(TMP)/$1_$2_$5.deb
 	cp -v -f -- '$$<' '$$@'
@@ -31,6 +33,7 @@ $(TMP)/$1_$2_$3.deb: | /usr/bin/debsigs
 	$(CURL) --output '$$@' -- '$4'
 	debsigs --sign=archive -- '$$@'
 
+curl: $(DEB)/$1_$2_$3.deb
 PKGS += $(DEB)/$1_$2_$3.deb
 $(DEB)/$1_$2_$3.deb: $(TMP)/$1_$2_$3.deb | $(DEB)
 	cp -v -f -- '$$<' '$$@'
@@ -102,5 +105,5 @@ CURL_DEBS := $(shell ./libexec/arch-tee.sh <<<'$(CURL_DEBS)')
 $(DEB): | $(VAR)
 	./libexec/s3.sh pull
 
-$(call META_2D,CURL_ARCHIVES,ARCHIVE_TEMPLATE)
-$(call META_2D,CURL_DEBS,DEB_TEMPLATE)
+$(call META_5D,CURL_ARCHIVES,ARCHIVE_TEMPLATE)
+$(call META_5D,CURL_DEBS,DEB_TEMPLATE)
