@@ -51,6 +51,7 @@ V_JLESS   := $(patsubst v%,%,$(shell $(GH_LATEST) PaulJuliusMartinez/jless))
 V_LAZYGIT := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
 V_PASTEL  := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
 V_POSH    := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
+V_RCLONE  := $(patsubst v%,%,$(shell $(GH_LATEST) rclone/rclone))
 V_S5CMD   := $(patsubst v%,%,$(shell $(GH_LATEST) peak/s5cmd))
 V_SAD     := $(shell $(GH_LATEST) ms-jpq/sad)
 V_TOKEI   := $(shell $(GH_LATEST) XAMPPRocky/tokei)
@@ -80,6 +81,7 @@ define CURL_DEBS
 $(V_BTM)     btm                     https://github.com/ClementTsang/bottom/releases/latest/download/bottom_#{VERSION}_#{GOARCH}.deb                        %
 $(V_DELTA)   git-delta               https://github.com/dandavison/delta/releases/latest/download/git-delta_#{VERSION}_#{GOARCH}.deb                        %
 $(V_PASTEL)  pastel                  https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                             %
+$(V_RCLONE)  rclone                  https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.deb                       %
 $(V_S5CMD)   s5cmd                   https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                            %
 $(V_SAD)     sad                     https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                               %
 $(V_TV)      tidy-viewer             https://github.com/alexhallam/tv/releases/latest/download/tidy-viewer_#{VERSION}_#{GOARCH}.deb                         %aarch64=!
