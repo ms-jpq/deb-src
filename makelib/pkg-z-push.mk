@@ -10,6 +10,9 @@ $(Z_PUSH_ROOT)/opt/z-push: | $(VAR)/sh $(TMP)
 $(Z_PUSH_ROOT)/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
 	mkdir -v -p -- '$(@D)'
 	ARCH='all' VERSION='$(V_ZPUSH)' NAME='z-push' envsubst <'$<' >'$@'
+	tee --append -- '$@' <<-'EOF'
+	Depends: php, php-cli, php-soap, php-mbstring, php-imap
+	EOF
 
 $(TMP)/all_$(V_ZPUSH)_zpush.deb: $(Z_PUSH_ROOT)/opt/z-push $(Z_PUSH_ROOT)/DEBIAN/control | /usr/bin/debsigs
 	dpkg-deb --root-owner-group --build -- '$(dir $(<D))' '$@'
