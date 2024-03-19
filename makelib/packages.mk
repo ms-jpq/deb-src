@@ -53,7 +53,7 @@ V_POSH    := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
 V_RCLONE  := $(patsubst v%,%,$(shell $(GH_LATEST) rclone/rclone))
 V_S3PROXY := $(patsubst s3proxy-%,%,$(shell $(GH_LATEST) gaul/s3proxy))
 V_S5CMD   := $(patsubst v%,%,$(shell $(GH_LATEST) peak/s5cmd))
-V_SAD     := $(shell $(GH_LATEST) ms-jpq/sad)
+V_SAD     := $(patsubst v%,%,$(shell $(GH_LATEST) ms-jpq/sad))
 V_TOKEI   := $(shell $(GH_LATEST) XAMPPRocky/tokei)
 V_TV      := $(shell $(GH_LATEST) alexhallam/tv)
 V_V2RAY   := $(patsubst v%,%,$(shell $(GH_LATEST) v2fly/v2ray-core))
@@ -73,6 +73,7 @@ $(V_JLESS)   jless                                               https://github.
 $(V_LAZYGIT) lazygit                                             https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz       %aarch64=arm64
 $(V_POSH)    posh-linux-#{GOARCH}:oh-my-posh                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
 $(V_S3PROXY) s3proxy                                             https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                    %aarch64=all,x86_64=all
+$(V_SAD)     sad                                                 https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.zip                            %
 $(V_V2RAY)   v2ray                                               https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-#{HOSTTYPE}.zip                            %aarch64=arm64-v8a,x86_64=64
 $(V_XSV)     xsv                                                 https://github.com/BurntSushi/xsv/releases/latest/download/xsv-#{VERSION}-x86_64-unknown-linux-musl.tar.gz          %aarch64=!
 $(V_YT_DLP)  yt-dlp_linux${HOSTTYPE}:yt-dlp                      https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux${HOSTTYPE}                                   %aarch64=_aarch64,x86_64=
@@ -88,7 +89,6 @@ $(V_DELTA)   git-delta               https://github.com/dandavison/delta/release
 $(V_PASTEL)  pastel                  https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                             %
 $(V_RCLONE)  rclone                  https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.deb                       %
 $(V_S5CMD)   s5cmd                   https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                            %
-$(V_SAD)     sad                     https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                               %
 $(V_TV)      tidy-viewer             https://github.com/alexhallam/tv/releases/latest/download/tidy-viewer_#{VERSION}_#{GOARCH}.deb                         %aarch64=!
 $(V_WATCHEX) watchexec               https://github.com/watchexec/watchexec/releases/latest/download/watchexec-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.deb %
 22.04        packages-microsoft-prod https://packages.microsoft.com/config/ubuntu/#{VERSION}/packages-microsoft-prod.deb                                    %aarch64=all,x86_64=all
