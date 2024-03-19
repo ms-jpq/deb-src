@@ -11,7 +11,7 @@ $(Z_PUSH_ROOT)/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
 	mkdir -v -p -- '$(@D)'
 	ARCH='any' VERSION='$(V_ZPUSH)' NAME='z-push' envsubst <'$<' >'$@'
 
-$(TMP)/any_$(V_ZPUSH)_zpush.deb: $(Z_PUSH_ROOT)/opt/z-push $(Z_PUSH_ROOT)/DEBIAN/control
+$(TMP)/any_$(V_ZPUSH)_zpush.deb: $(Z_PUSH_ROOT)/opt/z-push $(Z_PUSH_ROOT)/DEBIAN/control | /usr/bin/debsigs
 	dpkg-deb --root-owner-group --build -- '$(dir $(<D))' '$@'
 	debsigs --sign=archive -- '$@'
 
