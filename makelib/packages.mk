@@ -52,6 +52,7 @@ V_LAZYGIT := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
 V_PASTEL  := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
 V_POSH    := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
 V_RCLONE  := $(patsubst v%,%,$(shell $(GH_LATEST) rclone/rclone))
+V_S3PROXY := $(patsubst s3proxy-%,%,$(shell $(GH_LATEST) gaul/s3proxy))
 V_S5CMD   := $(patsubst v%,%,$(shell $(GH_LATEST) peak/s5cmd))
 V_SAD     := $(shell $(GH_LATEST) ms-jpq/sad)
 V_TOKEI   := $(shell $(GH_LATEST) XAMPPRocky/tokei)
@@ -72,7 +73,8 @@ $(V_HTMLQ)   htmlq                                               https://github.
 $(V_JLESS)   jless                                               https://github.com/PaulJuliusMartinez/jless/releases/latest/download/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip %aarch64=!
 $(V_LAZYGIT) lazygit                                             https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz       %aarch64=arm64
 $(V_POSH)    posh-linux-#{GOARCH}:oh-my-posh                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
-$(V_V2RAY)   v2ray                                               https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-#{HOSTTYPE}.zip                            %aarch64=arm64-v8a,x86_64=64
+$(V_S3PROXY) s3proxy                                             https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                    %aarch64=arm64-v8a,x86_64=64
+$(V_V2RAY)   v2ray                                               https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-#{HOSTTYPE}.zip                            %aarch64=,x86_64=
 $(V_XSV)     xsv                                                 https://github.com/BurntSushi/xsv/releases/latest/download/xsv-#{VERSION}-x86_64-unknown-linux-musl.tar.gz          %aarch64=!
 $(V_YT_DLP)  yt-dlp_linux${HOSTTYPE}:yt-dlp                      https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux${HOSTTYPE}                                   %aarch64=_aarch64,x86_64=
 
