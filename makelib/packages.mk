@@ -1,5 +1,3 @@
-UNPACK := $(VAR)/sh/layers/posix/home/.local/opt/initd/libexec/curl-unpack.sh
-PKGS :=
 CA := ,
 
 define META_2D

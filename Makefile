@@ -16,6 +16,7 @@ SHELL := bash
 VAR := ./var
 TMP := $(VAR)/tmp
 DEB := $(VAR)/deb
+PKGS :=
 
 clean:
 	shopt -u failglob
