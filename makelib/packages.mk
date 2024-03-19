@@ -1,3 +1,4 @@
+UNPACK := $(VAR)/sh/layers/posix/home/.local/opt/initd/libexec/curl-unpack.sh
 PKGS :=
 CA := ,
 
@@ -12,7 +13,7 @@ $(TMP)/$1_$2_$5/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
 
 $(TMP)/$1_$2/$3: | $(VAR)/sh $(TMP)
 	mkdir -v -p -- '$(TMP)/$1_$2'
-	'$(VAR)/sh/layers/posix/home/.local/opt/initd/libexec/curl-unpack.sh' '$4' '$(TMP)/$1_$2'
+	'$(UNPACK)' '$4' '$(TMP)/$1_$2'
 
 $(TMP)/$1_$2_$5/usr/local/bin/$5: $(TMP)/$1_$2/$3
 	mkdir -v -p -- '$$(@D)'
