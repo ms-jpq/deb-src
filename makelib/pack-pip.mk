@@ -6,7 +6,7 @@ endef
 all: pip
 
 define PIP_TEMPLATE
-$(TMP)/all_py_$1/opt/python3/$1: | $(TMP)
+$(TMP)/all_py_$1/opt/python3/$1: | $(TMP) /usr/bin/pip
 	PYTHONUSERBASE='$$@' python3 -m pip install --user -- $(patsubst %,'%',$(subst $(CA), ,$2))
 
 $(TMP)/all_py_$1/DEBIAN/control: $(TMP)/all_py_$1/opt/python3/$1 ./DEBIAN/control | $(TMP) /usr/bin/envsubst
