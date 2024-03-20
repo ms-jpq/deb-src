@@ -10,7 +10,7 @@ $(TMP)/all_py_$1/opt/python3/$1: | $(TMP)
 	PYTHONUSERBASE='$$@' python3 -m pip install --user -- $(patsubst %,'%',$(subst $(CA), ,$2))
 
 $(TMP)/all_py_$1/DEBIAN/control: $(TMP)/all_py_$1/opt/python3/$1 ./DEBIAN/control | $(TMP) /usr/bin/envsubst
-	V="$$$$(PYTHONUSERBASE='$$<' python3 -m pip freeze | grep -F -- '$1==' | cut -d '=' -f 3)"
+	V="$$$$(PYTHONUSERBASE='$$<' python3 -m pip freeze | grep -F -- '$1==' | cut -d '=' -f 3-)"
 	mkdir -v -p -- '$$(@D)'
 	ARCH='all' VERSION="$$$$V" NAME='py-$1' envsubst <'./DEBIAN/control' >'$$@'
 
