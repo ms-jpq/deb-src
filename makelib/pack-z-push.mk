@@ -6,7 +6,6 @@ Z_PUSH_NAME := all_$(V_ZPUSH)_z-push
 $(TMP)/$(Z_PUSH_NAME)/usr/share/z-push: | $(VAR)/sh $(TMP)
 	mkdir -v -p -- '$@'
 	'$(UNPACK)' 'https://github.com/Z-Hub/Z-Push/archive/refs/tags/$(V_ZPUSH).tar.gz' '$@' --wildcards --strip-components 2 '*/src' '*/config'
-	sudo -- chown -v -R -- www-data:www-data '$@'
 
 $(TMP)/$(Z_PUSH_NAME)/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
 	mkdir -v -p -- '$(@D)'
