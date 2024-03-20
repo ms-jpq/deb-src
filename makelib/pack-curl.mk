@@ -46,6 +46,7 @@ V_DIFFT    := $(shell $(GH_LATEST) Wilfred/difftastic)
 V_DUST     := $(patsubst v%,%,$(shell $(GH_LATEST) bootandy/dust))
 V_EZA      := $(patsubst v%,%,$(shell $(GH_LATEST) eza-community/eza))
 V_FZF      := $(shell $(GH_LATEST) junegunn/fzf)
+V_GAY      := 6.9
 V_GITUI    := $(patsubst v%,%,$(shell $(GH_LATEST) extrawurst/gitui))
 V_GOJQ     := $(shell $(GH_LATEST) itchyny/gojq)
 V_HTMLQ    := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
@@ -72,6 +73,7 @@ $(V_DIFFT)    difft                                               https://github
 $(V_DUST)     dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust https://github.com/bootandy/dust/releases/latest/download/dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz     %
 $(V_EZA)      eza                                                 https://github.com/eza-community/eza/releases/latest/download/eza_#{HOSTTYPE}-unknown-linux-gnu.tar.gz              %
 $(V_FZF)      fzf                                                 https://github.com/junegunn/fzf/releases/latest/download/fzf-#{VERSION}-linux_#{GOARCH}.tar.gz                      %
+$(V_GAY)      gay                                                 https://raw.githubusercontent.com/ms-jpq/gay/%3C3/gay                                                               %aarch64=all,x86_64=all
 $(V_GITUI)    gitui                                               https://github.com/extrawurst/gitui/releases/latest/download/gitui-linux-#{HOSTTYPE}.tar.gz                         %x86_64=musl
 $(V_HTMLQ)    htmlq                                               https://github.com/mgdm/htmlq/releases/latest/download/htmlq-#{HOSTTYPE}-linux.tar.gz                               %aarch64=!
 $(V_JLESS)    jless                                               https://github.com/PaulJuliusMartinez/jless/releases/latest/download/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip %aarch64=!
