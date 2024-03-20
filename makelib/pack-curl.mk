@@ -6,7 +6,7 @@ $(foreach line,$($1),$(eval $(call $2,$(firstword $(subst !, ,$(line))),$(word 2
 endef
 
 define ARCHIVE_TEMPLATE
-$(TMP)/$1_$2_$5/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
+$(TMP)/$1_$2_$5/DEBIAN/control: ./DEBIAN/control | $(TMP) /usr/bin/envsubst
 	mkdir -v -p -- '$$(@D)'
 	ARCH='$1' VERSION='$2' NAME='$5' envsubst <'$$<' >'$$@'
 
@@ -29,7 +29,7 @@ $(DEB)/$1_$2_$5.deb: $(TMP)/$1_$2_$5.deb
 endef
 
 define DEB_TEMPLATE
-$(TMP)/$1_$2_$3.deb: | /usr/bin/debsigs
+$(TMP)/$1_$2_$3.deb: | $(TMP) /usr/bin/debsigs
 	$(CURL) --output '$$@' -- '$4'
 	debsigs --sign=archive -- '$$@'
 
