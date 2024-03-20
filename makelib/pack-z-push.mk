@@ -11,7 +11,7 @@ $(TMP)/$(Z_PUSH_NAME)/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
 	mkdir -v -p -- '$(@D)'
 	ARCH='all' VERSION='$(V_ZPUSH)' NAME='z-push' envsubst <'$<' >'$@'
 	tee --append -- '$@' <<-'EOF'
-	Depends: php, php-cli, php-soap, php-mbstring, php-imap
+	Depends: php, php-cli, php-soap, php-mbstring, php-imap, php-mapi
 	EOF
 
 $(TMP)/$(Z_PUSH_NAME).deb: $(TMP)/$(Z_PUSH_NAME)/usr/share/z-push $(TMP)/$(Z_PUSH_NAME)/DEBIAN/control | /usr/bin/debsigs
