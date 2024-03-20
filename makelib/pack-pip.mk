@@ -7,7 +7,7 @@ all: pip
 
 define PIP_TEMPLATE
 $(TMP)/all_py_$1/opt/python3/$1: | $(TMP) /usr/bin/pip
-	PYTHONUSERBASE='$$@' python3 -m pip install --user -- $(patsubst %,'%',$(subst $(CA), ,$2))
+	python3 -m pip install --target '$$@' -- $(patsubst %,'%',$(subst $(CA), ,$2))
 
 $(TMP)/all_py_$1/DEBIAN/control: $(TMP)/all_py_$1/opt/python3/$1 ./DEBIAN/control | $(TMP) /usr/bin/envsubst
 	V="$$$$(PYTHONUSERBASE='$$<' python3 -m pip freeze | grep -F -- '$1==' | cut -d '=' -f 3-)"
