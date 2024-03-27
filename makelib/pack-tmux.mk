@@ -12,7 +12,7 @@ $(TMP)/$(DPKG_ARCH)_$(V_TMUX)_tmux/DEBIAN/control: ./DEBIAN/control | /usr/bin/e
 	mkdir -v -p -- '$(@D)'
 	ARCH='$(DPKG_ARCH)' VERSION='$(V_TMUX)' NAME='tmux' envsubst <'$<' >'$@'
 	tee --append -- '$@' <<-'EOF'
-	Depends: libevent, ncurses
+	Depends: libc6, libtinfo6, libutempter0
 	EOF
 
 $(TMP)/$(DPKG_ARCH)_$(V_TMUX)_tmux/bin/tmux: $(TMP)/tmux-$(V_TMUX) | /usr/include/event.h
