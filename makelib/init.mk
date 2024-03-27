@@ -12,6 +12,7 @@ init: $(TMP)/.init
 $(TMP)/.init:
 	sudo -- apt-get update
 	sudo -- env -- DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends --yes -- $(APT)
+	touch -- '$@'
 
 /usr/bin/envsubst /usr/bin/debsigs /usr/bin/apt-ftparchive /usr/bin/pip: | $(TMP)/.init
 
