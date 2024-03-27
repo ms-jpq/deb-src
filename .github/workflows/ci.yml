@@ -27,7 +27,7 @@ jobs:
           make pkg
 
       - run: |-
-          make pkg
+          make --debug pkg
 
       - run: |-
           make push
