@@ -29,6 +29,7 @@ define PIP_PACKAGES
 certbot       certbot
 elasticsearch elasticsearch==8.*
 gixy          gixy
+you-get       you-get
 endef
 
 PIP_PACK := $(shell tr -s -- ' ' '!' <<<'$(PIP_PACKAGES)')
