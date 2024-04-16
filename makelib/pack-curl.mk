@@ -74,7 +74,7 @@ $(V_DUST)     dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust https://github
 $(V_EZA)      eza                                                 https://github.com/eza-community/eza/releases/latest/download/eza_#{HOSTTYPE}-unknown-linux-gnu.tar.gz              %
 $(V_FZF)      fzf                                                 https://github.com/junegunn/fzf/releases/latest/download/fzf-#{VERSION}-linux_#{GOARCH}.tar.gz                      %
 $(V_GAY)      gay                                                 https://raw.githubusercontent.com/ms-jpq/gay/%3C3/gay                                                               %aarch64=all,x86_64=all
-$(V_GITUI)    gitui                                               https://github.com/extrawurst/gitui/releases/latest/download/gitui-linux-#{HOSTTYPE}.tar.gz                         %x86_64=musl
+$(V_GITUI)    gitui                                               https://github.com/extrawurst/gitui/releases/latest/download/gitui-linux-#{HOSTTYPE}.tar.gz                         %
 $(V_HTMLQ)    htmlq                                               https://github.com/mgdm/htmlq/releases/latest/download/htmlq-#{HOSTTYPE}-linux.tar.gz                               %aarch64=!
 $(V_JLESS)    jless                                               https://github.com/PaulJuliusMartinez/jless/releases/latest/download/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip %aarch64=!
 $(V_LAZYGIT)  lazygit                                             https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz       %aarch64=arm64
