@@ -51,6 +51,7 @@ V_GITUI    := $(patsubst v%,%,$(shell $(GH_LATEST) extrawurst/gitui))
 V_GOJQ     := $(shell $(GH_LATEST) itchyny/gojq)
 V_HTMLQ    := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
 V_JLESS    := $(patsubst v%,%,$(shell $(GH_LATEST) PaulJuliusMartinez/jless))
+V_JNV      := $(shell $(GH_LATEST) ynqa/jnv)
 V_LAZYGIT  := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
 V_PASTEL   := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
 V_POSH     := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
@@ -77,6 +78,7 @@ $(V_GAY)      gay                                                 https://raw.gi
 $(V_GITUI)    gitui                                               https://github.com/extrawurst/gitui/releases/latest/download/gitui-linux-#{HOSTTYPE}.tar.gz                         %
 $(V_HTMLQ)    htmlq                                               https://github.com/mgdm/htmlq/releases/latest/download/htmlq-#{HOSTTYPE}-linux.tar.gz                               %aarch64=!
 $(V_JLESS)    jless                                               https://github.com/PaulJuliusMartinez/jless/releases/latest/download/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip %aarch64=!
+$(V_JNV)      jnv                                                 https://github.com/ynqa/jnv/releases/latest/download/jnv-x86_64-unknown-linux-gnu.tar.xz                            %aarch64=!
 $(V_LAZYGIT)  lazygit                                             https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz       %aarch64=arm64
 $(V_POSH)     posh-linux-#{GOARCH}:oh-my-posh                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
 $(V_S3PROXY)  s3proxy                                             https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                    %aarch64=all,x86_64=all
