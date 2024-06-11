@@ -78,7 +78,7 @@ $(V_GAY)      gay                                                 https://raw.gi
 $(V_GITUI)    gitui                                               https://github.com/extrawurst/gitui/releases/latest/download/gitui-linux-#{HOSTTYPE}.tar.gz                         %
 $(V_HTMLQ)    htmlq                                               https://github.com/mgdm/htmlq/releases/latest/download/htmlq-#{HOSTTYPE}-linux.tar.gz                               %aarch64=!
 $(V_JLESS)    jless                                               https://github.com/PaulJuliusMartinez/jless/releases/latest/download/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip %aarch64=!
-$(V_JNV)      jnv                                                 https://github.com/ynqa/jnv/releases/latest/download/jnv-#{HOSTTYPE}-unknown-linux-gnu.tar.xz                       %aarch64=!
+$(V_JNV)      jnv-x86_64-unknown-linux-gnu/jnv                    https://github.com/ynqa/jnv/releases/latest/download/jnv-x86_64-unknown-linux-gnu.tar.xz                            %aarch64=!
 $(V_LAZYGIT)  lazygit                                             https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz       %aarch64=arm64
 $(V_POSH)     posh-linux-#{GOARCH}:oh-my-posh                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
 $(V_S3PROXY)  s3proxy                                             https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                    %aarch64=all,x86_64=all
