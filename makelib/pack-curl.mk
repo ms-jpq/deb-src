@@ -40,33 +40,34 @@ $(DEB)/$1_$2_$3.deb: $(TMP)/$1_$2_$3.deb | $(DEB)
 endef
 
 
-V_BTM      := $(shell $(GH_LATEST) ClementTsang/bottom)
-V_DELTA    := $(shell $(GH_LATEST) dandavison/delta)
-V_DIFFT    := $(shell $(GH_LATEST) Wilfred/difftastic)
-V_DUST     := $(patsubst v%,%,$(shell $(GH_LATEST) bootandy/dust))
-V_EZA      := $(patsubst v%,%,$(shell $(GH_LATEST) eza-community/eza))
-V_FZF      := $(shell $(GH_LATEST) junegunn/fzf)
-V_GAY      := 6.9
-V_GH       := $(patsubst v%,%,$(shell $(GH_LATEST) cli/cli))
-V_GITUI    := $(patsubst v%,%,$(shell $(GH_LATEST) extrawurst/gitui))
-V_GOJQ     := $(shell $(GH_LATEST) itchyny/gojq)
-V_HTMLQ    := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
-V_JLESS    := $(patsubst v%,%,$(shell $(GH_LATEST) PaulJuliusMartinez/jless))
-V_JNV      := $(patsubst v%,%,$(shell $(GH_LATEST) ynqa/jnv))
-V_LAZYGIT  := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
-V_PASTEL   := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
-V_POSH     := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
-V_RCLONE   := $(patsubst v%,%,$(shell $(GH_LATEST) rclone/rclone))
-V_S3PROXY  := $(patsubst s3proxy-%,%,$(shell $(GH_LATEST) gaul/s3proxy))
-V_S5CMD    := $(patsubst v%,%,$(shell $(GH_LATEST) peak/s5cmd))
-V_SAD      := $(patsubst v%,%,$(shell $(GH_LATEST) ms-jpq/sad))
-V_SPOTIFYD := $(patsubst v%,%,$(shell $(GH_LATEST) Spotifyd/spotifyd))
-V_TOKEI    := $(shell $(GH_LATEST) XAMPPRocky/tokei)
-V_TV       := $(shell $(GH_LATEST) alexhallam/tv)
-V_V2RAY    := $(patsubst v%,%,$(shell $(GH_LATEST) v2fly/v2ray-core))
-V_WATCHEX  := $(patsubst v%,%,$(shell $(GH_LATEST) watchexec/watchexec))
-V_XSV      := $(shell $(GH_LATEST) BurntSushi/xsv)
-V_YT_DLP   := $(shell $(GH_LATEST) yt-dlp/yt-dlp)
+V_BTM        := $(shell $(GH_LATEST) ClementTsang/bottom)
+V_DELTA      := $(shell $(GH_LATEST) dandavison/delta)
+V_DIFFT      := $(shell $(GH_LATEST) Wilfred/difftastic)
+V_DUST       := $(patsubst v%,%,$(shell $(GH_LATEST) bootandy/dust))
+V_EZA        := $(patsubst v%,%,$(shell $(GH_LATEST) eza-community/eza))
+V_FZF        := $(shell $(GH_LATEST) junegunn/fzf)
+V_GAY        := 6.9
+V_GH         := $(patsubst v%,%,$(shell $(GH_LATEST) cli/cli))
+V_GITUI      := $(patsubst v%,%,$(shell $(GH_LATEST) extrawurst/gitui))
+V_GOJQ       := $(shell $(GH_LATEST) itchyny/gojq)
+V_GORELEASER := $(patsubst v%,%,$(shell $(GH_LATEST) goreleaser/goreleaser))
+V_HTMLQ      := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
+V_JLESS      := $(patsubst v%,%,$(shell $(GH_LATEST) PaulJuliusMartinez/jless))
+V_JNV        := $(patsubst v%,%,$(shell $(GH_LATEST) ynqa/jnv))
+V_LAZYGIT    := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
+V_PASTEL     := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
+V_POSH       := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
+V_RCLONE     := $(patsubst v%,%,$(shell $(GH_LATEST) rclone/rclone))
+V_S3PROXY    := $(patsubst s3proxy-%,%,$(shell $(GH_LATEST) gaul/s3proxy))
+V_S5CMD      := $(patsubst v%,%,$(shell $(GH_LATEST) peak/s5cmd))
+V_SAD        := $(patsubst v%,%,$(shell $(GH_LATEST) ms-jpq/sad))
+V_SPOTIFYD   := $(patsubst v%,%,$(shell $(GH_LATEST) Spotifyd/spotifyd))
+V_TOKEI      := $(shell $(GH_LATEST) XAMPPRocky/tokei)
+V_TV         := $(shell $(GH_LATEST) alexhallam/tv)
+V_V2RAY      := $(patsubst v%,%,$(shell $(GH_LATEST) v2fly/v2ray-core))
+V_WATCHEX    := $(patsubst v%,%,$(shell $(GH_LATEST) watchexec/watchexec))
+V_XSV        := $(shell $(GH_LATEST) BurntSushi/xsv)
+V_YT_DLP     := $(shell $(GH_LATEST) yt-dlp/yt-dlp)
 
 
 define CURL_ARCHIVES
@@ -94,16 +95,17 @@ endef
 
 define CURL_DEBS
 
-$(V_BTM)     btm                     https://github.com/ClementTsang/bottom/releases/latest/download/bottom_#{VERSION}_#{GOARCH}.deb                        %
-$(V_DELTA)   git-delta               https://github.com/dandavison/delta/releases/latest/download/git-delta_#{VERSION}_#{GOARCH}.deb                        %
-$(V_GH)      gh                      https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                             %
-$(V_PASTEL)  pastel                  https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                             %
-$(V_RCLONE)  rclone                  https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.deb                       %
-$(V_S5CMD)   s5cmd                   https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                            %
-$(V_SAD)     sad                     https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                               %
-$(V_TV)      tidy-viewer             https://github.com/alexhallam/tv/releases/latest/download/tidy-viewer_#{VERSION}_#{GOARCH}.deb                         %aarch64=!
-$(V_WATCHEX) watchexec               https://github.com/watchexec/watchexec/releases/latest/download/watchexec-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.deb %
-22.04        packages-microsoft-prod https://packages.microsoft.com/config/ubuntu/#{VERSION}/packages-microsoft-prod.deb                                    %aarch64=all,x86_64=all
+$(V_BTM)        btm                     https://github.com/ClementTsang/bottom/releases/latest/download/bottom_#{VERSION}_#{GOARCH}.deb                        %
+$(V_DELTA)      git-delta               https://github.com/dandavison/delta/releases/latest/download/git-delta_#{VERSION}_#{GOARCH}.deb                        %
+$(V_GH)         gh                      https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                             %
+$(V_GORELEASER) goreleaser              https://github.com/goreleaser/goreleaser/releases/latest/download/goreleaser_#{VERSION}_#{GOARCH}.deb                  %
+$(V_PASTEL)     pastel                  https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                             %
+$(V_RCLONE)     rclone                  https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.deb                       %
+$(V_S5CMD)      s5cmd                   https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                            %
+$(V_SAD)        sad                     https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                               %
+$(V_TV)         tidy-viewer             https://github.com/alexhallam/tv/releases/latest/download/tidy-viewer_#{VERSION}_#{GOARCH}.deb                         %aarch64=!
+$(V_WATCHEX)    watchexec               https://github.com/watchexec/watchexec/releases/latest/download/watchexec-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.deb %
+22.04           packages-microsoft-prod https://packages.microsoft.com/config/ubuntu/#{VERSION}/packages-microsoft-prod.deb                                    %aarch64=all,x86_64=all
 
 endef
 
