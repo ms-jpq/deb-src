@@ -1,6 +1,6 @@
 V2RAY_NAME := all_$(V_V2RAY)_v2ray-dat
 
-$(TMP)/$(V2RAY_NAME)/opt/v2ray: $(TMP)/amd64_$(V_V2RAY)/v2ray | $(VAR)/sh $(TMP)
+$(TMP)/$(V2RAY_NAME)/opt/v2ray: $(TMP)/amd64_$(V_V2RAY)/v2ray | $(TMP)
 	mkdir -v -p -- '$@'
 	cp -v -f -- '$(<D)'/*.dat '$@'
 
