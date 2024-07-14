@@ -7,6 +7,9 @@ $(TMP)/$(V2RAY_NAME)/opt/v2ray: $(TMP)/amd64_$(V_V2RAY)/v2ray | $(TMP)
 $(TMP)/$(V2RAY_NAME)/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
 	mkdir -v -p -- '$(@D)'
 	ARCH='all' VERSION='$(V_V2RAY)' NAME='v2ray-dat' envsubst <'$<' >'$@'
+	tee --append -- '$@' <<-'EOF'
+	Depends: v2ray
+	EOF
 
 $(TMP)/$(V2RAY_NAME).deb: $(TMP)/$(V2RAY_NAME)/opt/v2ray $(TMP)/$(V2RAY_NAME)/DEBIAN/control | /usr/bin/debsigs
 	dpkg-deb --root-owner-group --build -- '$(dir $(<D))' '$@'
