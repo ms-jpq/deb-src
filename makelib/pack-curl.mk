@@ -86,13 +86,14 @@ $(V_LAZYGIT)  lazygit                                             https://github
 $(V_POSH)     posh-linux-#{GOARCH}:oh-my-posh                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
 $(V_S3PROXY)  s3proxy                                             https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                    %aarch64=all,x86_64=all
 $(V_SPOTIFYD) spotifyd                                            https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-linux-full.tar.gz                            %aarch64=!
-$(V_TOKEI)    tokei                                               https://github.com/XAMPPRocky/tokei/releases/latest/download/tokei-#{HOSTTYPE}-unknown-linux-gnu.tar.gz             %
+$(V_TOKEI)    tokei                                               https://github.com/XAMPPRocky/tokei/releases/download/v#{VERSION}/tokei-#{HOSTTYPE}-unknown-linux-gnu.tar.gz        %
 $(V_V2RAY)    v2ray                                               https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-#{HOSTTYPE}.zip                            %aarch64=arm64-v8a,x86_64=64
 $(V_XSV)      xsv                                                 https://github.com/BurntSushi/xsv/releases/latest/download/xsv-#{VERSION}-x86_64-unknown-linux-musl.tar.gz          %aarch64=!
 $(V_YT_DLP)   yt-dlp_linux${HOSTTYPE}:yt-dlp                      https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux${HOSTTYPE}                                   %aarch64=_aarch64,x86_64=
 
 endef
 
+# $(V_TOKEI)    tokei                                               https://github.com/XAMPPRocky/tokei/releases/latest/download/tokei-#{HOSTTYPE}-unknown-linux-gnu.tar.gz             %
 
 define CURL_DEBS
 
