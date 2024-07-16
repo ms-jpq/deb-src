@@ -5,12 +5,18 @@ endef
 .PHONY: pip
 all: pip
 
+ifeq ($(origin CI), environment)
+PYTHON3 := /usr/bin/python3
+else
+PYTHON3 := python3
+endif
+
 define PIP_TEMPLATE
 $(TMP)/all_py_$1/opt/python3/$1: | $(TMP) /usr/bin/pip
-	/usr/bin/python3 -m pip install --target '$$@' -- $(patsubst %,'%',$(subst $(CA), ,$2))
+	$(PYTHON3) -m pip install --target '$$@' -- $(patsubst %,'%',$(subst $(CA), ,$2))
 
 $(TMP)/all_py_$1/DEBIAN/control: $(TMP)/all_py_$1/opt/python3/$1 ./DEBIAN/control | $(TMP) /usr/bin/envsubst
-	V="$$$$(PYTHONPATH='$$<' /usr/bin/python3 -m pip freeze | grep -F -- '$1==' | cut -d '=' -f 3-)"
+	V="$$$$(PYTHONPATH='$$<' $(PYTHON3) -m pip freeze | grep -F -- '$1==' | cut -d '=' -f 3-)"
 	mkdir -v -p -- '$$(@D)'
 	ARCH='all' VERSION="$$$$V" NAME='py-$1' envsubst <'./DEBIAN/control' >'$$@'
 
