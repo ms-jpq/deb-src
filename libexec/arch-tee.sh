@@ -33,10 +33,10 @@ for LINE in "${LINES[@]}"; do
 
   for HT in "${!HOSTTYPES[@]}"; do
     GOARCH="${HOSTTYPES["$HT"]}"
-    HOSTTYPE="${REMAPS["$HT"]:-"$HT"}"
+    REMAP="${REMAPS["$HT"]:-""}"
     DPKG_ARCH="$GOARCH"
 
-    case "$HOSTTYPE" in
+    case "$REMAP" in
     !)
       continue
       ;;
@@ -46,7 +46,9 @@ for LINE in "${LINES[@]}"; do
     all)
       DPKG_ARCH='all'
       ;;
-    *) ;;
+    *)
+      HOSTTYPE="${REMAP:-"$HT"}"
+      ;;
     esac
 
     printf -- '%s ' "$DPKG_ARCH" "$VERSION"
