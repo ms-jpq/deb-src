@@ -3,7 +3,7 @@
 set -o pipefail
 
 LS="$(tr --squeeze-repeats -- ' ' | tr -- '#' '$')"
-readarray -t -- LINES <<<"$LS"
+readarray -t -- LINES <<< "$LS"
 
 declare -A -- HOSTTYPES REMAPS
 HOSTTYPES=(
@@ -13,17 +13,17 @@ HOSTTYPES=(
 export -- VERSION HOSTTYPE GOARCH
 
 for LINE in "${LINES[@]}"; do
-  if [[ -z "$LINE" ]]; then
+  if [[ -z $LINE ]]; then
     continue
   fi
-  read -r -- VERSION NAME URI REMAP <<<"$LINE"
+  read -r -- VERSION NAME URI REMAP <<< "$LINE"
 
   REMAPS=()
-  REMAP="$(tr -- ',' '\n' <<<"${REMAP#'%'}")"
-  readarray -t -- RS <<<"$REMAP"
+  REMAP="$(tr -- ',' '\n' <<< "${REMAP#'%'}")"
+  readarray -t -- RS <<< "$REMAP"
 
   for R in "${RS[@]}"; do
-    if [[ -z "$R" ]]; then
+    if [[ -z $R ]]; then
       continue
     fi
     FROM="${R%%=*}"
@@ -34,15 +34,7 @@ for LINE in "${LINES[@]}"; do
   for HT in "${!HOSTTYPES[@]}"; do
     GOARCH="${HOSTTYPES["$HT"]}"
     HOSTTYPE="${REMAPS["$HT"]:-"$HT"}"
-
-    case "$GOARCH" in
-    arm64)
-      ARCH=aarch64
-      ;;
-    *)
-      ARCH="$GOARCH"
-      ;;
-    esac
+    DPKG_ARCH="$GOARCH"
 
     case "$HOSTTYPE" in
     !)
@@ -52,12 +44,12 @@ for LINE in "${LINES[@]}"; do
       HOSTTYPE=''
       ;;
     all)
-      ARCH='all'
+      DPKG_ARCH='all'
       ;;
     *) ;;
     esac
 
-    printf -- '%s ' "$ARCH" "$VERSION"
-    envsubst <<<"$NAME!$URI"
+    printf -- '%s ' "$DPKG_ARCH" "$VERSION"
+    envsubst <<< "$NAME!$URI"
   done
 done | uniq | tr -- ' ' '!'
