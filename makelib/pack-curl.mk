@@ -40,6 +40,7 @@ $(DEB)/$1_$2_$3.deb: $(TMP)/$1_$2_$3.deb | $(DEB)
 endef
 
 
+V_AD_HOME    := $(patsubst v%,%,$(shell $(GH_LATEST) AdguardTeam/AdGuardHome))
 V_BTM        := $(shell $(GH_LATEST) ClementTsang/bottom)
 V_CTAGS      := $(subst /,,$(dir $(subst +,/,$(shell $(GH_LATEST) universal-ctags/ctags-nightly-build))))
 V_DELTA      := $(shell $(GH_LATEST) dandavison/delta)
@@ -75,6 +76,7 @@ V_TOKEI := 12.1.2
 
 define CURL_ARCHIVES
 
+$(V_AD_HOME)  AdGuardHome/AdGuardHome                             https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_#{GOARCH}.tar.gz              %
 $(V_DIFFT)    difft                                               https://github.com/Wilfred/difftastic/releases/latest/download/difft-#{HOSTTYPE}-unknown-linux-gnu.tar.gz           %
 $(V_DUST)     dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust https://github.com/bootandy/dust/releases/latest/download/dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz     %
 $(V_EZA)      eza                                                 https://github.com/eza-community/eza/releases/latest/download/eza_#{HOSTTYPE}-unknown-linux-gnu.tar.gz              %
@@ -100,7 +102,7 @@ endef
 
 define CURL_DEBS
 
-$(V_BTM)        btm                     https://github.com/ClementTsang/bottom/releases/latest/download/bottom_#{VERSION}_#{GOARCH}.deb                         %aarch64=!
+$(V_BTM)        btm                     https://github.com/ClementTsang/bottom/releases/latest/download/bottom_#{VERSION}-1_#{GOARCH}.deb                       %
 $(V_CTAGS)      uctags                  https://github.com/universal-ctags/ctags-nightly-build/releases/latest/download/uctags-#{VERSION}-linux-#{HOSTTYPE}.deb %
 $(V_DELTA)      git-delta               https://github.com/dandavison/delta/releases/latest/download/git-delta_#{VERSION}_#{GOARCH}.deb                         %
 $(V_GH)         gh                      https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                              %
