@@ -45,6 +45,7 @@ V_BTM        := $(shell $(GH_LATEST) ClementTsang/bottom)
 V_CTAGS      := $(subst /,,$(dir $(subst +,/,$(shell $(GH_LATEST) universal-ctags/ctags-nightly-build))))
 V_DELTA      := $(shell $(GH_LATEST) dandavison/delta)
 V_DIFFT      := $(shell $(GH_LATEST) Wilfred/difftastic)
+V_DIFF_NAV   := $(patsubst v%,%,$(shell $(GH_LATEST) dlvhdr/diffnav))
 V_DUST       := $(patsubst v%,%,$(shell $(GH_LATEST) bootandy/dust))
 V_EZA        := $(patsubst v%,%,$(shell $(GH_LATEST) eza-community/eza))
 V_FZF        := $(patsubst v%,%,$(shell $(GH_LATEST) junegunn/fzf))
@@ -78,6 +79,7 @@ define CURL_ARCHIVES
 
 $(V_AD_HOME)  AdGuardHome/AdGuardHome                             https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_#{GOARCH}.tar.gz              %
 $(V_DIFFT)    difft                                               https://github.com/Wilfred/difftastic/releases/latest/download/difft-#{HOSTTYPE}-unknown-linux-gnu.tar.gz           %
+$(V_DIFF_NAV) diffnav                                             https://github.com/dlvhdr/diffnav/releases/latest/download/diffnav_Linux_#{GOARCH}.tar.gz                           %
 $(V_DUST)     dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust https://github.com/bootandy/dust/releases/latest/download/dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz     %
 $(V_EZA)      eza                                                 https://github.com/eza-community/eza/releases/latest/download/eza_#{HOSTTYPE}-unknown-linux-gnu.tar.gz              %
 $(V_FZF)      fzf                                                 https://github.com/junegunn/fzf/releases/latest/download/fzf-#{VERSION}-linux_#{GOARCH}.tar.gz                      %
