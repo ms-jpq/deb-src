@@ -79,7 +79,7 @@ define CURL_ARCHIVES
 
 $(V_AD_HOME)  AdGuardHome/AdGuardHome                             https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_#{GOARCH}.tar.gz              %
 $(V_DIFFT)    difft                                               https://github.com/Wilfred/difftastic/releases/latest/download/difft-#{HOSTTYPE}-unknown-linux-gnu.tar.gz           %
-$(V_DIFF_NAV) diffnav                                             https://github.com/dlvhdr/diffnav/releases/latest/download/diffnav_Linux_#{GOARCH}.tar.gz                           %
+$(V_DIFF_NAV) diffnav                                             https://github.com/dlvhdr/diffnav/releases/latest/download/diffnav_Linux_#{HOSTTYPE}.tar.gz                         %aarch64=arm64
 $(V_DUST)     dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust https://github.com/bootandy/dust/releases/latest/download/dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz     %
 $(V_EZA)      eza                                                 https://github.com/eza-community/eza/releases/latest/download/eza_#{HOSTTYPE}-unknown-linux-gnu.tar.gz              %
 $(V_FZF)      fzf                                                 https://github.com/junegunn/fzf/releases/latest/download/fzf-#{VERSION}-linux_#{GOARCH}.tar.gz                      %
