@@ -16,6 +16,9 @@ $(TMP)/$1_$2/$3: | $(VAR)/sh $(TMP)
 
 $(TMP)/$1_$2_$5/usr/bin/$5: $(TMP)/$1_$2/$3
 	mkdir -v -p -- '$$(@D)'
+	if [[ -d 'overlay/$5' ]]; then
+	  cp -v -r --no-dereference -- 'overlay/$5'/* '$(TMP)/$1_$2_$5'
+	fi
 	install -v -- '$$<' '$$@'
 
 $(TMP)/$1_$2_$5.deb: $(TMP)/$1_$2_$5/DEBIAN/control $(TMP)/$1_$2_$5/usr/bin/$5 | $(DEB) /usr/bin/debsigs
@@ -91,6 +94,7 @@ $(V_JLESS)     jless                                               https://githu
 $(V_JNV)       jnv-x86_64-unknown-linux-gnu/jnv                    https://github.com/ynqa/jnv/releases/latest/download/jnv-x86_64-unknown-linux-gnu.tar.xz                            %aarch64=!
 $(V_LAZYGIT)   lazygit                                             https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz       %aarch64=arm64
 $(V_POSH)      posh-linux-#{GOARCH}:oh-my-posh                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
+$(V_RCLONE)    rclone-v#{VERSION}-linux-#{GOARCH}/rclone:rclone    https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.zip                    %
 $(V_S3PROXY)   s3proxy                                             https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                    %aarch64=all,x86_64=all
 $(V_SMART_DNS) smartdns-#{HOSTTYPE}:smartdns                       https://github.com/pymumu/smartdns/releases/latest/download/smartdns-#{HOSTTYPE}                                    %
 $(V_SPOTIFYD)  spotifyd                                            https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-linux-full.tar.gz                            %aarch64=!
@@ -112,7 +116,6 @@ $(V_DELTA)      git-delta               https://github.com/dandavison/delta/rele
 $(V_GH)         gh                      https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                              %
 $(V_GORELEASER) goreleaser              https://github.com/goreleaser/goreleaser/releases/latest/download/goreleaser_#{VERSION}_#{GOARCH}.deb                   %
 $(V_PASTEL)     pastel                  https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                              %
-$(V_RCLONE)     rclone                  https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.deb                        %
 $(V_S5CMD)      s5cmd                   https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                             %
 $(V_SAD)        sad                     https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                                %
 $(V_TV)         tidy-viewer             https://github.com/alexhallam/tv/releases/latest/download/tidy-viewer_#{VERSION}_#{GOARCH}.deb                          %aarch64=!
