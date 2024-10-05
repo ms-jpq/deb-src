@@ -10,13 +10,13 @@ $(TMP)/$(DPKG_ARCH)_$(V_TRANS)_transmission/DEBIAN/control: ./DEBIAN/control | /
 	mkdir -v -p -- '$(@D)'
 	ARCH='$(DPKG_ARCH)' VERSION='$(V_TRANS)' NAME='transmission' envsubst <'$<' >'$@'
 
-$(TMP)/$(DPKG_ARCH)_$(V_TRANS)_transmission/bin: $(TMP)/transmission-$(V_TRANS) | /usr/include/event.h
-	env --chdir '$<' -- cmake -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_QT=OFF -DENABLE_GTK=OFF -DWITH_SYSTEMD=ON -DWITH_INOTIFY=ON
+$(TMP)/$(DPKG_ARCH)_$(V_TRANS)_transmission/usr/bin: $(TMP)/transmission-$(V_TRANS) | /usr/include/event.h
+	env --chdir '$<' -- cmake -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_QT=OFF -DENABLE_GTK=OFF -DWITH_SYSTEMD=ON -DWITH_INOTIFY=ON -DPACKAGE_DATA_DIR=/usr/share
 	env --chdir '$</build' -- cmake --build .
 	env --chdir '$</build' -- cmake --install . --prefix='$(abspath $(@D))'
 
-$(TMP)/$(DPKG_ARCH)_$(V_TRANS)_transmission.deb: $(TMP)/$(DPKG_ARCH)_$(V_TRANS)_transmission/bin $(TMP)/$(DPKG_ARCH)_$(V_TRANS)_transmission/DEBIAN/control | /usr/bin/debsigs
-	dpkg-deb --root-owner-group --build -- '$(<D)' '$@'
+$(TMP)/$(DPKG_ARCH)_$(V_TRANS)_transmission.deb: $(TMP)/$(DPKG_ARCH)_$(V_TRANS)_transmission/usr/bin $(TMP)/$(DPKG_ARCH)_$(V_TRANS)_transmission/DEBIAN/control | /usr/bin/debsigs
+	dpkg-deb --root-owner-group --build -- '$(dir $(<D))' '$@'
 	debsigs --sign=archive -- '$@'
 
 trans: $(DEB)/$(DPKG_ARCH)_$(V_TRANS)_transmission.deb

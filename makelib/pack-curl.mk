@@ -112,7 +112,7 @@ define CURL_DEBS
 
 $(V_BTM)        btm                     https://github.com/ClementTsang/bottom/releases/latest/download/bottom_#{VERSION}-1_#{GOARCH}.deb                       %
 $(V_CTAGS)      uctags                  https://github.com/universal-ctags/ctags-nightly-build/releases/latest/download/uctags-#{VERSION}-linux-#{HOSTTYPE}.deb %
-$(V_DATE)       packages-microsoft-prod https://packages.microsoft.com/config/ubuntu/#{VERSION}/packages-microsoft-prod.deb                                     %aarch64=all,x86_64=all
+$(V_DATE)       packages-microsoft-prod https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb                                          %aarch64=all,x86_64=all
 $(V_DELTA)      git-delta               https://github.com/dandavison/delta/releases/latest/download/git-delta_#{VERSION}_#{GOARCH}.deb                         %
 $(V_GH)         gh                      https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                              %
 $(V_GORELEASER) goreleaser              https://github.com/goreleaser/goreleaser/releases/latest/download/goreleaser_#{VERSION}_#{GOARCH}.deb                   %
