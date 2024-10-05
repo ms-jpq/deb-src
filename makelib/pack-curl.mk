@@ -96,7 +96,6 @@ $(V_AD_HOME)   AdGuardHome/AdGuardHome                             *            
 $(V_DATE)      $(IMG_PREFIX)#{GOARCH}-initrd-generic               opt/img/initrd-generic  $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-initrd-generic                                                               %
 $(V_DATE)      $(IMG_PREFIX)#{GOARCH}-vmlinuz-generic              opt/img/vmlinuz-generic $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-vmlinuz-generic                                                              %
 $(V_DATE)      gay                                                 *                       https://raw.githubusercontent.com/ms-jpq/gay/%3C3/gay                                                               %aarch64=all,x86_64=all
-$(V_DATE)      virtio-win.iso:virtio-win                           opt/img/virtio-win.iso  https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso                       %aarch64=all,x86_64=all
 $(V_DIFFT)     difft                                               *                       https://github.com/Wilfred/difftastic/releases/latest/download/difft-#{HOSTTYPE}-unknown-linux-gnu.tar.gz           %
 $(V_DIFF_NAV)  diffnav                                             *                       https://github.com/dlvhdr/diffnav/releases/latest/download/diffnav_Linux_#{HOSTTYPE}.tar.gz                         %aarch64=arm64
 $(V_DUST)      dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust *                       https://github.com/bootandy/dust/releases/latest/download/dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz     %
@@ -120,7 +119,8 @@ $(V_YT_DLP)    yt-dlp_linux${HOSTTYPE}:yt-dlp                      *            
 
 endef
 
-# $(V_TOKEI)    tokei                                               https://github.com/XAMPPRocky/tokei/releases/latest/download/tokei-#{HOSTTYPE}-unknown-linux-gnu.tar.gz             %
+# $(V_DATE)      virtio-win.iso:virtio-win                           opt/img/virtio-win.iso  https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso                       %aarch64=all,x86_64=all
+# $(V_TOKEI)     tokei                                               *                       https://github.com/XAMPPRocky/tokei/releases/latest/download/tokei-#{HOSTTYPE}-unknown-linux-gnu.tar.gz             %
 
 define CURL_DEBS
 
