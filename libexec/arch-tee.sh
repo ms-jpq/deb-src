@@ -16,7 +16,7 @@ for LINE in "${LINES[@]}"; do
   if [[ -z $LINE ]]; then
     continue
   fi
-  read -r -- VERSION NAME URI REMAP <<< "$LINE"
+  read -r -- VERSION NAME COPY URI REMAP <<< "$LINE"
 
   REMAPS=()
   REMAP="$(tr -- ',' '\n' <<< "${REMAP#'%'}")"
@@ -52,6 +52,6 @@ for LINE in "${LINES[@]}"; do
     esac
 
     printf -- '%s ' "$DPKG_ARCH" "$VERSION"
-    envsubst <<< "$NAME!$URI"
+    envsubst <<< "$NAME!$URI!$COPY"
   done
 done | uniq | tr -- ' ' '!'
