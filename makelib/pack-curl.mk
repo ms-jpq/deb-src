@@ -42,7 +42,8 @@ $(DEB)/$1_$2_$3.deb: $(TMP)/$1_$2_$3.deb | $(DEB)
 	cp -v -f -- '$$<' '$$@'
 endef
 
-V_DATE       := $(shell date -- '+%Y-W%V')
+V_DATE     := $(shell date -- '+%Y-W%V')
+VERSION_ID := $(shell perl -CASD -wne '/^VERSION_ID="(.+)"$$/ && print $$1' </etc/os-release)
 
 V_AD_HOME    := $(patsubst v%,%,$(shell $(GH_LATEST) AdguardTeam/AdGuardHome))
 V_BTM        := $(shell $(GH_LATEST) ClementTsang/bottom)
@@ -94,7 +95,7 @@ $(V_JLESS)     jless                                               https://githu
 $(V_JNV)       jnv-x86_64-unknown-linux-gnu/jnv                    https://github.com/ynqa/jnv/releases/latest/download/jnv-x86_64-unknown-linux-gnu.tar.xz                            %aarch64=!
 $(V_LAZYGIT)   lazygit                                             https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz       %aarch64=arm64
 $(V_POSH)      posh-linux-#{GOARCH}:oh-my-posh                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
-$(V_RCLONE)    rclone-v#{VERSION}-linux-#{GOARCH}/rclone:rclone    https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.zip                    %
+$(V_RCLONE)    rclone-v#{VERSION}-linux-#{GOARCH}/rclone           https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.zip                    %
 $(V_S3PROXY)   s3proxy                                             https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                    %aarch64=all,x86_64=all
 $(V_SMART_DNS) smartdns-#{HOSTTYPE}:smartdns                       https://github.com/pymumu/smartdns/releases/latest/download/smartdns-#{HOSTTYPE}                                    %
 $(V_SPOTIFYD)  spotifyd                                            https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-linux-full.tar.gz                            %aarch64=!
@@ -112,7 +113,7 @@ define CURL_DEBS
 
 $(V_BTM)        btm                     https://github.com/ClementTsang/bottom/releases/latest/download/bottom_#{VERSION}-1_#{GOARCH}.deb                       %
 $(V_CTAGS)      uctags                  https://github.com/universal-ctags/ctags-nightly-build/releases/latest/download/uctags-#{VERSION}-linux-#{HOSTTYPE}.deb %
-$(V_DATE)       packages-microsoft-prod https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb                                          %aarch64=all,x86_64=all
+$(V_DATE)       packages-microsoft-prod https://packages.microsoft.com/config/ubuntu/$(VERSION_ID)/packages-microsoft-prod.deb                                  %aarch64=all,x86_64=all
 $(V_DELTA)      git-delta               https://github.com/dandavison/delta/releases/latest/download/git-delta_#{VERSION}_#{GOARCH}.deb                         %
 $(V_GH)         gh                      https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                              %
 $(V_GORELEASER) goreleaser              https://github.com/goreleaser/goreleaser/releases/latest/download/goreleaser_#{VERSION}_#{GOARCH}.deb                   %
