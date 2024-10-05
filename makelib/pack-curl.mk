@@ -42,6 +42,7 @@ $(DEB)/$1_$2_$3.deb: $(TMP)/$1_$2_$3.deb | $(DEB)
 	cp -v -f -- '$$<' '$$@'
 endef
 
+V_DATE       := $(shell date -- '+%Y-W%V')
 
 V_AD_HOME    := $(patsubst v%,%,$(shell $(GH_LATEST) AdguardTeam/AdGuardHome))
 V_BTM        := $(shell $(GH_LATEST) ClementTsang/bottom)
@@ -52,7 +53,6 @@ V_DIFF_NAV   := $(patsubst v%,%,$(shell $(GH_LATEST) dlvhdr/diffnav))
 V_DUST       := $(patsubst v%,%,$(shell $(GH_LATEST) bootandy/dust))
 V_EZA        := $(patsubst v%,%,$(shell $(GH_LATEST) eza-community/eza))
 V_FZF        := $(patsubst v%,%,$(shell $(GH_LATEST) junegunn/fzf))
-V_GAY        := 6.9
 V_GH         := $(patsubst v%,%,$(shell $(GH_LATEST) cli/cli))
 V_GITUI      := $(patsubst v%,%,$(shell $(GH_LATEST) extrawurst/gitui))
 V_GOJQ       := $(shell $(GH_LATEST) itchyny/gojq)
@@ -82,12 +82,12 @@ V_TOKEI := 12.1.2
 define CURL_ARCHIVES
 
 $(V_AD_HOME)   AdGuardHome/AdGuardHome                             https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_#{GOARCH}.tar.gz              %
+$(V_DATE)      gay                                                 https://raw.githubusercontent.com/ms-jpq/gay/%3C3/gay                                                               %aarch64=all,x86_64=all
 $(V_DIFFT)     difft                                               https://github.com/Wilfred/difftastic/releases/latest/download/difft-#{HOSTTYPE}-unknown-linux-gnu.tar.gz           %
 $(V_DIFF_NAV)  diffnav                                             https://github.com/dlvhdr/diffnav/releases/latest/download/diffnav_Linux_#{HOSTTYPE}.tar.gz                         %aarch64=arm64
 $(V_DUST)      dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust https://github.com/bootandy/dust/releases/latest/download/dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz     %
 $(V_EZA)       eza                                                 https://github.com/eza-community/eza/releases/latest/download/eza_#{HOSTTYPE}-unknown-linux-gnu.tar.gz              %
 $(V_FZF)       fzf                                                 https://github.com/junegunn/fzf/releases/latest/download/fzf-#{VERSION}-linux_#{GOARCH}.tar.gz                      %
-$(V_GAY)       gay                                                 https://raw.githubusercontent.com/ms-jpq/gay/%3C3/gay                                                               %aarch64=all,x86_64=all
 $(V_GITUI)     gitui                                               https://github.com/extrawurst/gitui/releases/latest/download/gitui-linux-#{HOSTTYPE}.tar.gz                         %
 $(V_HTMLQ)     htmlq                                               https://github.com/mgdm/htmlq/releases/latest/download/htmlq-#{HOSTTYPE}-linux.tar.gz                               %aarch64=!
 $(V_JLESS)     jless                                               https://github.com/PaulJuliusMartinez/jless/releases/latest/download/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip %aarch64=!
@@ -112,6 +112,7 @@ define CURL_DEBS
 
 $(V_BTM)        btm                     https://github.com/ClementTsang/bottom/releases/latest/download/bottom_#{VERSION}-1_#{GOARCH}.deb                       %
 $(V_CTAGS)      uctags                  https://github.com/universal-ctags/ctags-nightly-build/releases/latest/download/uctags-#{VERSION}-linux-#{HOSTTYPE}.deb %
+$(V_DATE)       packages-microsoft-prod https://packages.microsoft.com/config/ubuntu/#{VERSION}/packages-microsoft-prod.deb                                     %aarch64=all,x86_64=all
 $(V_DELTA)      git-delta               https://github.com/dandavison/delta/releases/latest/download/git-delta_#{VERSION}_#{GOARCH}.deb                         %
 $(V_GH)         gh                      https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                              %
 $(V_GORELEASER) goreleaser              https://github.com/goreleaser/goreleaser/releases/latest/download/goreleaser_#{VERSION}_#{GOARCH}.deb                   %
@@ -120,7 +121,6 @@ $(V_S5CMD)      s5cmd                   https://github.com/peak/s5cmd/releases/l
 $(V_SAD)        sad                     https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                                %
 $(V_TV)         tidy-viewer             https://github.com/alexhallam/tv/releases/latest/download/tidy-viewer_#{VERSION}_#{GOARCH}.deb                          %aarch64=!
 $(V_WATCHEX)    watchexec               https://github.com/watchexec/watchexec/releases/latest/download/watchexec-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.deb  %
-22.04           packages-microsoft-prod https://packages.microsoft.com/config/ubuntu/#{VERSION}/packages-microsoft-prod.deb                                     %aarch64=all,x86_64=all
 
 endef
 
