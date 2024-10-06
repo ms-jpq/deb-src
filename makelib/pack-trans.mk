@@ -9,6 +9,9 @@ $(TMP)/transmission-$(V_TRANS): | $(VAR)/sh $(TMP)
 $(TMP)/$(DPKG_ARCH)_$(V_TRANS)_transmission/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
 	mkdir -v -p -- '$(@D)'
 	ARCH='$(DPKG_ARCH)' VERSION='$(V_TRANS)' NAME='transmission-$(VERSION_ID)' envsubst <'$<' >'$@'
+	tee --append -- '$@' <<-'EOF'
+	Depends: libevent-2.1-7t64 libminiupnpc17 libnatpmp1t64
+	EOF
 
 $(TMP)/$(DPKG_ARCH)_$(V_TRANS)_transmission/usr/bin: $(TMP)/transmission-$(V_TRANS) | /usr/include/event.h
 	env --chdir '$<' -- cmake -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_QT=OFF -DENABLE_GTK=OFF -DWITH_SYSTEMD=ON -DWITH_INOTIFY=ON -DPACKAGE_DATA_DIR=/usr/share
