@@ -51,7 +51,6 @@ $(DEB)/$1_$2_$3.deb: $(TMP)/$1_$2_$3.deb | $(DEB)
 endef
 
 V_DATE       := $(shell date -- '+%Y-W%V')
-VERSION_ID   := $(shell perl -CASD -wne '/^VERSION_ID="(.+)"$$/ && print $$1' </etc/os-release)
 CLOUD_IMG_AT := https://cloud-images.ubuntu.com/releases/$(VERSION_ID)/release/unpacked
 IMG_PREFIX   := ubuntu-$(VERSION_ID)-server-cloudimg-
 
@@ -119,7 +118,6 @@ $(V_YT_DLP)    yt-dlp_linux${HOSTTYPE}:yt-dlp                      *            
 
 endef
 
-# $(V_DATE)      virtio-win.iso:virtio-win                           opt/img/virtio-win.iso  https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso                       %aarch64=all,x86_64=all
 # $(V_TOKEI)     tokei                                               *                       https://github.com/XAMPPRocky/tokei/releases/latest/download/tokei-#{HOSTTYPE}-unknown-linux-gnu.tar.gz             %
 
 define CURL_DEBS

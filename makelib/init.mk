@@ -1,9 +1,10 @@
 .PHONY: init
 
-DPKG_ARCH := $(shell dpkg --print-architecture)
-GH_LATEST := ./libexec/gh-latest.sh $(TMP)
-CURL := curl --fail-with-body --location --no-progress-meter
-UNPACK := $(VAR)/sh/layers/posix/home/.local/opt/initd/libexec/curl-unpack.sh
+DPKG_ARCH  := $(shell dpkg --print-architecture)
+VERSION_ID := $(shell perl -CASD -wne '/^VERSION_ID="(.+)"$$/ && print $$1' </etc/os-release)
+GH_LATEST  := ./libexec/gh-latest.sh $(TMP)
+CURL       := curl --fail-with-body --location --no-progress-meter
+UNPACK     := $(VAR)/sh/layers/posix/home/.local/opt/initd/libexec/curl-unpack.sh
 
 APT :=
 APT += gettext-base apt-utils debsigs
