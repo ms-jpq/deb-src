@@ -71,6 +71,7 @@ V_HTMLQ      := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
 V_JLESS      := $(patsubst v%,%,$(shell $(GH_LATEST) PaulJuliusMartinez/jless))
 V_JNV        := $(patsubst v%,%,$(shell $(GH_LATEST) ynqa/jnv))
 V_K3S        := $(patsubst v%,%,$(shell $(GH_LATEST) k3s-io/k3s))
+V_K9S        := $(patsubst v%,%,$(shell $(GH_LATEST) derailed/k9s))
 V_LAZYGIT    := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
 V_PASTEL     := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
 V_POSH       := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
@@ -130,6 +131,7 @@ $(V_DATE)       packages-microsoft-prod * https://packages.microsoft.com/config/
 $(V_DELTA)      git-delta               * https://github.com/dandavison/delta/releases/latest/download/git-delta_#{VERSION}_#{GOARCH}.deb                         %
 $(V_GH)         gh                      * https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                              %
 $(V_GORELEASER) goreleaser              * https://github.com/goreleaser/goreleaser/releases/latest/download/goreleaser_#{VERSION}_#{GOARCH}.deb                   %
+$(V_K9S)        k9s                     * https://github.com/derailed/k9s/releases/latest/download/k9s_linux_#{GOARCH}.deb                                        %
 $(V_PASTEL)     pastel                  * https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                              %
 $(V_S5CMD)      s5cmd                   * https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                             %
 $(V_SAD)        sad                     * https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                                %
