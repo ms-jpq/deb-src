@@ -71,6 +71,7 @@ V_HTMLQ      := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
 V_JLESS      := $(patsubst v%,%,$(shell $(GH_LATEST) PaulJuliusMartinez/jless))
 V_JNV        := $(patsubst v%,%,$(shell $(GH_LATEST) ynqa/jnv))
 V_K3S        := $(patsubst v%,%,$(shell $(GH_LATEST) k3s-io/k3s))
+V_K8S        := $(patsubst v%,%,$(shell $(GH_LATEST) kubernetes/kubernetes))
 V_K9S        := $(patsubst v%,%,$(shell $(GH_LATEST) derailed/k9s))
 V_LAZYGIT    := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
 V_PASTEL     := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
@@ -107,6 +108,7 @@ $(V_HTMLQ)     htmlq                                               *            
 $(V_JLESS)     jless                                               *                                     https://github.com/PaulJuliusMartinez/jless/releases/latest/download/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip %aarch64=!
 $(V_JNV)       jnv-x86_64-unknown-linux-gnu/jnv                    *                                     https://github.com/ynqa/jnv/releases/latest/download/jnv-x86_64-unknown-linux-gnu.tar.xz                            %aarch64=!
 $(V_K3S)       #{HOSTTYPE}:k3s                                     *                                     https://github.com/k3s-io/k3s/releases/latest/download/#{HOSTTYPE}                                                  %aarch64=k3s-arm64,x86_64=k3s
+$(V_K8S)       kubectl                                             *                                     https://dl.k8s.io/release/v#{VERSION}/bin/linux/#{GOARCH}/kubectl                                                   %
 $(V_LAZYGIT)   lazygit                                             *                                     https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz       %aarch64=arm64
 $(V_POSH)      posh-linux-#{GOARCH}:oh-my-posh                     *                                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
 $(V_RCLONE)    rclone-v#{VERSION}-linux-#{GOARCH}/rclone           *                                     https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.zip                    %
