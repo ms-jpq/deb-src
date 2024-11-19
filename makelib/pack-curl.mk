@@ -74,6 +74,7 @@ V_K3S        := $(patsubst v%,%,$(shell $(GH_LATEST) k3s-io/k3s))
 V_K8S        := $(patsubst v%,%,$(shell $(GH_LATEST) kubernetes/kubernetes))
 V_K9S        := $(patsubst v%,%,$(shell $(GH_LATEST) derailed/k9s))
 V_LAZYGIT    := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
+V_LF         := $(patsubst r%,%,$(shell $(GH_LATEST) gokcehan/lf))
 V_PASTEL     := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
 V_POSH       := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
 V_RCLONE     := $(patsubst v%,%,$(shell $(GH_LATEST) rclone/rclone))
@@ -110,6 +111,7 @@ $(V_JNV)       jnv-x86_64-unknown-linux-gnu/jnv                    *            
 $(V_K3S)       #{HOSTTYPE}:k3s                                     *                                     https://github.com/k3s-io/k3s/releases/latest/download/#{HOSTTYPE}                                                  %aarch64=k3s-arm64,x86_64=k3s
 $(V_K8S)       kubectl                                             *                                     https://dl.k8s.io/release/v#{VERSION}/bin/linux/#{GOARCH}/kubectl                                                   %
 $(V_LAZYGIT)   lazygit                                             *                                     https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz       %aarch64=arm64
+$(V_LF)        lf                                                  *                                     https://github.com/gokcehan/lf/releases/latest/download/lf-linux-#{GOARCH}.tar.gz                                   %
 $(V_POSH)      posh-linux-#{GOARCH}:oh-my-posh                     *                                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
 $(V_RCLONE)    rclone-v#{VERSION}-linux-#{GOARCH}/rclone           *                                     https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.zip                    %
 $(V_S3PROXY)   s3proxy                                             *                                     https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                    %aarch64=all,x86_64=all
