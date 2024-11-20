@@ -87,6 +87,7 @@ V_TV         := $(shell $(GH_LATEST) alexhallam/tv)
 V_V2RAY      := $(patsubst v%,%,$(shell $(GH_LATEST) v2fly/v2ray-core))
 V_WATCHEX    := $(patsubst v%,%,$(shell $(GH_LATEST) watchexec/watchexec))
 V_XSV        := $(shell $(GH_LATEST) BurntSushi/xsv)
+V_YAZI       := $(patsubst v%,%,$(shell $(GH_LATEST) sxyazi/yazi)) https://github.com//releases/download/v0.3.3/yazi-x86_64-unknown-linux-gnu.zip
 V_YQ         := $(patsubst v%,%,$(shell $(GH_LATEST) mikefarah/yq))
 V_YT_DLP     := $(shell $(GH_LATEST) yt-dlp/yt-dlp)
 
@@ -120,6 +121,7 @@ $(V_SPOTIFYD)  spotifyd                                            *            
 $(V_TOKEI)     tokei                                               *                                     https://github.com/XAMPPRocky/tokei/releases/download/v#{VERSION}/tokei-#{HOSTTYPE}-unknown-linux-gnu.tar.gz        %
 $(V_V2RAY)     v2ray                                               *                                     https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-#{HOSTTYPE}.zip                            %aarch64=arm64-v8a,x86_64=64
 $(V_XSV)       xsv                                                 *                                     https://github.com/BurntSushi/xsv/releases/latest/download/xsv-#{VERSION}-x86_64-unknown-linux-musl.tar.gz          %aarch64=!
+$(V_YAZI)      yazi                                                *                                     https://github.com/sxyazi/yazi/releases/latest/download/yazi-#{HOSTTYPE}-unknown-linux-gnu.zip                      %
 $(V_YQ)        yq_linux_#{GOARCH}:yq                               *                                     https://github.com/mikefarah/yq/releases/latest/download/yq_linux_#{GOARCH}.tar.gz                                  %
 $(V_YT_DLP)    yt-dlp_linux${HOSTTYPE}:yt-dlp                      *                                     https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux${HOSTTYPE}                                   %aarch64=_aarch64,x86_64=
 
