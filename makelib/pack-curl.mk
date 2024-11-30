@@ -78,6 +78,7 @@ V_LF         := $(patsubst r%,%,$(shell $(GH_LATEST) gokcehan/lf))
 V_PASTEL     := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
 V_POSH       := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
 V_RCLONE     := $(patsubst v%,%,$(shell $(GH_LATEST) rclone/rclone))
+V_REGI       := $(patsubst v%,%,$(shell $(GH_LATEST) distribution/distribution))
 V_S3PROXY    := $(patsubst s3proxy-%,%,$(shell $(GH_LATEST) gaul/s3proxy))
 V_S5CMD      := $(patsubst v%,%,$(shell $(GH_LATEST) peak/s5cmd))
 V_SAD        := $(patsubst v%,%,$(shell $(GH_LATEST) ms-jpq/sad))
@@ -115,6 +116,7 @@ $(V_LAZYGIT)   lazygit                                             *            
 $(V_LF)        lf                                                  *                                     https://github.com/gokcehan/lf/releases/latest/download/lf-linux-#{GOARCH}.tar.gz                                   %
 $(V_POSH)      posh-linux-#{GOARCH}:oh-my-posh                     *                                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                          %
 $(V_RCLONE)    rclone-v#{VERSION}-linux-#{GOARCH}/rclone           *                                     https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.zip                    %
+$(V_REGI)      registry                                            *                                     https://github.com/distribution/distribution/releases/latest/download/registry_#{VERSION}_linux_#{GOARCH}.tar.gz    %
 $(V_S3PROXY)   s3proxy                                             *                                     https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                    %aarch64=all,x86_64=all
 $(V_SMART_DNS) smartdns-#{HOSTTYPE}:smartdns                       *                                     https://github.com/pymumu/smartdns/releases/latest/download/smartdns-#{HOSTTYPE}                                    %
 $(V_SPOTIFYD)  spotifyd                                            *                                     https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-linux-full.tar.gz                            %aarch64=!
