@@ -55,11 +55,12 @@ CLOUD_IMG_AT := https://cloud-images.ubuntu.com/releases/$(VERSION_ID)/release/u
 IMG_PREFIX   := ubuntu-$(VERSION_ID)-server-cloudimg-
 
 V_AD_HOME    := $(patsubst v%,%,$(shell $(GH_LATEST) AdguardTeam/AdGuardHome))
+V_ASDF       := $(patsubst v%,%,$(shell $(GH_LATEST) asdf-vm/asdf))
 V_BTM        := $(shell $(GH_LATEST) ClementTsang/bottom)
 V_CTAGS      := $(subst /,,$(dir $(subst +,/,$(shell $(GH_LATEST) universal-ctags/ctags-nightly-build))))
 V_DELTA      := $(shell $(GH_LATEST) dandavison/delta)
-V_DIFFT      := $(shell $(GH_LATEST) Wilfred/difftastic)
 V_DIFF_NAV   := $(patsubst v%,%,$(shell $(GH_LATEST) dlvhdr/diffnav))
+V_DIFFT      := $(shell $(GH_LATEST) Wilfred/difftastic)
 V_DUST       := $(patsubst v%,%,$(shell $(GH_LATEST) bootandy/dust))
 V_EZA        := $(patsubst v%,%,$(shell $(GH_LATEST) eza-community/eza))
 V_FZF        := $(patsubst v%,%,$(shell $(GH_LATEST) junegunn/fzf))
@@ -99,6 +100,7 @@ V_TOKEI := 12.1.2
 define CURL_ARCHIVES
 
 $(V_AD_HOME)   AdGuardHome/AdGuardHome                             *                                     https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_#{GOARCH}.tar.gz                       %
+$(V_ASDF)      asdf                                                *                                     https://github.com/asdf-vm/asdf/releases/latest/download/asdf-v#{VERSION}-linux-#{GOARCH}.tar.gz                             %
 $(V_DATE)      $(IMG_PREFIX)#{GOARCH}-initrd-generic               opt/img/initrd-generic-$(VERSION_ID)  $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-initrd-generic                                                                        %
 $(V_DATE)      $(IMG_PREFIX)#{GOARCH}-vmlinuz-generic              opt/img/vmlinuz-generic-$(VERSION_ID) $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-vmlinuz-generic                                                                       %
 $(V_DATE)      gay                                                 *                                     https://raw.githubusercontent.com/ms-jpq/gay/%3C3/gay                                                                        %aarch64=all,x86_64=all
