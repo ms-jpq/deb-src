@@ -77,6 +77,7 @@ V_K9S        := $(patsubst v%,%,$(shell $(GH_LATEST) derailed/k9s))
 V_LAZYGIT    := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
 V_LF         := $(patsubst r%,%,$(shell $(GH_LATEST) gokcehan/lf))
 V_PASTEL     := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
+V_PHPDOC     := $(patsubst v%,%,$(shell $(GH_LATEST) phpDocumentor/phpDocumentor))
 V_POSH       := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
 V_PTERM      := $(patsubst v%,%,$(shell $(GH_LATEST) mfontanini/presenterm))
 V_RCLONE     := $(patsubst v%,%,$(shell $(GH_LATEST) rclone/rclone))
@@ -104,8 +105,8 @@ $(V_ASDF)      asdf                                                *            
 $(V_DATE)      $(IMG_PREFIX)#{GOARCH}-initrd-generic               opt/img/initrd-generic-$(VERSION_ID)  $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-initrd-generic                                                                        %
 $(V_DATE)      $(IMG_PREFIX)#{GOARCH}-vmlinuz-generic              opt/img/vmlinuz-generic-$(VERSION_ID) $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-vmlinuz-generic                                                                       %
 $(V_DATE)      gay                                                 *                                     https://raw.githubusercontent.com/ms-jpq/gay/%3C3/gay                                                                        %aarch64=all,x86_64=all
-$(V_DIFFT)     difft                                               *                                     https://github.com/Wilfred/difftastic/releases/latest/download/difft-#{HOSTTYPE}-unknown-linux-gnu.tar.gz                    %
 $(V_DIFF_NAV)  diffnav                                             *                                     https://github.com/dlvhdr/diffnav/releases/latest/download/diffnav_Linux_#{HOSTTYPE}.tar.gz                                  %aarch64=arm64
+$(V_DIFFT)     difft                                               *                                     https://github.com/Wilfred/difftastic/releases/latest/download/difft-#{HOSTTYPE}-unknown-linux-gnu.tar.gz                    %
 $(V_DUST)      dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust *                                     https://github.com/bootandy/dust/releases/latest/download/dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz              %
 $(V_EZA)       eza                                                 *                                     https://github.com/eza-community/eza/releases/latest/download/eza_#{HOSTTYPE}-unknown-linux-gnu.tar.gz                       %
 $(V_FZF)       fzf                                                 *                                     https://github.com/junegunn/fzf/releases/latest/download/fzf-#{VERSION}-linux_#{GOARCH}.tar.gz                               %
@@ -117,6 +118,7 @@ $(V_K3S)       #{HOSTTYPE}:k3s                                     *            
 $(V_K8S)       kubectl                                             *                                     https://dl.k8s.io/release/v#{VERSION}/bin/linux/#{GOARCH}/kubectl                                                            %
 $(V_LAZYGIT)   lazygit                                             *                                     https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz                %aarch64=arm64
 $(V_LF)        lf                                                  *                                     https://github.com/gokcehan/lf/releases/latest/download/lf-linux-#{GOARCH}.tar.gz                                            %
+$(V_PHPDOC)    phpDocumentor.phar                                  *                                     https://github.com/phpDocumentor/phpDocumentor/releases/latest/download/phpDocumentor.phar                                   %aarch64=all,x86_64=all
 $(V_POSH)      posh-linux-#{GOARCH}:oh-my-posh                     *                                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-#{GOARCH}                                   %
 $(V_PTERM)     presenterm-#{VERSION}/presenterm                    *                                     https://github.com/mfontanini/presenterm/releases/latest/download/presenterm-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz %
 $(V_RCLONE)    rclone-v#{VERSION}-linux-#{GOARCH}/rclone           *                                     https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.zip                             %
