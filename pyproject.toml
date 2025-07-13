@@ -1,0 +1,6 @@
+[project]
+name    = "deb-src"
+version = "0"
+
+[project.optional-dependencies]
+dev = ["s3cmd"]
