@@ -13,8 +13,13 @@ TABBY_URL  := https://github.com/TabbyML/tabby/releases/latest/download/tabby_x8
 
 OLLAMA_SHORT := amd64_$(V_OLLAMA)
 TABBY_SHORT  := amd64_$(V_TABBY)
+OLLAMA_LONG  := all_$(V_OLLAMA)_ollama
+TABBY_LONG   := all_$(V_TABBY)_tabby
 
 $(TMP)/$(OLLAMA_SHORT): | $(VAR)/sh $(TMP)
 	'$(UNPACK)' '$(OLLAMA_URL)' '$@'
+
+$(TMP)/$(TABBY_SHORT): | $(VAR)/sh $(TMP)
+	'$(UNPACK)' '$(TABBY_URL)' '$@' --strip-components 1
 
 ollama: $(TMP)/$(OLLAMA_NAME)
