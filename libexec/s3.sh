@@ -1,0 +1,8 @@
+#!/usr/bin/env -S -- bash -Eeu -o pipefail -O dotglob -O nullglob -O extglob -O failglob -O globstar
+
+set -o pipefail
+
+S3="${0%/*}/../.venv/bin/s3cmd"
+
+export -- AWS_SHARED_CREDENTIALS_FILE="$HOME/.config/aws/credentials"
+exec -- "$S3" "$@"
