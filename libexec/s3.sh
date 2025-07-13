@@ -2,7 +2,7 @@
 
 set -o pipefail
 
-S3="${0%/*}/../.venv/bin/s3cmd"
+S3="${0%/*}/../var/venv/bin/s3cmd"
 
 export -- AWS_SHARED_CREDENTIALS_FILE="$HOME/.config/aws/credentials"
 exec -- "$S3" "$@"
