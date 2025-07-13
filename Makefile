@@ -13,9 +13,10 @@ SHELL := bash
 
 .PHONY: clean clobber
 
-VAR := ./var
-TMP := $(VAR)/tmp
-DEB := $(VAR)/deb
+VAR  := ./var
+VENV := $(VAR)/venv
+TMP  := $(VAR)/tmp
+DEB  := $(VAR)/deb
 PKGS :=
 
 clean:

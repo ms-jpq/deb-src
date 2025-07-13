@@ -23,3 +23,32 @@ $(VAR)/sh: | $(VAR)
 	else
 		git clone --recurse-submodules --shallow-submodules --depth=1 -- 'https://github.com/ms-jpq/shell_rc' '$@'
 	fi
+
+define PYDEPS
+from itertools import chain
+from os import execl
+from sys import executable
+
+from tomli import load
+
+toml = load(open("pyproject.toml", "rb"))
+
+project = toml["project"]
+execl(
+  executable,
+  executable,
+  "-m",
+  "pip",
+  "install",
+  "--upgrade",
+  "--",
+  *project.get("dependencies", ()),
+  *chain.from_iterable(project["optional-dependencies"].values()),
+)
+endef
+export -- PYDEPS
+
+$(VENV):
+	python3 -m venv -- '$@'
+	'$@/bin/python3' -m pip install --upgrade -- tomli
+	'$@/bin/python3' <<< '$(PYDEPS)'
