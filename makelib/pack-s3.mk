@@ -31,7 +31,7 @@ $(TMP)/$(OLLAMA_LONG): $(TMP)/$(OLLAMA_SHORT) | /usr/bin/envsubst
 $(TMP)/$(TABBY_LONG): $(TMP)/$(TABBY_SHORT) | /usr/bin/envsubst
 	DST='$@/opt/tabby'
 	mkdir -v -p -- '$@/DEBIAN' "$$DST"
-	ARCH='$(DPKG_ARCH)' VERSION='$(V_TABBY)' NAME='tabby' envsubst <'./DEBIAN/control' >'$@/DEBIAN/control'
+	ARCH='$(DPKG_ARCH)' VERSION='$(V_TABBY)' NAME='tabby-ml' envsubst <'./DEBIAN/control' >'$@/DEBIAN/control'
 	cp -v -fr -- '$</'* "$$DST/"
 
 ollama: $(S3)/$(OLLAMA_LONG).deb
