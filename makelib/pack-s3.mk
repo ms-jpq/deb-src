@@ -13,13 +13,36 @@ TABBY_URL  := https://github.com/TabbyML/tabby/releases/latest/download/tabby_x8
 
 OLLAMA_SHORT := amd64_$(V_OLLAMA)
 TABBY_SHORT  := amd64_$(V_TABBY)
-OLLAMA_LONG  := all_$(V_OLLAMA)_ollama
-TABBY_LONG   := all_$(V_TABBY)_tabby
+OLLAMA_LONG  := $(OLLAMA_SHORT)_ollama
+TABBY_LONG   := $(TABBY_SHORT)_tabby
 
 $(TMP)/$(OLLAMA_SHORT): | $(VAR)/sh $(TMP)
+	mkdir -v -p -- '$@'
 	'$(UNPACK)' '$(OLLAMA_URL)' '$@'
 
 $(TMP)/$(TABBY_SHORT): | $(VAR)/sh $(TMP)
+	mkdir -v -p -- '$@'
 	'$(UNPACK)' '$(TABBY_URL)' '$@' --strip-components 1
 
-ollama: $(TMP)/$(OLLAMA_NAME)
+$(TMP)/$(OLLAMA_LONG): $(TMP)/$(OLLAMA_SHORT) | /usr/bin/envsubst
+	set -x
+	mkdir -v -p -- '$@/DEBIAN'
+	ARCH='$(DPKG_ARCH)' VERSION='$(V_OLLAMA)' NAME='ollama' envsubst <'./DEBIAN/control' >'$@/DEBIAN/control'
+	cp -v -fr -- '$</'* '$@/'
+
+$(TMP)/$(TABBY_LONG): $(TMP)/$(TABBY_SHORT) | /usr/bin/envsubst
+	DST='$@/opt/tabby'
+	mkdir -v -p -- '$@/DEBIAN' "$$DST"
+	ARCH='$(DPKG_ARCH)' VERSION='$(V_TABBY)' NAME='tabby' envsubst <'./DEBIAN/control' >'$@/DEBIAN/control'
+	cp -v -fr -- '$</'* "$$DST/"
+
+$(S3)/$(OLLAMA_LONG).deb: $(TMP)/$(OLLAMA_LONG) | /usr/bin/debsigs $(S3)
+	dpkg-deb --root-owner-group --build -- '$<' '$@'
+	debsigs --sign=archive -- '$@'
+
+$(S3)/$(TABBY_LONG).deb: $(TMP)/$(TABBY_LONG) | /usr/bin/debsigs $(S3)
+	dpkg-deb --root-owner-group --build -- '$<' '$@'
+	debsigs --sign=archive -- '$@'
+
+ollama: $(S3)/$(OLLAMA_LONG).deb
+tabby:  $(S3)/$(TABBY_LONG).deb
