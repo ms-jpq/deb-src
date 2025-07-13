@@ -13,11 +13,13 @@ SHELL := bash
 
 .PHONY: clean clobber
 
-VAR  := ./var
-VENV := $(VAR)/venv
-TMP  := $(VAR)/tmp
-DEB  := $(VAR)/deb
-PKGS :=
+VAR     := ./var
+VENV    := $(VAR)/venv
+TMP     := $(VAR)/tmp
+DEB     := $(VAR)/deb
+PKGS    :=
+S3      := $(VAR)/s3
+S3_PKGS :=
 
 clean:
 	shopt -u failglob

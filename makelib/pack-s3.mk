@@ -1,6 +1,4 @@
-.PHONY: ollama tabby
-
-S3 := $(VAR)/s3
+.PHONY: s3pkg ollama tabby
 
 $(S3): | $(VAR)
 	mkdir -v -p -- '$@'
@@ -36,13 +34,21 @@ $(TMP)/$(TABBY_LONG): $(TMP)/$(TABBY_SHORT) | /usr/bin/envsubst
 	ARCH='$(DPKG_ARCH)' VERSION='$(V_TABBY)' NAME='tabby' envsubst <'./DEBIAN/control' >'$@/DEBIAN/control'
 	cp -v -fr -- '$</'* "$$DST/"
 
+ollama: $(S3)/$(OLLAMA_LONG).deb
 $(S3)/$(OLLAMA_LONG).deb: $(TMP)/$(OLLAMA_LONG) | /usr/bin/debsigs $(S3)
 	dpkg-deb --root-owner-group --build -- '$<' '$@'
 	debsigs --sign=archive -- '$@'
 
+tabby:  $(S3)/$(TABBY_LONG).deb
 $(S3)/$(TABBY_LONG).deb: $(TMP)/$(TABBY_LONG) | /usr/bin/debsigs $(S3)
 	dpkg-deb --root-owner-group --build -- '$<' '$@'
 	debsigs --sign=archive -- '$@'
 
-ollama: $(S3)/$(OLLAMA_LONG).deb
-tabby:  $(S3)/$(TABBY_LONG).deb
+S3_PKGS += $(S3)/$(OLLAMA_LONG).deb $(S3)/$(TABBY_LONG).deb
+
+$(S3)/Packages: $(S3_PKGS) | /usr/bin/apt-ftparchive $(S3)
+	env --chdir '$(@D)' -- apt-ftparchive packages -- . >'$@'
+
+s3pkg: $(S3)/Packages.gz
+$(S3)/Packages.gz: $(S3)/Packages
+	gzip --keep --no-name --force -- '$<'
