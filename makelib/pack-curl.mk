@@ -159,7 +159,7 @@ CURL_ARCHIVES := $(shell ./libexec/arch-tee.sh <<<'$(CURL_ARCHIVES)')
 CURL_DEBS := $(shell ./libexec/arch-tee.sh <<<'$(CURL_DEBS)')
 
 $(DEB): | $(VAR)
-	./libexec/s3.sh pull
+	./libexec/git-ops.sh pull
 
 $(call META_5D,CURL_ARCHIVES,ARCHIVE_TEMPLATE)
 $(call META_5D,CURL_DEBS,DEB_TEMPLATE)
