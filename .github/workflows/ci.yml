@@ -31,4 +31,4 @@ jobs:
           make --debug pkg
 
       - run: |-
-          make push
+          make push s3
