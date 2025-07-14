@@ -3,13 +3,13 @@
 set -o pipefail
 
 VAR="${0%/*}/../var"
-S3_BUCKET="${S3_BUCKET:=""}"
+BUCKET="s3://${S3_BUCKET:=""}"
 
 S3HOST='s3.ca-west-1.amazonaws.com'
 export -- AWS_ACCESS_KEY AWS_SECRET_KEY
 export -- AWS_SHARED_CREDENTIALS_FILE="$HOME/.config/aws/credentials"
 S3=(
-  "$VAR/venv/bin/s3cmd"
+  "$(realpath -- "$VAR/venv/bin/s3cmd")"
   --no-mime-magic
   --host "$S3HOST"
   --host-bucket "%(bucket).$S3HOST"
@@ -17,10 +17,10 @@ S3=(
 
 case "${1:-""}" in
 '' | ls)
-  "${S3[@]}" ls --recursive --human-readable-sizes -- "$S3_BUCKET"
+  "${S3[@]}" ls --recursive --human-readable-sizes -- "$BUCKET"
   ;;
 push)
-  env --chdir "$VAR/s3" -- "${S3[@]}" sync --delete-removed -- ./ "$S3_BUCKET"
+  env --chdir "$VAR/s3" -- "${S3[@]}" sync --delete-removed -- ./ "$BUCKET"
   ;;
 *)
   set -x
