@@ -1,7 +1,7 @@
 .PHONY: pkg pubkey
 
 $(DEB)/Packages: $(PKGS) | /usr/bin/apt-ftparchive $(DEB)
-	env --chdir '$(@D)' -- apt-ftparchive packages -- . >'$@'
+	env --chdir '$(@D)' -- apt-ftparchive packages -- . | sed -E -e '/^Filename/s#: ./#: #' >'$@'
 
 pkg: $(DEB)/Packages.gz
 $(DEB)/Packages.gz: $(DEB)/Packages

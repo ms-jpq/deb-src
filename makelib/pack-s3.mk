@@ -47,7 +47,7 @@ $(S3)/$(TABBY_LONG).deb: $(TMP)/$(TABBY_LONG) | /usr/bin/debsigs $(S3)
 S3_PKGS += $(S3)/$(OLLAMA_LONG).deb $(S3)/$(TABBY_LONG).deb
 
 $(S3)/Packages: $(S3_PKGS) | /usr/bin/apt-ftparchive $(S3)
-	env --chdir '$(@D)' -- apt-ftparchive packages -- . >'$@'
+	env --chdir '$(@D)' -- apt-ftparchive packages -- . | sed -E -e '/^Filename/s#: ./#: #' >'$@'
 
 $(S3)/Packages.gz: $(S3)/Packages
 	gzip --keep --no-name --force -- '$<'
