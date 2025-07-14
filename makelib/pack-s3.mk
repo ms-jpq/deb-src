@@ -29,7 +29,7 @@ $(TMP)/$(OLLAMA_LONG): $(TMP)/$(OLLAMA_SHORT) | /usr/bin/envsubst
 	cp -v -fr -- '$</'* '$@/'
 
 $(TMP)/$(TABBY_LONG): $(TMP)/$(TABBY_SHORT) | /usr/bin/envsubst
-	DST='$@/opt/tabby'
+	DST='$@/opt/tabby/bin'
 	mkdir -v -p -- '$@/DEBIAN' "$$DST"
 	ARCH='$(DPKG_ARCH)' VERSION='$(V_TABBY)' NAME='tabby' envsubst <'./DEBIAN/control' >'$@/DEBIAN/control'
 	cp -v -fr -- '$</'* "$$DST/"
