@@ -43,7 +43,7 @@ execl(
   "--upgrade",
   "--",
   *project.get("dependencies", ()),
-  *chain.from_iterable(project["optional-dependencies"].values()),
+  *chain.from_iterable(project.get("optional-dependencies", {}).values()),
 )
 endef
 export -- PYDEPS

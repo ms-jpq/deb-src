@@ -6,4 +6,4 @@ push pull: | $(VAR)
 $(VENV)/bin/s3cmd: $(VENV)
 
 s3: | $(S3) $(VENV)/bin/s3cmd
-	./libexec/s3.sh
+	./libexec/s3.sh push

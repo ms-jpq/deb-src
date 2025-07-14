@@ -3,8 +3,7 @@
 set -o pipefail
 
 VAR="${0%/*}/../var"
-BUCKET="$1"
-shift -- 1
+S3_BUCKET="${S3_BUCKET:=""}"
 
 S3HOST='s3.ca-west-1.amazonaws.com'
 export -- AWS_ACCESS_KEY AWS_SECRET_KEY
@@ -18,11 +17,10 @@ S3=(
 
 case "${1:-""}" in
 '' | ls)
-  "${S3[@]}" ls --recursive --human-readable-sizes -- "$BUCKET"
+  "${S3[@]}" ls --recursive --human-readable-sizes -- "$S3_BUCKET"
   ;;
 push)
-  pushd -- "$VAR"
-  "${S3[@]}" sync --delete-removed -- ./ "$BUCKET"
+  env --chdir "$VAR/s3" -- "${S3[@]}" sync --delete-removed -- ./ "$S3_BUCKET"
   ;;
 *)
   set -x

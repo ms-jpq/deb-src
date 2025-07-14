@@ -50,5 +50,6 @@ $(S3)/Packages: $(S3_PKGS) | /usr/bin/apt-ftparchive $(S3)
 	env --chdir '$(@D)' -- apt-ftparchive packages -- . >'$@'
 
 s3pkg: $(S3)/Packages.gz
+pkg: $(S3)/Packages.gz
 $(S3)/Packages.gz: $(S3)/Packages
 	gzip --keep --no-name --force -- '$<'
