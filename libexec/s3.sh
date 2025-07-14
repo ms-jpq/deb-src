@@ -2,9 +2,27 @@
 
 set -o pipefail
 
-S3="${0%/*}/../var/venv/bin/s3cmd"
+VAR="${0%/*}/../var"
+BUCKET="$1"
+shift -- 1
 
+S3HOST='s3.ca-west-1.amazonaws.com'
 export -- AWS_ACCESS_KEY AWS_SECRET_KEY
 export -- AWS_SHARED_CREDENTIALS_FILE="$HOME/.config/aws/credentials"
+S3=(
+  "$VAR/venv/bin/s3cmd"
+  --no-mime-magic
+  --host "$S3HOST"
+  --host-bucket "%(bucket).$S3HOST"
+)
 
-exec -- "$S3" "$@"
+case "${1:-""}" in
+'' | ls)
+  pushd -- "$VAR"
+  "${S3[@]}" sync --delete-removed -- ./ "$BUCKET"
+  ;;
+*)
+  set -x
+  exit 2
+  ;;
+esac

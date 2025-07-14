@@ -2,5 +2,6 @@
 name    = "deb-src"
 version = "0"
 
-[project.optional-dependencies]
-dev = ["s3cmd@https://github.com/s3tools/s3cmd/archive/heads/master.tar.gz"]
+dependencies = [
+  "s3cmd@https://github.com/s3tools/s3cmd/archive/heads/master.tar.gz",
+]
