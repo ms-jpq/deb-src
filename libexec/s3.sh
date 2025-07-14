@@ -10,7 +10,9 @@ export -- AWS_REGION AWS_ACCESS_KEY AWS_SECRET_KEY
 export -- AWS_SHARED_CREDENTIALS_FILE="$HOME/.config/aws/credentials"
 S3=(
   "$(realpath -- "$VAR/venv/bin/s3cmd")"
+  --no-guess-mime-type
   --no-mime-magic
+  --delete-after
   --host "$S3HOST"
   --host-bucket "%(bucket).$S3HOST"
 )
@@ -20,7 +22,7 @@ case "${1:-""}" in
   "${S3[@]}" ls --recursive --human-readable-sizes -- "$BUCKET"
   ;;
 push)
-  env --chdir "$VAR/s3" -- "${S3[@]}" sync --delete-removed -- ./ "$BUCKET"
+  env --chdir "$VAR/s3" -- "${S3[@]}" sync --delete-removed --no-preserve -- ./ "$BUCKET"
   ;;
 *)
   set -x
