@@ -6,7 +6,7 @@ VAR="${0%/*}/../var"
 BUCKET="s3://${S3_BUCKET:=""}"
 
 S3HOST='s3.ca-west-1.amazonaws.com'
-export -- AWS_ACCESS_KEY AWS_SECRET_KEY
+export -- AWS_REGION AWS_ACCESS_KEY AWS_SECRET_KEY
 export -- AWS_SHARED_CREDENTIALS_FILE="$HOME/.config/aws/credentials"
 S3=(
   "$(realpath -- "$VAR/venv/bin/s3cmd")"
