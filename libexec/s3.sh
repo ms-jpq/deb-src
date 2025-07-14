@@ -18,6 +18,9 @@ S3=(
 
 case "${1:-""}" in
 '' | ls)
+  "${S3[@]}" ls --recursive --human-readable-sizes -- "$BUCKET"
+  ;;
+push)
   pushd -- "$VAR"
   "${S3[@]}" sync --delete-removed -- ./ "$BUCKET"
   ;;
