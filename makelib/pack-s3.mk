@@ -49,7 +49,17 @@ S3_PKGS += $(S3)/$(OLLAMA_LONG).deb $(S3)/$(TABBY_LONG).deb
 $(S3)/Packages: $(S3_PKGS) | /usr/bin/apt-ftparchive $(S3)
 	env --chdir '$(@D)' -- apt-ftparchive packages -- . >'$@'
 
-s3pkg: $(S3)/Packages.gz
-pkg: $(S3)/Packages.gz
 $(S3)/Packages.gz: $(S3)/Packages
 	gzip --keep --no-name --force -- '$<'
+
+$(S3)/Release: $(S3)/Packages | /usr/bin/apt-ftparchive
+	env --chdir '$(@D)' -- apt-ftparchive release . >'$@'
+
+pkg: $(S3)/Release.gpg
+$(S3)/Release.gpg: $(S3)/Release
+	gpg --batch --sign --yes --output '$@' -- '$<'
+
+pkg: $(S3)/InRelease
+s3pkg: $(S3)/InRelease
+$(S3)/InRelease: $(S3)/Release
+	gpg --batch --clearsign --yes --output '$@' -- '$<'
