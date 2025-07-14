@@ -32,6 +32,9 @@ $(TMP)/$(TABBY_LONG): $(TMP)/$(TABBY_SHORT) | /usr/bin/envsubst
 	DST='$@/opt/tabby/bin'
 	mkdir -v -p -- '$@/DEBIAN' "$$DST"
 	ARCH='$(DPKG_ARCH)' VERSION='$(V_TABBY)' NAME='tabby' envsubst <'./DEBIAN/control' >'$@/DEBIAN/control'
+	tee --append -- '$@/DEBIAN/control' <<-'EOF'
+	Depends: nvidia-cuda-toolkit
+	EOF
 	cp -v -fr -- '$</'* "$$DST/"
 
 ollama: $(S3)/$(OLLAMA_LONG).deb
