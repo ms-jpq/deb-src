@@ -68,6 +68,7 @@ V_GH         := $(patsubst v%,%,$(shell $(GH_LATEST) cli/cli))
 V_GITUI      := $(patsubst v%,%,$(shell $(GH_LATEST) extrawurst/gitui))
 V_GOJQ       := $(shell $(GH_LATEST) itchyny/gojq)
 V_GORELEASER := $(patsubst v%,%,$(shell $(GH_LATEST) goreleaser/goreleaser))
+V_HELIX      := $(shell $(GH_LATEST) helix-editor/helix)
 V_HTMLQ      := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
 V_JLESS      := $(patsubst v%,%,$(shell $(GH_LATEST) PaulJuliusMartinez/jless))
 V_JNV        := $(patsubst v%,%,$(shell $(GH_LATEST) ynqa/jnv))
@@ -137,6 +138,8 @@ endef
 
 # $(V_TOKEI)     tokei                                               *                       https://github.com/XAMPPRocky/tokei/releases/latest/download/tokei-#{HOSTTYPE}-unknown-linux-gnu.tar.gz             %
 
+V_HELIX_DEB = $(subst .0,.,$(V_HELIX))-1
+
 define CURL_DEBS
 
 $(V_BTM)        btm                     * https://github.com/ClementTsang/bottom/releases/latest/download/bottom_#{VERSION}-1_#{GOARCH}.deb                       %
@@ -145,6 +148,7 @@ $(V_DATE)       packages-microsoft-prod * https://packages.microsoft.com/config/
 $(V_DELTA)      git-delta               * https://github.com/dandavison/delta/releases/latest/download/git-delta_#{VERSION}_#{GOARCH}.deb                         %
 $(V_GH)         gh                      * https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                              %
 $(V_GORELEASER) goreleaser              * https://github.com/goreleaser/goreleaser/releases/latest/download/goreleaser_#{VERSION}_#{GOARCH}.deb                   %
+$(V_HELIX)      helix                   * https://github.com/helix-editor/helix/releases/latest/download/helix_$(V_HELIX_DEB)_#{GOARCH}.deb                       %aarch64=!
 $(V_K9S)        k9s                     * https://github.com/derailed/k9s/releases/latest/download/k9s_linux_#{GOARCH}.deb                                        %
 $(V_PASTEL)     pastel                  * https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                              %
 $(V_S5CMD)      s5cmd                   * https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                             %
