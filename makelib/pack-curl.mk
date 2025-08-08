@@ -154,7 +154,7 @@ $(V_K9S)        k9s                     * https://github.com/derailed/k9s/releas
 $(V_PASTEL)     pastel                  * https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                              %
 $(V_S5CMD)      s5cmd                   * https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                             %
 $(V_SAD)        sad                     * https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                                %
-$(V_TV)         tidy-viewer             * https://github.com/alexhallam/tv/releases/latest/download/tidy-viewer_#{VERSION}_#{GOARCH}.deb                          %aarch64=!
+$(V_TV)         tidy-viewer             * https://github.com/alexhallam/tv/releases/download/#{VERSION}/tidy-viewer_#{VERSION}_#{GOARCH}.deb                      %aarch64=!
 $(V_WATCHEX)    watchexec               * https://github.com/watchexec/watchexec/releases/latest/download/watchexec-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.deb  %
 
 endef
