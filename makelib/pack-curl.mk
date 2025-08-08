@@ -75,6 +75,7 @@ V_JNV        := $(patsubst v%,%,$(shell $(GH_LATEST) ynqa/jnv))
 V_K3S        := $(patsubst v%,%,$(shell $(GH_LATEST) k3s-io/k3s))
 V_K8S        := $(patsubst v%,%,$(shell $(GH_LATEST) kubernetes/kubernetes))
 V_K9S        := $(patsubst v%,%,$(shell $(GH_LATEST) derailed/k9s))
+V_KATANA     := $(patsubst v%,%,$(shell $(GH_LATEST) projectdiscovery/katana))
 V_LAZYGIT    := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
 V_LF         := $(patsubst r%,%,$(shell $(GH_LATEST) gokcehan/lf))
 V_PASTEL     := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
@@ -88,6 +89,7 @@ V_S5CMD      := $(patsubst v%,%,$(shell $(GH_LATEST) peak/s5cmd))
 V_SAD        := $(patsubst v%,%,$(shell $(GH_LATEST) ms-jpq/sad))
 V_SMART_DNS  := $(patsubst Release%,%,$(shell $(GH_LATEST) pymumu/smartdns))
 V_SPOTIFYD   := $(patsubst v%,%,$(shell $(GH_LATEST) Spotifyd/spotifyd))
+V_TOKEI      := $(shell $(GH_LATEST) XAMPPRocky/tokei)
 V_TV         := $(shell $(GH_LATEST) alexhallam/tv)
 V_V2RAY      := $(patsubst v%,%,$(shell $(GH_LATEST) v2fly/v2ray-core))
 V_WATCHEX    := $(patsubst v%,%,$(shell $(GH_LATEST) watchexec/watchexec))
@@ -96,7 +98,9 @@ V_YAZI       := $(patsubst v%,%,$(shell $(GH_LATEST) sxyazi/yazi))
 V_YQ         := $(patsubst v%,%,$(shell $(GH_LATEST) mikefarah/yq))
 V_YT_DLP     := $(shell $(GH_LATEST) yt-dlp/yt-dlp)
 
-# V_TOKEI      := $(shell $(GH_LATEST) XAMPPRocky/tokei)
+V_TV         := 1.5.2
+V_HELIX_DEB  := $(subst .0,.,$(V_HELIX))-1
+
 V_TOKEI := 12.1.2
 
 define CURL_ARCHIVES
@@ -117,6 +121,7 @@ $(V_JLESS)     jless                                               *            
 $(V_JNV)       jnv-x86_64-unknown-linux-gnu/jnv                    *                                     https://github.com/ynqa/jnv/releases/latest/download/jnv-x86_64-unknown-linux-gnu.tar.xz                                     %aarch64=!
 $(V_K3S)       #{HOSTTYPE}:k3s                                     *                                     https://github.com/k3s-io/k3s/releases/latest/download/#{HOSTTYPE}                                                           %aarch64=k3s-arm64,x86_64=k3s
 $(V_K8S)       kubectl                                             *                                     https://dl.k8s.io/release/v#{VERSION}/bin/linux/#{GOARCH}/kubectl                                                            %
+$(V_KATANA)    katana                                              *                                     https://github.com/projectdiscovery/katana/releases/latest/download/katana_#{VERSION}_linux_#{GOARCH}.zip                    %
 $(V_LAZYGIT)   lazygit                                             *                                     https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz                %aarch64=arm64
 $(V_LF)        lf                                                  *                                     https://github.com/gokcehan/lf/releases/latest/download/lf-linux-#{GOARCH}.tar.gz                                            %
 $(V_PHPDOC)    phpDocumentor.phar:phpdoc                           *                                     https://github.com/phpDocumentor/phpDocumentor/releases/latest/download/phpDocumentor.phar                                   %aarch64=all,x86_64=all
@@ -135,10 +140,6 @@ $(V_YQ)        yq_linux_#{GOARCH}:yq                               *            
 $(V_YT_DLP)    yt-dlp_linux${HOSTTYPE}:yt-dlp                      *                                     https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux${HOSTTYPE}                                            %aarch64=_aarch64,x86_64=
 
 endef
-
-# $(V_TOKEI)     tokei                                               *                       https://github.com/XAMPPRocky/tokei/releases/latest/download/tokei-#{HOSTTYPE}-unknown-linux-gnu.tar.gz             %
-
-V_HELIX_DEB = $(subst .0,.,$(V_HELIX))-1
 
 define CURL_DEBS
 
