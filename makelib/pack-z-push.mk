@@ -1,7 +1,7 @@
 .PHONY: zpush
 
 V_ZPUSH := $(shell $(GH_LATEST) Z-Hub/Z-Push)
-ZPUSH_NAME := all_$(V_ZPUSH)_z-push
+ZPUSH_NAME := z-push_all_$(V_ZPUSH)
 
 $(TMP)/$(ZPUSH_NAME)/usr/share/z-push: | $(VAR)/sh $(TMP)
 	mkdir -v -p -- '$@'
