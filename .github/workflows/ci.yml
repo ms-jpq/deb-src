@@ -22,7 +22,7 @@ jobs:
           printenv -- PGP_SIGNING_KEY | gpg --batch --import --yes
 
       - run: |-
-          make lint
+          make lint var/venv/bin/s3cmd
 
       - run: |-
           make pkg
