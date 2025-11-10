@@ -17,12 +17,12 @@ jobs:
           CI_TOKEN: ${{ secrets.CI_TOKEN }}
           PGP_SIGNING_KEY: ${{ secrets.PGP_SIGNING_KEY }}
         run: |-
-          make pubkey
+          make pubkey var/venv/bin/s3cmd
           gpg --batch --import --yes -- ./var/deb/pubkey.asc
           printenv -- PGP_SIGNING_KEY | gpg --batch --import --yes
 
       - run: |-
-          make lint var/venv/bin/s3cmd
+          make lint
 
       - run: |-
           make pkg
