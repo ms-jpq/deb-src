@@ -8,20 +8,20 @@ V_TMUX := $(shell $(GH_LATEST) tmux/tmux)
 $(TMP)/tmux-$(V_TMUX): | $(VAR)/sh $(TMP)
 	'$(UNPACK)' 'https://github.com/tmux/tmux/releases/latest/download/tmux-$(V_TMUX).tar.gz' '$(@D)'
 
-$(TMP)/$(DPKG_ARCH)_$(V_TMUX)_tmux/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
+$(TMP)/tmux_$(DPKG_ARCH)_$(V_TMUX)/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
 	mkdir -v -p -- '$(@D)'
 	ARCH='$(DPKG_ARCH)' VERSION='$(V_TMUX)' NAME='tmux' envsubst <'$<' >'$@'
 
-$(TMP)/$(DPKG_ARCH)_$(V_TMUX)_tmux/bin/tmux: $(TMP)/tmux-$(V_TMUX) | /usr/include/event.h
+$(TMP)/tmux_$(DPKG_ARCH)_$(V_TMUX)/bin/tmux: $(TMP)/tmux-$(V_TMUX) | /usr/include/event.h
 	env --chdir '$<' -- './configure' --prefix='$(abspath $(dir $(@D)))' --enable-static --enable-utf8proc --enable-sixel
 	'$(MAKE)' --directory='$<'
 	'$(MAKE)' --directory='$<' install
 
-$(TMP)/$(DPKG_ARCH)_$(V_TMUX)_tmux.deb: $(TMP)/$(DPKG_ARCH)_$(V_TMUX)_tmux/bin/tmux $(TMP)/$(DPKG_ARCH)_$(V_TMUX)_tmux/DEBIAN/control | /usr/bin/debsigs
+$(TMP)/tmux_$(DPKG_ARCH)_$(V_TMUX).deb: $(TMP)/tmux_$(DPKG_ARCH)_$(V_TMUX)/bin/tmux $(TMP)/tmux_$(DPKG_ARCH)_$(V_TMUX)/DEBIAN/control | /usr/bin/debsigs
 	dpkg-deb --root-owner-group --build -- '$(dir $(<D))' '$@'
 	debsigs --sign=archive -- '$@'
 
-tmux: $(DEB)/$(DPKG_ARCH)_$(V_TMUX)_tmux.deb
-PKGS += $(DEB)/$(DPKG_ARCH)_$(V_TMUX)_tmux.deb
-$(DEB)/$(DPKG_ARCH)_$(V_TMUX)_tmux.deb: $(TMP)/$(DPKG_ARCH)_$(V_TMUX)_tmux.deb | $(DEB)
+tmux: $(DEB)/tmux_$(DPKG_ARCH)_$(V_TMUX).deb
+PKGS += $(DEB)/tmux_$(DPKG_ARCH)_$(V_TMUX).deb
+$(DEB)/tmux_$(DPKG_ARCH)_$(V_TMUX).deb: $(TMP)/tmux_$(DPKG_ARCH)_$(V_TMUX).deb | $(DEB)
 	cp -v -f -- '$<' '$@'
