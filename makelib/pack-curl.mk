@@ -70,6 +70,7 @@ V_GOJQ       := $(shell $(GH_LATEST) itchyny/gojq)
 V_GORELEASER := $(patsubst v%,%,$(shell $(GH_LATEST) goreleaser/goreleaser))
 V_HELIX      := $(shell $(GH_LATEST) helix-editor/helix)
 V_HTMLQ      := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
+V_JAEGER     := $(patsubst v%,%,$(shell $(GH_LATEST) jaegertracing/jaeger))
 V_JLESS      := $(patsubst v%,%,$(shell $(GH_LATEST) PaulJuliusMartinez/jless))
 V_JNV        := $(patsubst v%,%,$(shell $(GH_LATEST) ynqa/jnv))
 V_K3S        := $(patsubst v%,%,$(shell $(GH_LATEST) k3s-io/k3s))
@@ -118,6 +119,7 @@ $(V_EZA)       eza                                                 *            
 $(V_FZF)       fzf                                                 *                                     https://github.com/junegunn/fzf/releases/latest/download/fzf-#{VERSION}-linux_#{GOARCH}.tar.gz                               %
 $(V_GITUI)     gitui                                               *                                     https://github.com/extrawurst/gitui/releases/latest/download/gitui-linux-#{HOSTTYPE}.tar.gz                                  %
 $(V_HTMLQ)     htmlq                                               *                                     https://github.com/mgdm/htmlq/releases/latest/download/htmlq-#{HOSTTYPE}-linux.tar.gz                                        %aarch64=!
+$(V_JAEGER)    jaeger                                              *                                     https://github.com/jaegertracing/jaeger/releases/latest/download/jaeger-#{VERSION}-linux-#{GOARCH}.tar.gz                    %
 $(V_JLESS)     jless                                               *                                     https://github.com/PaulJuliusMartinez/jless/releases/latest/download/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip          %aarch64=!
 $(V_JNV)       jnv-x86_64-unknown-linux-gnu/jnv                    *                                     https://github.com/ynqa/jnv/releases/latest/download/jnv-x86_64-unknown-linux-gnu.tar.xz                                     %aarch64=!
 $(V_K3S)       #{HOSTTYPE}:k3s                                     *                                     https://github.com/k3s-io/k3s/releases/latest/download/#{HOSTTYPE}                                                           %aarch64=k3s-arm64,x86_64=k3s
