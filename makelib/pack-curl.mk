@@ -10,13 +10,13 @@ $(TMP)/$6_$1_$2/DEBIAN/control: ./DEBIAN/control | $(TMP) /usr/bin/envsubst
 	mkdir -v -p -- '$$(@D)'
 	ARCH='$1' VERSION='$2' NAME='$6' envsubst <'$$<' >'$$@'
 
-$(TMP)/$1_$3_$2/$3: | $(VAR)/sh $(TMP)
+$(TMP)/$1_$6_$2/$3: | $(VAR)/sh $(TMP)
 	mkdir -v -p -- '$$(@D)'
 	'$(UNPACK)' '$4' '$$(@D)'
 
 ifeq ($5,*)
 vv_$6 := $(TMP)/$6_$1_$2/usr/bin/$6
-$$(vv_$6): $(TMP)/$1_$3_$2/$3
+$$(vv_$6): $(TMP)/$1_$6_$2/$3
 	mkdir -v -p -- '$$(@D)'
 	if [[ -d 'overlay/$6' ]]; then
 	  cp -v -r --no-dereference -- 'overlay/$6'/* '$(TMP)/$6_$1_$2'
@@ -24,7 +24,7 @@ $$(vv_$6): $(TMP)/$1_$3_$2/$3
 	install -v -- '$$<' '$$@'
 else
 vv_$6 := $(TMP)/$6_$1_$2/$5
-$$(vv_$6): $(TMP)/$1_$3_$2/$3
+$$(vv_$6): $(TMP)/$1_$6_$2/$3
 	mkdir -v -p -- '$$(@D)'
 	cp -v -r --no-dereference -- '$$<' '$$@'
 endif
