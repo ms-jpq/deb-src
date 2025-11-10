@@ -10,6 +10,6 @@ curl --disable --fail --location --no-progress-meter -- 'https://ms-jpq.github.i
 
 ```bash
 command -- sudo -- tee -- /etc/apt/sources.list.d/ms-jpq.list <<-'EOF'
-deb https://ms-jpq.github.io/deb/ /
+deb https://raw.githubusercontent.com/ms-jpq/deb/refs/heads/deb/ /
 EOF
 ```
