@@ -16,6 +16,7 @@ $(TMP)/tmux_$(DPKG_ARCH)_$(V_TMUX)/bin/tmux: $(TMP)/tmux-$(V_TMUX) | /usr/includ
 	env --chdir '$<' -- './configure' --prefix='$(abspath $(dir $(@D)))' --enable-static --enable-utf8proc --enable-sixel
 	'$(MAKE)' --directory='$<'
 	'$(MAKE)' --directory='$<' install
+	touch -- '$@'
 
 $(TMP)/tmux_$(DPKG_ARCH)_$(V_TMUX).deb: $(TMP)/tmux_$(DPKG_ARCH)_$(V_TMUX)/bin/tmux $(TMP)/tmux_$(DPKG_ARCH)_$(V_TMUX)/DEBIAN/control | /usr/bin/debsigs
 	dpkg-deb --root-owner-group --build -- '$(dir $(<D))' '$@'
