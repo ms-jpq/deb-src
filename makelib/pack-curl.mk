@@ -6,7 +6,7 @@ $(foreach line,$($1),$(eval $(call $2,$(firstword $(subst !, ,$(line))),$(word 2
 endef
 
 define ARCHIVE_TEMPLATE
-$(TMP)/$1_$2_$6/DEBIAN/control: ./DEBIAN/control | $(TMP) /usr/bin/envsubst
+$(TMP)/$6_$1_$2/DEBIAN/control: ./DEBIAN/control | $(TMP) /usr/bin/envsubst
 	mkdir -v -p -- '$$(@D)'
 	ARCH='$1' VERSION='$2' NAME='$6' envsubst <'$$<' >'$$@'
 
@@ -15,38 +15,38 @@ $(TMP)/$1_$2/$3: | $(VAR)/sh $(TMP)
 	'$(UNPACK)' '$4' '$(TMP)/$1_$2'
 
 ifeq ($5,*)
-vv_$6 := $(TMP)/$1_$2_$6/usr/bin/$6
+vv_$6 := $(TMP)/$6_$1_$2/usr/bin/$6
 $$(vv_$6): $(TMP)/$1_$2/$3
 	mkdir -v -p -- '$$(@D)'
 	if [[ -d 'overlay/$6' ]]; then
-	  cp -v -r --no-dereference -- 'overlay/$6'/* '$(TMP)/$1_$2_$6'
+	  cp -v -r --no-dereference -- 'overlay/$6'/* '$(TMP)/$6_$1_$2'
 	fi
 	install -v -- '$$<' '$$@'
 else
-vv_$6 := $(TMP)/$1_$2_$6/$5
+vv_$6 := $(TMP)/$6_$1_$2/$5
 $$(vv_$6): $(TMP)/$1_$2/$3
 	mkdir -v -p -- '$$(@D)'
 	cp -v -r --no-dereference -- '$$<' '$$@'
 endif
 
-$(TMP)/$1_$2_$6.deb: $(TMP)/$1_$2_$6/DEBIAN/control $$(vv_$6) | $(DEB) /usr/bin/debsigs
-	dpkg-deb --root-owner-group --build -- '$(TMP)/$1_$2_$6' '$$@'
+$(TMP)/$6_$1_$2.deb: $(TMP)/$6_$1_$2/DEBIAN/control $$(vv_$6) | $(DEB) /usr/bin/debsigs
+	dpkg-deb --root-owner-group --build -- '$(TMP)/$6_$1_$2' '$$@'
 	debsigs --sign=archive -- '$$@'
 
-curl: $(DEB)/$1_$2_$6.deb
-PKGS += $(DEB)/$1_$2_$6.deb
-$(DEB)/$1_$2_$6.deb: $(TMP)/$1_$2_$6.deb
+curl: $(DEB)/$6_$1_$2.deb
+PKGS += $(DEB)/$6_$1_$2.deb
+$(DEB)/$6_$1_$2.deb: $(TMP)/$6_$1_$2.deb
 	cp -v -f -- '$$<' '$$@'
 endef
 
 define DEB_TEMPLATE
-$(TMP)/$1_$2_$3.deb: | $(TMP) /usr/bin/debsigs
+$(TMP)/$3_$1_$2.deb: | $(TMP) /usr/bin/debsigs
 	$(CURL) --output '$$@' -- '$4'
 	debsigs --sign=archive -- '$$@'
 
-curl: $(DEB)/$1_$2_$3.deb
-PKGS += $(DEB)/$1_$2_$3.deb
-$(DEB)/$1_$2_$3.deb: $(TMP)/$1_$2_$3.deb | $(DEB)
+curl: $(DEB)/$3_$1_$2.deb
+PKGS += $(DEB)/$3_$1_$2.deb
+$(DEB)/$3_$1_$2.deb: $(TMP)/$3_$1_$2.deb | $(DEB)
 	cp -v -f -- '$$<' '$$@'
 endef
 
