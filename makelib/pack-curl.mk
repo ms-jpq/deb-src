@@ -11,8 +11,8 @@ $(TMP)/$6_$1_$2/DEBIAN/control: ./DEBIAN/control | $(TMP) /usr/bin/envsubst
 	ARCH='$1' VERSION='$2' NAME='$6' envsubst <'$$<' >'$$@'
 
 $(TMP)/$1_$6_$2/$3: | $(VAR)/sh $(TMP)
-	mkdir -v -p -- '$$(@D)'
-	'$(UNPACK)' '$4' '$$(@D)'
+	mkdir -v -p -- '$(TMP)/$1_$6_$2'
+	'$(UNPACK)' '$4' '$(TMP)/$1_$6_$2'
 
 ifeq ($5,*)
 vv_$6 := $(TMP)/$6_$1_$2/usr/bin/$6
