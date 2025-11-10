@@ -1,6 +1,6 @@
-XRAY_NAME := all_$(V_XRAY)_xray-dat
+XRAY_NAME := xray-dat_all_$(V_XRAY)
 
-$(TMP)/$(XRAY_NAME)/opt/xray: $(TMP)/amd64_$(V_XRAY)/xray | $(TMP)
+$(TMP)/$(XRAY_NAME)/opt/xray: $(TMP)/amd64_xray_$(V_XRAY)/xray | $(TMP)
 	mkdir -v -p -- '$@'
 	cp -v -f -- '$(<D)'/*.dat '$@'
 

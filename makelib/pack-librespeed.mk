@@ -1,7 +1,7 @@
 .PHONY: librespeed
 
 V_LIBRESPEED := $(shell $(GH_LATEST) librespeed/speedtest)
-LIBRESPEED_NAME := all_$(V_LIBRESPEED)_librespeed
+LIBRESPEED_NAME := librespeed_all_$(V_LIBRESPEED)
 
 $(TMP)/$(LIBRESPEED_NAME)/usr/share/librespeed: | $(VAR)/sh $(TMP)
 	mkdir -v -p -- '$@'
