@@ -133,7 +133,6 @@ $(V_POSH)      posh-linux-#{GOARCH}:oh-my-posh                     *            
 $(V_PTERM)     presenterm-#{VERSION}/presenterm                    *                                     https://github.com/mfontanini/presenterm/releases/latest/download/presenterm-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz %
 $(V_RCLONE)    rclone-v#{VERSION}-linux-#{GOARCH}/rclone           *                                     https://github.com/rclone/rclone/releases/latest/download/rclone-v#{VERSION}-linux-#{GOARCH}.zip                             %
 $(V_REGI)      registry                                            *                                     https://github.com/distribution/distribution/releases/latest/download/registry_#{VERSION}_linux_#{GOARCH}.tar.gz             %
-$(V_S3PROXY)   s3proxy                                             *                                     https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                             %aarch64=all,x86_64=all
 $(V_SMART_DNS) smartdns-#{HOSTTYPE}:smartdns                       *                                     https://github.com/pymumu/smartdns/releases/latest/download/smartdns-#{HOSTTYPE}                                             %
 $(V_SPOTIFYD)  spotifyd                                            *                                     https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-linux-#{HOSTTYPE}-full.tar.gz                         %
 $(V_TOKEI)     tokei                                               *                                     https://github.com/XAMPPRocky/tokei/releases/download/v#{VERSION}/tokei-#{HOSTTYPE}-unknown-linux-gnu.tar.gz                 %
@@ -144,6 +143,8 @@ $(V_YQ)        yq_linux_#{GOARCH}:yq                               *            
 $(V_YT_DLP)    yt-dlp_linux${HOSTTYPE}:yt-dlp                      *                                     https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux${HOSTTYPE}                                            %aarch64=_aarch64,x86_64=
 
 endef
+
+# $(V_S3PROXY)   s3proxy                                             *                                     https://github.com/gaul/s3proxy/releases/latest/download/s3proxy                                                             %aarch64=all,x86_64=all
 
 define CURL_DEBS
 
