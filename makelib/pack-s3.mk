@@ -6,7 +6,7 @@ $(S3): | $(VAR)
 V_OLLAMA := $(patsubst v%,%,$(shell $(GH_LATEST) ollama/ollama))
 V_TABBY  := $(patsubst v%,%,$(shell $(GH_LATEST) TabbyML/tabby))
 
-OLLAMA_URL := https://github.com/ollama/ollama/releases/latest/download/ollama-linux-amd64.tgz
+OLLAMA_URL := https://github.com/ollama/ollama/releases/latest/download/ollama-linux-amd64.tar.zst
 TABBY_URL  := https://github.com/TabbyML/tabby/releases/latest/download/tabby_x86_64-manylinux_2_28-cuda123.tar.gz
 
 OLLAMA_SHORT := amd64_$(V_OLLAMA)
