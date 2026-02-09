@@ -90,7 +90,6 @@ V_S5CMD      := $(patsubst v%,%,$(shell $(GH_LATEST) peak/s5cmd))
 V_SAD        := $(patsubst v%,%,$(shell $(GH_LATEST) ms-jpq/sad))
 V_SMART_DNS  := $(patsubst Release%,%,$(shell $(GH_LATEST) pymumu/smartdns))
 V_SPOTIFYD   := $(patsubst v%,%,$(shell $(GH_LATEST) Spotifyd/spotifyd))
-V_STREMIO    := $(patsubst v%,%,$(shell $(GH_LATEST) Stremio/stremio-service))
 V_TOKEI      := $(shell $(GH_LATEST) XAMPPRocky/tokei)
 V_TV         := $(shell $(GH_LATEST) alexhallam/tv)
 V_WATCHEX    := $(patsubst v%,%,$(shell $(GH_LATEST) watchexec/watchexec))
@@ -159,7 +158,6 @@ $(V_OTEL_COLL)  otelcol-contrib         *  https://github.com/open-telemetry/ope
 $(V_PASTEL)     pastel                  *  https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                                                      %
 $(V_S5CMD)      s5cmd                   *  https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                                                     %
 $(V_SAD)        sad                     *  https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                                                        %
-$(V_STREMIO)    stremio                 *  https://github.com/Stremio/stremio-service/releases/latest/download/stremio-service_#{GOARCH}.deb                                               %aarch64=!
 $(V_TV)         tidy-viewer             *  https://github.com/alexhallam/tv/releases/download/#{VERSION}/tidy-viewer_#{VERSION}_#{GOARCH}.deb                                              %aarch64=!
 $(V_WATCHEX)    watchexec               *  https://github.com/watchexec/watchexec/releases/latest/download/watchexec-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.deb                          %
 
