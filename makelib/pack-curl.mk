@@ -81,7 +81,6 @@ V_LAZYGIT    := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
 V_LF         := $(patsubst r%,%,$(shell $(GH_LATEST) gokcehan/lf))
 V_OTEL_COLL  := $(patsubst v%,%,$(shell $(GH_LATEST) open-telemetry/opentelemetry-collector-releases))
 V_PASTEL     := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
-V_PHPDOC     := $(patsubst v%,%,$(shell $(GH_LATEST) phpDocumentor/phpDocumentor))
 V_POSH       := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
 V_PTERM      := $(patsubst v%,%,$(shell $(GH_LATEST) mfontanini/presenterm))
 V_RCLONE     := $(patsubst v%,%,$(shell $(GH_LATEST) rclone/rclone))
@@ -91,6 +90,7 @@ V_S5CMD      := $(patsubst v%,%,$(shell $(GH_LATEST) peak/s5cmd))
 V_SAD        := $(patsubst v%,%,$(shell $(GH_LATEST) ms-jpq/sad))
 V_SMART_DNS  := $(patsubst Release%,%,$(shell $(GH_LATEST) pymumu/smartdns))
 V_SPOTIFYD   := $(patsubst v%,%,$(shell $(GH_LATEST) Spotifyd/spotifyd))
+V_STREMIO    := $(patsubst v%,%,$(shell $(GH_LATEST) Stremio/stremio-service))
 V_TOKEI      := $(shell $(GH_LATEST) XAMPPRocky/tokei)
 V_TV         := $(shell $(GH_LATEST) alexhallam/tv)
 V_WATCHEX    := $(patsubst v%,%,$(shell $(GH_LATEST) watchexec/watchexec))
@@ -148,20 +148,21 @@ endef
 
 define CURL_DEBS
 
-$(V_BTM)         btm                      *  https://github.com/ClementTsang/bottom/releases/latest/download/bottom_#{VERSION}-1_#{GOARCH}.deb                                               %
-$(V_CTAGS)       uctags                   *  https://github.com/universal-ctags/ctags-nightly-build/releases/latest/download/uctags-#{VERSION}-linux-#{HOSTTYPE}.deb                         %
-$(V_DATE)        packages-microsoft-prod  *  https://packages.microsoft.com/config/ubuntu/$(VERSION_ID)/packages-microsoft-prod.deb                                                          %aarch64=all,x86_64=all
-$(V_DELTA)       git-delta                *  https://github.com/dandavison/delta/releases/latest/download/git-delta_#{VERSION}_#{GOARCH}.deb                                                 %
-$(V_GH)          gh                       *  https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                                                      %
-$(V_GORELEASER)  goreleaser               *  https://github.com/goreleaser/goreleaser/releases/latest/download/goreleaser_#{VERSION}_#{GOARCH}.deb                                           %
-$(V_HELIX)       helix                    *  https://github.com/helix-editor/helix/releases/latest/download/helix_$(V_HELIX_DEB)_#{GOARCH}.deb                                               %aarch64=!
-$(V_K9S)         k9s                      *  https://github.com/derailed/k9s/releases/latest/download/k9s_linux_#{GOARCH}.deb                                                                %
-$(V_OTEL_COLL)   otelcol-contrib          *  https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest/download/otelcol-contrib_#{VERSION}_linux_#{GOARCH}.deb      %
-$(V_PASTEL)      pastel                   *  https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                                                      %
-$(V_S5CMD)       s5cmd                    *  https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                                                     %
-$(V_SAD)         sad                      *  https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                                                        %
-$(V_TV)          tidy-viewer              *  https://github.com/alexhallam/tv/releases/download/#{VERSION}/tidy-viewer_#{VERSION}_#{GOARCH}.deb                                              %aarch64=!
-$(V_WATCHEX)     watchexec                *  https://github.com/watchexec/watchexec/releases/latest/download/watchexec-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.deb                          %
+$(V_BTM)        btm                     *  https://github.com/ClementTsang/bottom/releases/latest/download/bottom_#{VERSION}-1_#{GOARCH}.deb                                               %
+$(V_CTAGS)      uctags                  *  https://github.com/universal-ctags/ctags-nightly-build/releases/latest/download/uctags-#{VERSION}-linux-#{HOSTTYPE}.deb                         %
+$(V_DATE)       packages-microsoft-prod *  https://packages.microsoft.com/config/ubuntu/$(VERSION_ID)/packages-microsoft-prod.deb                                                          %aarch64=all,x86_64=all
+$(V_DELTA)      git-delta               *  https://github.com/dandavison/delta/releases/latest/download/git-delta_#{VERSION}_#{GOARCH}.deb                                                 %
+$(V_GH)         gh                      *  https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                                                      %
+$(V_GORELEASER) goreleaser              *  https://github.com/goreleaser/goreleaser/releases/latest/download/goreleaser_#{VERSION}_#{GOARCH}.deb                                           %
+$(V_HELIX)      helix                   *  https://github.com/helix-editor/helix/releases/latest/download/helix_$(V_HELIX_DEB)_#{GOARCH}.deb                                               %aarch64=!
+$(V_K9S)        k9s                     *  https://github.com/derailed/k9s/releases/latest/download/k9s_linux_#{GOARCH}.deb                                                                %
+$(V_OTEL_COLL)  otelcol-contrib         *  https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest/download/otelcol-contrib_#{VERSION}_linux_#{GOARCH}.deb      %
+$(V_PASTEL)     pastel                  *  https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                                                      %
+$(V_S5CMD)      s5cmd                   *  https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                                                     %
+$(V_SAD)        sad                     *  https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                                                        %
+$(V_STREMIO)    stremio                 *  https://github.com/Stremio/stremio-service/releases/latest/download/stremio-service_#{GOARCH}.deb                                               %aarch64=!
+$(V_TV)         tidy-viewer             *  https://github.com/alexhallam/tv/releases/download/#{VERSION}/tidy-viewer_#{VERSION}_#{GOARCH}.deb                                              %aarch64=!
+$(V_WATCHEX)    watchexec               *  https://github.com/watchexec/watchexec/releases/latest/download/watchexec-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.deb                          %
 
 endef
 
