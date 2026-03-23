@@ -98,6 +98,7 @@ V_XSV        := $(shell $(GH_LATEST) BurntSushi/xsv)
 V_YAZI       := $(patsubst v%,%,$(shell $(GH_LATEST) sxyazi/yazi))
 V_YQ         := $(patsubst v%,%,$(shell $(GH_LATEST) mikefarah/yq))
 V_YT_DLP     := $(shell $(GH_LATEST) yt-dlp/yt-dlp)
+V_ZELLIJ     := $(patsubst v%,%,$(shell $(GH_LATEST) zellij-org/zellij))
 
 # V_JAEGER     := $(patsubst v%,%,$(shell $(GH_LATEST) jaegertracing/jaeger))
 V_TV         := 1.5.2
@@ -134,6 +135,7 @@ $(V_REGI)      registry                                            *            
 $(V_SMART_DNS) smartdns-#{HOSTTYPE}:smartdns                       *                                     https://github.com/pymumu/smartdns/releases/latest/download/smartdns-#{HOSTTYPE}                                             %
 $(V_SPOTIFYD)  spotifyd                                            *                                     https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-linux-#{HOSTTYPE}-full.tar.gz                         %
 $(V_TOKEI)     tokei                                               *                                     https://github.com/XAMPPRocky/tokei/releases/download/v#{VERSION}/tokei-#{HOSTTYPE}-unknown-linux-gnu.tar.gz                 %
+$(V_ZELLIJ)    zellij                                              *                                     https://github.com/zellij-org/zellij/releases/download/v#{VERSION}/zellij-#{HOSTTYPE}-unknown-linux-musl.tar.gz              %
 $(V_XRAY)      xray                                                *                                     https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-#{HOSTTYPE}.zip                                        %aarch64=arm64-v8a,x86_64=64
 $(V_XSV)       xsv                                                 *                                     https://github.com/BurntSushi/xsv/releases/latest/download/xsv-#{VERSION}-x86_64-unknown-linux-musl.tar.gz                   %aarch64=!
 $(V_YAZI)      yazi-#{HOSTTYPE}-unknown-linux-gnu/yazi             *                                     https://github.com/sxyazi/yazi/releases/latest/download/yazi-#{HOSTTYPE}-unknown-linux-gnu.zip                               %
