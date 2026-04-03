@@ -114,7 +114,7 @@ define CURL_ARCHIVES
 
 $(V_AD_HOME)     AdGuardHome/AdGuardHome                             *                                     https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_#{GOARCH}.tar.gz                       %
 $(V_ASDF)        asdf                                                *                                     https://github.com/asdf-vm/asdf/releases/latest/download/asdf-v#{VERSION}-linux-#{GOARCH}.tar.gz                             %
-$(V_CLAUDE_CODE) claude                                              *                                     $(CLAUDE_BUCKET)/$(V_CLAUDE_CODE)/linux-#{HOSTTYPE}/claude                                                                   %aarch64=arm64,x86_64=x64
+$(V_CLAUDE_CODE) claude:claude-code                                  *                                     $(CLAUDE_BUCKET)/$(V_CLAUDE_CODE)/linux-#{HOSTTYPE}/claude                                                                   %aarch64=arm64,x86_64=x64
 $(V_DATE)        $(IMG_PREFIX)#{GOARCH}-initrd-generic               opt/img/initrd-generic-$(VERSION_ID)  $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-initrd-generic                                                                        %
 $(V_DATE)        $(IMG_PREFIX)#{GOARCH}-vmlinuz-generic              opt/img/vmlinuz-generic-$(VERSION_ID) $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-vmlinuz-generic                                                                       %
 $(V_DATE)        gay                                                 *                                     https://raw.githubusercontent.com/ms-jpq/gay/%3C3/gay                                                                        %aarch64=all,x86_64=all
