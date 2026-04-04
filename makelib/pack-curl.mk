@@ -104,11 +104,11 @@ V_YQ          := $(patsubst v%,%,$(shell $(GH_LATEST) mikefarah/yq))
 V_YT_DLP      := $(shell $(GH_LATEST) yt-dlp/yt-dlp)
 V_ZELLIJ      := $(patsubst v%,%,$(shell $(GH_LATEST) zellij-org/zellij))
 
-# V_JAEGER     := $(patsubst v%,%,$(shell $(GH_LATEST) jaegertracing/jaeger))
-V_TV         := 1.5.2
-V_HELIX_DEB  := $(subst .0,.,$(V_HELIX))-1
+V_HELIX_DEB := $(subst .0,.,$(V_HELIX))-1
+V_TIDY_DEB  := $(V_TV)-1
 
-V_TOKEI := 12.1.2
+# V_JAEGER     := $(patsubst v%,%,$(shell $(GH_LATEST) jaegertracing/jaeger))
+V_TOKEI     := 12.1.2
 
 define CURL_ARCHIVES
 
@@ -165,7 +165,7 @@ $(V_OTEL_COLL)  otelcol-contrib         *  https://github.com/open-telemetry/ope
 $(V_PASTEL)     pastel                  *  https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                                                      %
 $(V_S5CMD)      s5cmd                   *  https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                                                     %
 $(V_SAD)        sad                     *  https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                                                        %
-$(V_TV)         tidy-viewer             *  https://github.com/alexhallam/tv/releases/download/#{VERSION}/tidy-viewer_#{VERSION}_#{GOARCH}.deb                                              %aarch64=!
+$(V_TV)         tidy-viewer             *  https://github.com/alexhallam/tv/releases/download/#{VERSION}/tidy-viewer_$(V_TIDY_DEB)_#{GOARCH}.deb                                           %aarch64=!
 $(V_WATCHEX)    watchexec               *  https://github.com/watchexec/watchexec/releases/latest/download/watchexec-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.deb                          %
 
 endef
