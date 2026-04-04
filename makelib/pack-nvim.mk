@@ -21,8 +21,8 @@ $(TMP)/nvim_$1_$(V_NVIM).deb: $(TMP)/$1_nvim_$(V_NVIM)/DEBIAN/control | /usr/bin
 	debsigs --sign=archive -- '$$@'
 
 PKGS += $(DEB)/nvim_$1_$(V_NVIM).deb
-nvim: $(DEB)/py_$1_all.deb
-$(DEB)/py_$1_all.deb: $(TMP)/py_$1_all.deb | $(DEB)
+nvim: $(DEB)/nvim_$1_$(V_NVIM).deb
+$(DEB)/nvim_$1_$(V_NVIM).deb: $(TMP)/nvim_$1_$(V_NVIM).deb | $(DEB)
 	cp -v -f -- '$$<' '$$@'
 endef
 
