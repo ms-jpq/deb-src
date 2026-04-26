@@ -96,6 +96,7 @@ V_SMART_DNS   := $(patsubst Release%,%,$(shell $(GH_LATEST) pymumu/smartdns))
 V_SPOTIFYD    := $(patsubst v%,%,$(shell $(GH_LATEST) Spotifyd/spotifyd))
 V_TOKEI       := $(shell $(GH_LATEST) XAMPPRocky/tokei)
 V_TV          := $(shell $(GH_LATEST) alexhallam/tv)
+V_VERSITY     := $(patsubst v%,%,$(shell $(GH_LATEST) versity/versitygw))
 V_WATCHEX     := $(patsubst v%,%,$(shell $(GH_LATEST) watchexec/watchexec))
 V_XRAY        := $(patsubst v%,%,$(shell $(GH_LATEST) XTLS/Xray-core))
 V_XSV         := $(shell $(GH_LATEST) BurntSushi/xsv)
@@ -166,6 +167,7 @@ $(V_PASTEL)     pastel                  *  https://github.com/sharkdp/pastel/rel
 $(V_S5CMD)      s5cmd                   *  https://github.com/peak/s5cmd/releases/latest/download/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                                                     %
 $(V_SAD)        sad                     *  https://github.com/ms-jpq/sad/releases/latest/download/#{HOSTTYPE}-unknown-linux-gnu.deb                                                        %
 $(V_TV)         tidy-viewer             *  https://github.com/alexhallam/tv/releases/download/#{VERSION}/tidy-viewer_$(V_TIDY_DEB)_#{GOARCH}.deb                                           %aarch64=!
+$(V_VERSITY)    versitygw               *  https://github.com/versity/versitygw/releases/latest/download/versitygw_#{VERSION}_linux_#{GOARCH}.deb                                          %
 $(V_WATCHEX)    watchexec               *  https://github.com/watchexec/watchexec/releases/latest/download/watchexec-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.deb                          %
 
 endef
