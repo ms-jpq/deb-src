@@ -5,7 +5,7 @@
 - [Artifacts](https://github.com/ms-jpq/deb)
 
 ```bash
-curl --disable --fail --location --no-progress-meter -- 'https://ms-jpq.github.io/deb/pubkey.asc' | command -- sudo -- gpg --batch --dearmor --yes --output /etc/apt/trusted.gpg.d/ms-jpq.gpg
+curl --disable --fail --location --no-progress-meter -- 'https://raw.githubusercontent.com/ms-jpq/deb/refs/heads/deb/pubkey.asc' | command -- sudo -- gpg --batch --dearmor --yes --output /etc/apt/trusted.gpg.d/ms-jpq.gpg
 ```
 
 ```bash
