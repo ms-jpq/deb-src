@@ -94,6 +94,7 @@ V_S5CMD       := $(patsubst v%,%,$(shell $(GH_LATEST) peak/s5cmd))
 V_SAD         := $(patsubst v%,%,$(shell $(GH_LATEST) ms-jpq/sad))
 V_SMART_DNS   := $(patsubst Release%,%,$(shell $(GH_LATEST) pymumu/smartdns))
 V_SPOTIFYD    := $(patsubst v%,%,$(shell $(GH_LATEST) Spotifyd/spotifyd))
+V_STARSHIP    := $(patsubst v%,%,$(shell $(GH_LATEST) starship/starship))
 V_TOKEI       := $(shell $(GH_LATEST) XAMPPRocky/tokei)
 V_TV          := $(shell $(GH_LATEST) alexhallam/tv)
 V_VERSITY     := $(patsubst v%,%,$(shell $(GH_LATEST) versity/versitygw))
@@ -140,6 +141,7 @@ $(V_RCLONE)      rclone-v#{VERSION}-linux-#{GOARCH}/rclone           *          
 $(V_REGI)        registry                                            *                                     https://github.com/distribution/distribution/releases/latest/download/registry_#{VERSION}_linux_#{GOARCH}.tar.gz             %
 $(V_SMART_DNS)   smartdns-#{HOSTTYPE}:smartdns                       *                                     https://github.com/pymumu/smartdns/releases/latest/download/smartdns-#{HOSTTYPE}                                             %
 $(V_SPOTIFYD)    spotifyd                                            *                                     https://github.com/Spotifyd/spotifyd/releases/latest/download/spotifyd-linux-#{HOSTTYPE}-full.tar.gz                         %
+$(V_STARSHIP)    starship                                            *                                     https://github.com/starship/starship/releases/latest/download/starship-#{HOSTTYPE}-unknown-linux-musl.tar.gz                 %
 $(V_TOKEI)       tokei                                               *                                     https://github.com/XAMPPRocky/tokei/releases/download/v#{VERSION}/tokei-#{HOSTTYPE}-unknown-linux-gnu.tar.gz                 %
 $(V_XRAY)        xray                                                *                                     https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-#{HOSTTYPE}.zip                                        %aarch64=arm64-v8a,x86_64=64
 $(V_XSV)         xsv                                                 *                                     https://github.com/BurntSushi/xsv/releases/latest/download/xsv-#{VERSION}-x86_64-unknown-linux-musl.tar.gz                   %aarch64=!
