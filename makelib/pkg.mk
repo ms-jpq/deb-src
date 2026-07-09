@@ -7,7 +7,7 @@ pkg: $(DEB)/Packages.gz
 $(DEB)/Packages.gz: $(DEB)/Packages
 	gzip --keep --no-name --force -- '$<'
 
-$(DEB)/Release: $(DEB)/Packages | /usr/bin/apt-ftparchive
+$(DEB)/Release: $(DEB)/Packages.gz | /usr/bin/apt-ftparchive
 	env --chdir '$(@D)' -- apt-ftparchive release . >'$@'
 
 pkg: $(DEB)/Release.gpg
