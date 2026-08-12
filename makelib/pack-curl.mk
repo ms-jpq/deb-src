@@ -75,6 +75,7 @@ V_GOJQ        := $(shell $(GH_LATEST) itchyny/gojq)
 V_GORELEASER  := $(patsubst v%,%,$(shell $(GH_LATEST) goreleaser/goreleaser))
 V_HELIX       := $(shell $(GH_LATEST) helix-editor/helix)
 V_HTMLQ       := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
+V_HTTM        := $(shell $(GH_LATEST) kimono-koans/httm)
 V_JAEGER      := $(shell $(CURL) -- 'https://api.github.com/repos/jaegertracing/jaeger/releases/latest' | jq --exit-status --raw-output '.name' | sed -E -e 's#.*([0-9]+\.[0-9]+\.[0-9]+)$$#\1#')
 V_JLESS       := $(patsubst v%,%,$(shell $(GH_LATEST) PaulJuliusMartinez/jless))
 V_JNV         := $(patsubst v%,%,$(shell $(GH_LATEST) ynqa/jnv))
@@ -165,6 +166,7 @@ $(V_DELTA)      git-delta               *  https://github.com/dandavison/delta/r
 $(V_GH)         gh                      *  https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                                                      %
 $(V_GORELEASER) goreleaser              *  https://github.com/goreleaser/goreleaser/releases/latest/download/goreleaser_#{VERSION}_#{GOARCH}.deb                                           %
 $(V_HELIX)      helix                   *  https://github.com/helix-editor/helix/releases/latest/download/helix_$(V_HELIX_DEB)_#{GOARCH}.deb                                               %aarch64=!
+$(V_HTTM)       httm                    *  https://github.com/kimono-koans/httm/releases/latest/download/httm_#{VERSION}-1_#{GOARCH}.deb                                                   %aarch64=!
 $(V_K9S)        k9s                     *  https://github.com/derailed/k9s/releases/latest/download/k9s_linux_#{GOARCH}.deb                                                                %
 $(V_OTEL_COLL)  otelcol-contrib         *  https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest/download/otelcol-contrib_#{VERSION}_linux_#{GOARCH}.deb      %
 $(V_PASTEL)     pastel                  *  https://github.com/sharkdp/pastel/releases/latest/download/pastel_#{VERSION}_#{GOARCH}.deb                                                      %
