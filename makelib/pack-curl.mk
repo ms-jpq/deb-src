@@ -74,6 +74,7 @@ V_GITUI       := $(patsubst v%,%,$(shell $(GH_LATEST) extrawurst/gitui))
 V_GOJQ        := $(shell $(GH_LATEST) itchyny/gojq)
 V_GORELEASER  := $(patsubst v%,%,$(shell $(GH_LATEST) goreleaser/goreleaser))
 V_HELIX       := $(shell $(GH_LATEST) helix-editor/helix)
+V_HISTER      := $(patsubst v%,%,$(shell $(GH_LATEST) asciimoo/hister))
 V_HTMLQ       := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
 V_HTTM        := $(shell $(GH_LATEST) kimono-koans/httm)
 V_JAEGER      := $(shell $(CURL) -- 'https://api.github.com/repos/jaegertracing/jaeger/releases/latest' | jq --exit-status --raw-output '.name' | sed -E -e 's#.*([0-9]+\.[0-9]+\.[0-9]+)$$#\1#')
@@ -132,6 +133,7 @@ $(V_DUST)        dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust            
 $(V_EZA)         eza                                                                                *                                     https://github.com/eza-community/eza/releases/latest/download/eza_#{HOSTTYPE}-unknown-linux-gnu.tar.gz                       %
 $(V_FZF)         fzf                                                                                *                                     https://github.com/junegunn/fzf/releases/latest/download/fzf-#{VERSION}-linux_#{GOARCH}.tar.gz                               %
 $(V_GITUI)       gitui                                                                              *                                     https://github.com/extrawurst/gitui/releases/latest/download/gitui-linux-#{HOSTTYPE}.tar.gz                                  %
+$(V_HISTER)      hister_#{VERSION}_linux_#{GOARCH}:hister                                           *                                     https://github.com/asciimoo/hister/releases/download/v#{VERSION}/hister_#{VERSION}_linux_#{GOARCH}                           %
 $(V_HTMLQ)       htmlq                                                                              *                                     https://github.com/mgdm/htmlq/releases/latest/download/htmlq-#{HOSTTYPE}-linux.tar.gz                                        %aarch64=!
 $(V_JAEGER)      jaeger-#{VERSION}-linux-#{GOARCH}/jaeger                                           *                                     https://github.com/jaegertracing/jaeger/releases/latest/download/jaeger-#{VERSION}-linux-#{GOARCH}.tar.gz                    %
 $(V_JLESS)       jless                                                                              *                                     https://github.com/PaulJuliusMartinez/jless/releases/latest/download/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip          %aarch64=!
