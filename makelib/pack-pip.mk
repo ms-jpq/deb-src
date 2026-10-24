@@ -12,7 +12,7 @@ $(TMP)/py_$1_all/opt/python3/$1: | $(TMP) /usr/bin/pip
 	$(PYTHON3) -m pip install --target '$$@' -- $(patsubst %,'%',$(subst $(CA), ,$2))
 
 $(TMP)/py_$1_all/DEBIAN/control: $(TMP)/py_$1_all/opt/python3/$1 ./DEBIAN/control | $(TMP) /usr/bin/envsubst
-	V="$$$$(PYTHONPATH='$$<' $(PYTHON3) -m pip freeze | grep -F -- '$1==' | cut -d '=' -f 3-)"
+	V="$$$$(PYTHONPATH='$$<' $(PYTHON3) -c 'from importlib.metadata import version; print(version("$1"))')"
 	mkdir -v -p -- '$$(@D)'
 	ARCH='all' VERSION="$$$$V" NAME='py-$1' envsubst <'./DEBIAN/control' >'$$@'
 
