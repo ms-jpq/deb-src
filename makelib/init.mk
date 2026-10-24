@@ -15,7 +15,7 @@ $(TMP)/.init:
 	sudo -- env -- DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends --yes -- $(APT)
 	touch -- '$@'
 
-/usr/bin/envsubst /usr/bin/debsigs /usr/bin/apt-ftparchive /usr/bin/pip: | $(TMP)/.init
+/usr/bin/envsubst /usr/bin/debsigs /usr/bin/apt-ftparchive: | $(TMP)/.init
 
 $(VAR)/sh: | $(VAR)
 	if [[ -d '$@' ]]; then
@@ -50,5 +50,5 @@ export -- PYDEPS
 
 $(VENV):
 	python3 -m venv -- '$@'
-	'$@/bin/python3' -m pip install --upgrade -- tomli
+	'$@/bin/python3' -m pip install --upgrade -- pip tomli
 	'$@/bin/python3' <<< '$(PYDEPS)'
