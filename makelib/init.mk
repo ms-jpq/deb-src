@@ -7,7 +7,7 @@ CURL       := curl --fail --location --no-progress-meter
 UNPACK     := $(VAR)/sh/layers/posix/home/.local/opt/initd/libexec/curl-unpack.sh
 
 APT :=
-APT += gettext-base apt-utils debsigs
+APT += gettext-base apt-utils debsigs jq
 
 init: $(TMP)/.init
 $(TMP)/.init:
