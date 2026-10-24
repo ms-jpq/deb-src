@@ -53,16 +53,26 @@ endef
 CLAUDE_BUCKET := https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases
 
 
-V_DATE       := $(shell date -- '+%Y.W%V')
-CLOUD_IMG_AT := https://cloud-images.ubuntu.com/releases/$(VERSION_ID)/release/unpacked
+CLOUD_IMG_CACHE := $(TMP)/ubuntu-cloud-images.json
+MS_PROD_CACHE   := $(TMP)/packages-microsoft-prod-$(VERSION_ID).deb
+
+V_CLOUD_IMG := $(shell \
+  mkdir -p -- '$(TMP)' && \
+  $(CURL) --etag-compare '$(CLOUD_IMG_CACHE).etag' --etag-save '$(CLOUD_IMG_CACHE).etag' --output '$(CLOUD_IMG_CACHE)' \
+    -- 'https://cloud-images.ubuntu.com/releases/streams/v1/com.ubuntu.cloud:released:download.json' && \
+  jq --exit-status --raw-output --arg version '$(VERSION_ID)' \
+    --arg cutoff '$(shell date --utc --date="30 days ago" +%Y%m%d)' \
+    '.products["com.ubuntu.cloud:server:" + $$version + ":amd64"].versions | keys | map(select(. < $$cutoff)) | max' '$(CLOUD_IMG_CACHE)')
+
+CLOUD_IMG_AT := https://cloud-images.ubuntu.com/releases/$(VERSION_ID)/release-$(V_CLOUD_IMG)/unpacked
 IMG_PREFIX   := ubuntu-$(VERSION_ID)-server-cloudimg-
 
+T_CTAGS       := $(shell $(GH_LATEST) universal-ctags/ctags-nightly-build)
 V_AD_HOME     := $(patsubst v%,%,$(shell $(GH_LATEST) AdguardTeam/AdGuardHome))
 V_ASDF        := $(patsubst v%,%,$(shell $(GH_LATEST) asdf-vm/asdf))
 V_BTM         := $(shell $(GH_LATEST) ClementTsang/bottom)
 V_CLAUDE_CODE := $(shell $(CURL) -- $(CLAUDE_BUCKET)/latest)
 V_CODEX       := $(patsubst rust-v%,%,$(shell $(GH_LATEST) openai/codex))
-T_CTAGS       := $(shell $(GH_LATEST) universal-ctags/ctags-nightly-build)
 V_CTAGS       := $(subst /,,$(dir $(subst +,/,$(T_CTAGS))))
 V_DELTA       := $(shell $(GH_LATEST) dandavison/delta)
 V_DIFF_NAV    := $(patsubst v%,%,$(shell $(GH_LATEST) dlvhdr/diffnav))
@@ -87,6 +97,7 @@ V_K9S         := $(patsubst v%,%,$(shell $(GH_LATEST) derailed/k9s))
 V_KATANA      := $(patsubst v%,%,$(shell $(GH_LATEST) projectdiscovery/katana))
 V_LAZYGIT     := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
 V_LF          := $(patsubst r%,%,$(shell $(GH_LATEST) gokcehan/lf))
+V_MS_PROD     := $(shell $(CURL) --etag-compare '$(MS_PROD_CACHE).etag' --etag-save '$(MS_PROD_CACHE).etag' --output '$(MS_PROD_CACHE)' -- 'https://packages.microsoft.com/config/ubuntu/$(VERSION_ID)/packages-microsoft-prod.deb' && dpkg-deb --field '$(MS_PROD_CACHE)' Version)
 V_OTEL_COLL   := $(patsubst v%,%,$(shell $(GH_LATEST) open-telemetry/opentelemetry-collector-releases))
 V_PASTEL      := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
 V_POSH        := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
@@ -125,9 +136,8 @@ $(V_CODEX)       codex-#{HOSTTYPE}-unknown-linux-musl:codex                     
 $(V_CODEX)       codex-app-server-#{HOSTTYPE}-unknown-linux-musl:codex-app-server                   *                                     https://github.com/openai/codex/releases/download/rust-v#{VERSION}/codex-app-server-#{HOSTTYPE}-unknown-linux-musl.tar.gz          %
 $(V_CODEX)       codex-code-mode-host-#{HOSTTYPE}-unknown-linux-musl:codex-code-mode-host           *                                     https://github.com/openai/codex/releases/download/rust-v#{VERSION}/codex-code-mode-host-#{HOSTTYPE}-unknown-linux-musl.tar.gz      %
 $(V_CODEX)       codex-responses-api-proxy-#{HOSTTYPE}-unknown-linux-musl:codex-responses-api-proxy *                                     https://github.com/openai/codex/releases/download/rust-v#{VERSION}/codex-responses-api-proxy-#{HOSTTYPE}-unknown-linux-musl.tar.gz %
-$(V_DATE)        $(IMG_PREFIX)#{GOARCH}-initrd-generic                                              opt/img/initrd-generic-$(VERSION_ID)  $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-initrd-generic                                                                              %
-$(V_DATE)        $(IMG_PREFIX)#{GOARCH}-vmlinuz-generic                                             opt/img/vmlinuz-generic-$(VERSION_ID) $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-vmlinuz-generic                                                                             %
-$(V_DATE)        gay                                                                                *                                     https://raw.githubusercontent.com/ms-jpq/gay/%3C3/gay                                                                              %aarch64=all,x86_64=all
+$(V_CLOUD_IMG)   $(IMG_PREFIX)#{GOARCH}-initrd-generic                                              opt/img/initrd-generic-$(VERSION_ID)  $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-initrd-generic                                                                              %
+$(V_CLOUD_IMG)   $(IMG_PREFIX)#{GOARCH}-vmlinuz-generic                                             opt/img/vmlinuz-generic-$(VERSION_ID) $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-vmlinuz-generic                                                                             %
 $(V_DIFF_NAV)    diffnav                                                                            *                                     https://github.com/dlvhdr/diffnav/releases/download/v#{VERSION}/diffnav_Linux_#{HOSTTYPE}.tar.gz                                   %aarch64=arm64,amd64=x64
 $(V_DIFFT)       difft                                                                              *                                     https://github.com/Wilfred/difftastic/releases/download/#{VERSION}/difft-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz           %
 $(V_DUST)        dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust                                *                                     https://github.com/bootandy/dust/releases/download/v#{VERSION}/dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz               %
@@ -167,13 +177,13 @@ define CURL_DEBS
 
 $(V_BTM)        btm                     * https://github.com/ClementTsang/bottom/releases/download/#{VERSION}/bottom_#{VERSION}-1_#{GOARCH}.deb                                           %
 $(V_CTAGS)      uctags                  * https://github.com/universal-ctags/ctags-nightly-build/releases/download/$(T_CTAGS)/uctags-#{VERSION}-linux-#{HOSTTYPE}.deb                     %
-$(V_DATE)       packages-microsoft-prod * https://packages.microsoft.com/config/ubuntu/$(VERSION_ID)/packages-microsoft-prod.deb                                                          %aarch64=all,x86_64=all
 $(V_DELTA)      git-delta               * https://github.com/dandavison/delta/releases/download/#{VERSION}/git-delta_#{VERSION}_#{GOARCH}.deb                                             %
 $(V_GH)         gh                      * https://github.com/cli/cli/releases/download/v#{VERSION}/gh_#{VERSION}_linux_#{GOARCH}.deb                                                      %
 $(V_GORELEASER) goreleaser              * https://github.com/goreleaser/goreleaser/releases/download/v#{VERSION}/goreleaser_#{VERSION}_#{GOARCH}.deb                                      %
 $(V_HELIX)      helix                   * https://github.com/helix-editor/helix/releases/download/#{VERSION}/helix_$(V_HELIX_DEB)_#{GOARCH}.deb                                           %aarch64=!
 $(V_HTTM)       httm                    * https://github.com/kimono-koans/httm/releases/download/#{VERSION}/httm_#{VERSION}-1_#{GOARCH}.deb                                               %aarch64=!
 $(V_K9S)        k9s                     * https://github.com/derailed/k9s/releases/download/v#{VERSION}/k9s_linux_#{GOARCH}.deb                                                           %
+$(V_MS_PROD)    packages-microsoft-prod * https://packages.microsoft.com/ubuntu/$(VERSION_ID)/prod/pool/main/p/packages-microsoft-prod/packages-microsoft-prod_#{VERSION}_all.deb         %aarch64=all,x86_64=all
 $(V_OTEL_COLL)  otelcol-contrib         * https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v#{VERSION}/otelcol-contrib_#{VERSION}_linux_#{GOARCH}.deb %
 $(V_PASTEL)     pastel                  * https://github.com/sharkdp/pastel/releases/download/v#{VERSION}/pastel_#{VERSION}_#{GOARCH}.deb                                                 %
 $(V_S5CMD)      s5cmd                   * https://github.com/peak/s5cmd/releases/download/v#{VERSION}/s5cmd_#{VERSION}_linux_#{GOARCH}.deb                                                %

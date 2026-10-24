@@ -26,6 +26,7 @@ endef
 define PIP_PACKAGES
 certbot       certbot
 elasticsearch elasticsearch==8.*
+gay           gay
 gixy          gixy
 you-get       you-get
 endef
