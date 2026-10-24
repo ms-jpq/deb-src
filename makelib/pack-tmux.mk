@@ -6,7 +6,7 @@ V_TMUX := $(shell $(GH_LATEST) tmux/tmux)
 /usr/include/event.h: | $(TMP)/.init
 
 $(TMP)/tmux-$(V_TMUX): | $(VAR)/sh $(TMP)
-	'$(UNPACK)' 'https://github.com/tmux/tmux/releases/latest/download/tmux-$(V_TMUX).tar.gz' '$(@D)'
+	'$(UNPACK)' 'https://github.com/tmux/tmux/releases/download/$(V_TMUX)/tmux-$(V_TMUX).tar.gz' '$(@D)'
 
 $(TMP)/tmux_$(DPKG_ARCH)_$(V_TMUX)/DEBIAN/control: ./DEBIAN/control | /usr/bin/envsubst
 	mkdir -v -p -- '$(@D)'

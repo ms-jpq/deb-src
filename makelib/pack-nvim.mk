@@ -10,7 +10,7 @@ V_NVIM := $(patsubst v%,%,$(shell $(GH_LATEST) neovim/neovim))
 define NVIM_TEMPLATE
 $(TMP)/$1_nvim_$(V_NVIM)/usr: | $(TMP)
 	mkdir -v -p -- '$$@'
-	$(CURL) -- 'https://github.com/neovim/neovim/releases/latest/download/nvim-linux-$2.tar.gz' | tar --extract -z --file - --directory '$$@' --strip-components 1
+	$(CURL) -- 'https://github.com/neovim/neovim/releases/download/v$(V_NVIM)/nvim-linux-$2.tar.gz' | tar --extract -z --file - --directory '$$@' --strip-components 1
 
 $(TMP)/$1_nvim_$(V_NVIM)/DEBIAN/control: $(TMP)/$1_nvim_$(V_NVIM)/usr ./DEBIAN/control | $(TMP) /usr/bin/envsubst
 	mkdir -v -p -- '$$(@D)'
