@@ -10,6 +10,8 @@ jobs:
   build:
     # TODO: use ubuntu-latest
     runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ github.token }}
 
     steps:
       - uses: actions/checkout@v3

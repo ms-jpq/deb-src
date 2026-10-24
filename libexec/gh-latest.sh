@@ -25,25 +25,36 @@ if ! [[ -f $CACHE ]]; then
     --location
     --no-progress-meter
     --max-time 60
+    --retry 3
   )
+  if [[ -n ${GH_TOKEN:-} ]]; then
+    CURL+=(--header "Authorization: Bearer $GH_TOKEN")
+  fi
 
   read -r -d '' -- JQ <<- 'JQ' || true
-add | map(select(.draft == false and .prerelease == false) | select((.published_at | fromdateiso8601) <= $cutoff)) | max_by(.published_at) | .tag_name // empty
+map(select(.draft == false and .prerelease == false)
+  | select(.tag_name | contains("/") | not)
+  | select((.published_at | fromdateiso8601) <= $cutoff))
+| max_by(.published_at) | .tag_name // empty
 JQ
 
   CUTOFF="$(date --date='30 days ago' +%s)"
-  TAG="$(
-    PAGE=1
-    while :; do
-      RELEASES="$("${CURL[@]}" -- "https://api.github.com/repos/$REPO/releases?per_page=100&page=$PAGE")"
-      printf -- '%s\n' "$RELEASES"
-      COUNT="$(jq --exit-status 'length' <<< "$RELEASES")"
-      if ((COUNT < 100)); then
-        break
-      fi
-      PAGE="$((PAGE + 1))"
-    done | jq --exit-status --raw-output --slurp --argjson cutoff "$CUTOFF" "$JQ"
-  )"
+  PAGE=1
+  while :; do
+    RELEASES="$("${CURL[@]}" -- "https://api.github.com/repos/$REPO/releases?per_page=30&page=$PAGE")"
+    TAG="$(jq --raw-output --argjson cutoff "$CUTOFF" "$JQ" <<< "$RELEASES")"
+    if [[ -n $TAG ]]; then
+      break
+    fi
+    COUNT="$(jq --exit-status 'length' <<< "$RELEASES")"
+    if ((COUNT < 30)); then
+      tee <<- EOF >&2
+No release at least 30 days old: $REPO
+EOF
+      exit 1
+    fi
+    PAGE="$((PAGE + 1))"
+  done
 
   printf -- '%s' "$TAG" > "$CACHE"
 fi
