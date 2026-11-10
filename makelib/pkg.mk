@@ -3,7 +3,8 @@
 $(S3): | $(VAR)
 	mkdir -v -p -- '$@'
 
-$(TMP)/.promoted: $(PKGS) | $(TMP) $(S3)
+$(TMP)/.promoted: $(patsubst $(DEB)/%,$(TMP)/%,$(PKGS)) | $(TMP) $(DEB) $(S3)
+	cp -v -f -- $? '$(DEB)/'
 	find -- '$(DEB)' -type f -name '*.deb' -size +99M -exec mv -v -f -- {} '$(S3)/' ';'
 	touch -- '$@'
 
