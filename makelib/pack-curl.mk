@@ -88,7 +88,7 @@ V_HELIX       := $(shell $(GH_LATEST) helix-editor/helix)
 V_HISTER      := $(patsubst v%,%,$(shell $(GH_LATEST) asciimoo/hister))
 V_HTMLQ       := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
 V_HTTM        := $(shell $(GH_LATEST) kimono-koans/httm)
-V_JAEGER      := $(shell $(CURL) -- 'https://api.github.com/repos/jaegertracing/jaeger/releases/latest' | jq --exit-status --raw-output '.name' | sed -E -e 's#.*([0-9]+\.[0-9]+\.[0-9]+)$$#\1#')
+V_JAEGER      := $(patsubst v%,%,$(shell $(GH_LATEST) jaegertracing/jaeger))
 V_JLESS       := $(patsubst v%,%,$(shell $(GH_LATEST) PaulJuliusMartinez/jless))
 V_JNV         := $(patsubst v%,%,$(shell $(GH_LATEST) ynqa/jnv))
 V_K3S         := $(patsubst v%,%,$(shell $(GH_LATEST) k3s-io/k3s))
@@ -124,7 +124,6 @@ V_ZELLIJ      := $(patsubst v%,%,$(shell $(GH_LATEST) zellij-org/zellij))
 V_HELIX_DEB := $(subst .0,.,$(V_HELIX))-1
 V_TIDY_DEB  := $(V_TV)-1
 
-# V_JAEGER     := $(patsubst v%,%,$(shell $(GH_LATEST) jaegertracing/jaeger))
 V_TOKEI     := 12.1.2
 
 define CURL_ARCHIVES
