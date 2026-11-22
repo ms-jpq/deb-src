@@ -85,7 +85,6 @@ V_GITUI       := $(patsubst v%,%,$(shell $(GH_LATEST) extrawurst/gitui))
 V_GOJQ        := $(shell $(GH_LATEST) itchyny/gojq)
 V_GORELEASER  := $(patsubst v%,%,$(shell $(GH_LATEST) goreleaser/goreleaser))
 V_HELIX       := $(shell $(GH_LATEST) helix-editor/helix)
-V_HISTER      := $(patsubst v%,%,$(shell $(GH_LATEST) asciimoo/hister))
 V_HTMLQ       := $(patsubst v%,%,$(shell $(GH_LATEST) mgdm/htmlq))
 V_HTTM        := $(shell $(GH_LATEST) kimono-koans/httm)
 V_JAEGER      := $(patsubst v%,%,$(shell $(GH_LATEST) jaegertracing/jaeger))
@@ -98,6 +97,7 @@ V_KATANA      := $(patsubst v%,%,$(shell $(GH_LATEST) projectdiscovery/katana))
 V_LAZYGIT     := $(patsubst v%,%,$(shell $(GH_LATEST) jesseduffield/lazygit))
 V_LF          := $(patsubst r%,%,$(shell $(GH_LATEST) gokcehan/lf))
 V_MS_PROD     := $(shell $(CURL) --etag-compare '$(MS_PROD_CACHE).etag' --etag-save '$(MS_PROD_CACHE).etag' --output '$(MS_PROD_CACHE)' -- 'https://packages.microsoft.com/config/ubuntu/$(VERSION_ID)/packages-microsoft-prod.deb' && dpkg-deb --field '$(MS_PROD_CACHE)' Version)
+V_NOGON       := $(patsubst v%,%,$(shell $(GH_LATEST) asciimoo/nogon))
 V_OTEL_COLL   := $(patsubst v%,%,$(shell $(GH_LATEST) open-telemetry/opentelemetry-collector-releases))
 V_PASTEL      := $(patsubst v%,%,$(shell $(GH_LATEST) sharkdp/pastel))
 V_POSH        := $(patsubst v%,%,$(shell $(GH_LATEST) JanDeDobbeleer/oh-my-posh))
@@ -125,25 +125,25 @@ V_HELIX_DEB := $(subst .0,.,$(V_HELIX))-1
 V_TIDY_DEB  := $(V_TV)-1
 
 V_TOKEI     := 12.1.2
+V_NOGON     := 0.22.0
 
 define CURL_ARCHIVES
 
 $(V_AD_HOME)     AdGuardHome/AdGuardHome                                                            *                                     https://github.com/AdguardTeam/AdGuardHome/releases/download/v#{VERSION}/AdGuardHome_linux_#{GOARCH}.tar.gz                        %
 $(V_ASDF)        asdf                                                                               *                                     https://github.com/asdf-vm/asdf/releases/download/v#{VERSION}/asdf-v#{VERSION}-linux-#{GOARCH}.tar.gz                              %
 $(V_CLAUDE_CODE) claude:claude-code                                                                 *                                     $(CLAUDE_BUCKET)/$(V_CLAUDE_CODE)/linux-#{HOSTTYPE}/claude                                                                         %aarch64=arm64,x86_64=x64
+$(V_CLOUD_IMG)   $(IMG_PREFIX)#{GOARCH}-initrd-generic                                              opt/img/initrd-generic-$(VERSION_ID)  $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-initrd-generic                                                                              %
+$(V_CLOUD_IMG)   $(IMG_PREFIX)#{GOARCH}-vmlinuz-generic                                             opt/img/vmlinuz-generic-$(VERSION_ID) $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-vmlinuz-generic                                                                             %
 $(V_CODEX)       codex-#{HOSTTYPE}-unknown-linux-musl:codex                                         *                                     https://github.com/openai/codex/releases/download/rust-v#{VERSION}/codex-#{HOSTTYPE}-unknown-linux-musl.tar.gz                     %
 $(V_CODEX)       codex-app-server-#{HOSTTYPE}-unknown-linux-musl:codex-app-server                   *                                     https://github.com/openai/codex/releases/download/rust-v#{VERSION}/codex-app-server-#{HOSTTYPE}-unknown-linux-musl.tar.gz          %
 $(V_CODEX)       codex-code-mode-host-#{HOSTTYPE}-unknown-linux-musl:codex-code-mode-host           *                                     https://github.com/openai/codex/releases/download/rust-v#{VERSION}/codex-code-mode-host-#{HOSTTYPE}-unknown-linux-musl.tar.gz      %
 $(V_CODEX)       codex-responses-api-proxy-#{HOSTTYPE}-unknown-linux-musl:codex-responses-api-proxy *                                     https://github.com/openai/codex/releases/download/rust-v#{VERSION}/codex-responses-api-proxy-#{HOSTTYPE}-unknown-linux-musl.tar.gz %
-$(V_CLOUD_IMG)   $(IMG_PREFIX)#{GOARCH}-initrd-generic                                              opt/img/initrd-generic-$(VERSION_ID)  $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-initrd-generic                                                                              %
-$(V_CLOUD_IMG)   $(IMG_PREFIX)#{GOARCH}-vmlinuz-generic                                             opt/img/vmlinuz-generic-$(VERSION_ID) $(CLOUD_IMG_AT)/$(IMG_PREFIX)#{GOARCH}-vmlinuz-generic                                                                             %
 $(V_DIFF_NAV)    diffnav                                                                            *                                     https://github.com/dlvhdr/diffnav/releases/download/v#{VERSION}/diffnav_Linux_#{HOSTTYPE}.tar.gz                                   %aarch64=arm64,amd64=x64
 $(V_DIFFT)       difft                                                                              *                                     https://github.com/Wilfred/difftastic/releases/download/#{VERSION}/difft-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz           %
 $(V_DUST)        dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu/dust                                *                                     https://github.com/bootandy/dust/releases/download/v#{VERSION}/dust-v#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz               %
 $(V_EZA)         eza                                                                                *                                     https://github.com/eza-community/eza/releases/download/v#{VERSION}/eza_#{HOSTTYPE}-unknown-linux-gnu.tar.gz                        %
 $(V_FZF)         fzf                                                                                *                                     https://github.com/junegunn/fzf/releases/download/v#{VERSION}/fzf-#{VERSION}-linux_#{GOARCH}.tar.gz                                %
 $(V_GITUI)       gitui                                                                              *                                     https://github.com/extrawurst/gitui/releases/download/v#{VERSION}/gitui-linux-#{HOSTTYPE}.tar.gz                                   %
-$(V_HISTER)      hister_#{VERSION}_linux_#{GOARCH}:hister                                           *                                     https://github.com/asciimoo/hister/releases/download/v#{VERSION}/hister_#{VERSION}_linux_#{GOARCH}                                 %
 $(V_HTMLQ)       htmlq                                                                              *                                     https://github.com/mgdm/htmlq/releases/download/v#{VERSION}/htmlq-#{HOSTTYPE}-linux.tar.gz                                         %aarch64=!
 $(V_JAEGER)      jaeger-#{VERSION}-linux-#{GOARCH}/jaeger                                           *                                     https://github.com/jaegertracing/jaeger/releases/download/v#{VERSION}/jaeger-#{VERSION}-linux-#{GOARCH}.tar.gz                     %
 $(V_JLESS)       jless                                                                              *                                     https://github.com/PaulJuliusMartinez/jless/releases/download/v#{VERSION}/jless-v#{VERSION}-x86_64-unknown-linux-gnu.zip           %aarch64=!
@@ -153,6 +153,7 @@ $(V_K8S)         kubectl                                                        
 $(V_KATANA)      katana                                                                             *                                     https://github.com/projectdiscovery/katana/releases/download/v#{VERSION}/katana_#{VERSION}_linux_#{GOARCH}.zip                     %
 $(V_LAZYGIT)     lazygit                                                                            *                                     https://github.com/jesseduffield/lazygit/releases/download/v#{VERSION}/lazygit_#{VERSION}_Linux_#{HOSTTYPE}.tar.gz                 %aarch64=arm64
 $(V_LF)          lf                                                                                 *                                     https://github.com/gokcehan/lf/releases/download/r#{VERSION}/lf-linux-#{GOARCH}.tar.gz                                             %
+$(V_NOGON)       nogon_#{VERSION}_linux_#{GOARCH}:hister                                            *                                     https://github.com/asciimoo/hister/releases/download/v#{VERSION}/nogon_#{VERSION}_linux_#{GOARCH}                                  %
 $(V_POSH)        posh-linux-#{GOARCH}:oh-my-posh                                                    *                                     https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/v#{VERSION}/posh-linux-#{GOARCH}                                    %
 $(V_PTERM)       presenterm-#{VERSION}/presenterm                                                   *                                     https://github.com/mfontanini/presenterm/releases/download/v#{VERSION}/presenterm-#{VERSION}-#{HOSTTYPE}-unknown-linux-gnu.tar.gz  %
 $(V_RCLONE)      rclone-v#{VERSION}-linux-#{GOARCH}/rclone                                          *                                     https://github.com/rclone/rclone/releases/download/v#{VERSION}/rclone-v#{VERSION}-linux-#{GOARCH}.zip                              %
